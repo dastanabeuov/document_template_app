@@ -11,6 +11,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+      <div class="container pt-5 pb-5"><%= render 'layouts/breadcrumbs' %></div>
+      <div class="container pb-5"><%= yield %></div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
