@@ -63,6 +63,9 @@ gem "thinking-sphinx"
 gem "bootstrap"
 gem "sassc-rails"
 
+# Add authorize resource
+gem "cancancan", "~> 3.6"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
