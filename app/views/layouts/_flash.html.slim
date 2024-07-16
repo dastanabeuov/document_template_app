@@ -1,0 +1,4 @@
+- flash.each do |key, message|
+  div class=("flash alert #{flash_key(key)}")
+    a.close data-dismiss="alert" href="#"  ×
+    li= message
