@@ -44,38 +44,6 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# Response body to request and parse json
-gem "oj"
-gem "responders"
-
-# Background job connect apadter from ActiveJob
-gem "sidekiq"
-gem "sinatra", require: false
-
-# Background job organization to every day, yaer, month
-gem "whenever", require: false
-
-# Full search text function with fast
-gem "mysql2"
-gem "thinking-sphinx"
-
-# Style css(scss)
-gem "bootstrap"
-gem "sassc-rails"
-
-# Add authorize resource
-gem "cancancan", "~> 3.6"
-
-# Add function user authentication
-gem "devise", "~> 4.9"
-
-# Add localize
-gem "rails-i18n", "~> 7.0"
-gem "devise-i18n", "~> 1.12"
-
-# Add responders template format
-gem "slim-rails", "~> 3.6"
-
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
@@ -102,3 +70,20 @@ group :test do
   gem "rails-controller-testing"
   gem "database_cleaner-active_record", "~> 2.2"
 end
+
+## Additional gems
+gem "bootstrap"
+gem "sassc-rails"
+gem "mysql2"
+gem "thinking-sphinx"
+gem "whenever", require: false
+gem "sidekiq"
+gem "sinatra", require: false
+gem "oj"
+gem "responders"
+gem "slim-rails", "~> 3.6"
+gem "rails-i18n", "~> 7.0"
+gem "devise-i18n", "~> 1.12"
+gem "devise", "~> 4.9"
+gem "cancancan", "~> 3.6"
+gem "strong_migrations", "~> 2.0"
