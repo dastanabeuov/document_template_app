@@ -1,0 +1,153 @@
+kz:
+  activerecord:
+    attributes:
+      user:
+        confirmation_sent_at: Растау жіберілген күн
+        confirmation_token: Растау белгісі
+        confirmed_at: Растау күні
+        created_at: Құрылған күні
+        current_password: Ағымдағы құпия сөз
+        current_sign_in_at: Ағымдағы кірген күні
+        current_sign_in_ip: ағымдағы кірген IP
+        email: Электрондық пошта
+        encrypted_password: Шифрланған құпия сөз
+        failed_attempts: Сәтсіз әрекеттер
+        last_sign_in_at: Соңғы кіру күні
+        last_sign_in_ip: Соңғы кірген IP
+        locked_at: Құлыптау күні
+        password: Құпия сөз
+        password_confirmation: Құпиясөзді растау
+        remember_created_at: Жадтың жасалған күні
+        remember_me: мені есте сақтау
+        reset_password_sent_at: Құпия сөзді қалпына келтіру жіберілген күн
+        reset_password_token: Құпия сөзді қалпына келтіру белгісі
+        sign_in_count: Енгізу саны
+        unconfirmed_email: Расталмаған электрондық пошта
+        unlock_token: Токен құлпын ашу
+        updated_at: Жаңарту күні
+    models:
+      user:
+        few: Пайдаланушы
+        many: Пайдаланушылар
+        one: Пайдаланушы
+        other: Пайдаланушылар
+  devise:
+    confirmations:
+      confirmed: Сіздің электронды пошта адресіңіз пошта сәтті расталды.
+      new:
+        resend_confirmation_instructions: Белсендіру электрондық поштасын қайта жіберу
+      send_instructions: Бірнеше минут ішінде электрондық пошта мекенжайыңызды растау нұсқаулары бар электрондық хат аласыз. пошта.
+      send_paranoid_instructions: Егер сіздің электрондық пошта мекенжайыңыз болса пошта жүйеде болса, бірнеше минут ішінде сіз оны растау нұсқаулары бар электрондық хат аласыз.
+    failure:
+      already_authenticated: Сіз әлдеқашан жүйеге кірдіңіз.
+      inactive: Есептік жазбаңыз әлі іске қосылмаған.
+      invalid: Қате %{authentication_keys} немесе құпия сөз.
+      last_attempt: Тіркелгіңіз бұғатталғанға дейін сізде соңғы құпия сөз әрекеті қалды.
+      locked: Есептік жазбаңыз бұғатталды.
+      not_found_in_database: Қате %{authentication_keys} немесе құпия сөз.
+      timeout: Сеансыңыз аяқталды. Қайтадан кіріңіз.
+      unauthenticated: Жүйеге кіру немесе тіркелу қажет.
+      unconfirmed: Есептік жазбаңызды растауыңыз керек.
+    mailer:
+      confirmation_instructions:
+        action: Белсендендіру
+        greeting: Сәлем %{recipient}!
+        instruction: 'Төмендегі сілтемені басу арқылы тіркелгіңізді белсендіре аласыз:'
+        subject: Есептік жазбаны тексеру нұсқаулары
+      email_changed:
+        greeting: Сәлем, %{recipient}!
+        message: Электрондық поштаңыз %{email} болып өзгертілгенін хабарлау үшін сізбен байланысуға тырысамыз.
+        message_unconfirmed:
+        subject: Электрондық пошта өзгертілді
+      password_change:
+        greeting: Сәлем, %{recipient}!
+        message: Құпия сөзіңіздің өзгертілгенін хабарлау үшін сізбен хабарласуға тырысамыз.
+        subject: Құпия сөз өзгертілді
+      reset_password_instructions:
+        action: Құпия сөзді өзгерту
+        greeting: Сәлем %{recipient}!
+        instruction: 'Сіз (немесе басқа біреу) құпия сөзді өзгертуді сұрадыңыз. Құпия сөзіңізді өзгерту үшін төмендегі сілтемені басыңыз:'
+        instruction_2: Құпия сөзді өзгертуді сұрамаған болсаңыз, бұл хабарды елемеңіз.
+        instruction_3: Сілтемені басып, жаңасын енгізбейінше, құпия сөзіңіз өзгермейді.
+        subject: Құпия сөзді қалпына келтіру нұсқаулары
+      unlock_instructions:
+        action: Есептік жазбаның құлпын ашу
+        greeting: Сәлем %{recipient}!
+        instruction: 'Тіркелгіні белсендіру үшін сілтемені басыңыз:'
+        message: Жүйеге кіру әрекеттерінің сәтсіздігі шегінен асып кеткендіктен есептік жазбаңыз құлыпталды.
+        subject: Тіркелгі құлпын ашу нұсқаулары
+    omniauth_callbacks:
+      failure: '%{kind} есептік жазбасымен жүйеге кіре алмайсыз, себебі %{reason}'
+      success: '%{kind} есептік жазбасымен кірдіңіз.'
+    passwords:
+      edit:
+        change_my_password: Құпия сөзімді өзгертіңіз
+        change_your_password: Құпия сөзді өзгерту
+        confirm_new_password: Жаңа құпия сөзді қайталаңыз
+        new_password: Жаңа құпия сөз
+      new:
+        forgot_your_password: Құпия сөзіңізді ұмыттыңыз ба?
+        send_me_reset_password_instructions: Жаңа құпия сөзді жіберу
+      no_token: Бұл бетке құпия сөзді қалпына келтіру электрондық поштасындағы сілтеме арқылы ғана кіруге болады. Егер сіз осындай сілтемеден келген болсаңыз, сілтемені толығымен көшіріп алғаныңызға көз жеткізіңіз.
+      send_instructions: Бірнеше минут ішінде құпия сөзді қалпына келтіру туралы нұсқаулар бар электрондық хат аласыз.
+      send_paranoid_instructions: Егер сіздің электрондық пошта мекенжайыңыз болса пошта жүйеде болса, бірнеше минут ішінде құпия сөзді қалпына келтіру туралы нұсқаулары бар электрондық хат аласыз.
+      updated: Құпия сөзіңіз өзгертілді. Сіз енді жүйеге кірдіңіз.
+      updated_not_active: Құпия сөзіңіз өзгертілді.
+    registrations:
+      destroyed: Сау болыңыз! Есептік жазбаңыз жойылды. Сізді қайтадан көреміз деп үміттенеміз.
+      edit:
+        are_you_sure: Сіз сенімдісіз бе?
+        cancel_my_account: Есептік жазбаңызды жойыңыз
+        currently_waiting_confirmation_for_email: 'Электрондық пошта мекенжайын растау күтілуде: %{email}'
+        leave_blank_if_you_don_t_want_to_change_it: Оны өзгерткіңіз келмесе, өрісті бос қалдырыңыз
+        title: '%{resource} өңдеу'
+        unhappy: Көңілі қалған?
+        update: Жаңарту
+        we_need_your_current_password_to_confirm_your_changes: өзгертулерді растау үшін ағымдағы құпия сөзді енгізіңіз
+      new:
+        sign_up: тіркеу
+      signed_up: Қош келдіңіз! Сіз сәтті тіркелдіңіз.
+      signed_up_but_inactive: Сіз сәтті тіркелдіңіз. Дегенмен, тіркелгіңіз іске қосылмағандықтан жүйеге кіре алмайсыз.
+      signed_up_but_locked: Сіз сәтті тіркелдіңіз. Дегенмен, тіркелгіңіз өшірілгендіктен жүйеге кіре алмайсыз.
+      signed_up_but_unconfirmed: Электрондық пошта мекенжайыңызға растау сілтемесі бар электрондық хат жіберілді. пошта. Тіркелгіңізді растау үшін сілтемеге өтіңіз.
+      update_needs_confirmation: Тіркелгі ақпаратын сәтті жаңарттыңыз, бірақ жаңа электрондық пошта мекенжайыңызды растауыңыз қажет. пошта. Жаңа электрондық пошта мекенжайыңызды растау үшін кіріс жәшігіңізді тексеріп, сілтемені орындаңыз. пошта.
+      updated: Есептік жазбаңыз өзгертілді.
+      updated_but_not_signed_in: Есептік жазбаңыз сәтті жаңартылды, бірақ құпия сөз өзгертілгендіктен, жүйеге қайта кіру керек
+    sessions:
+      already_signed_out: Жүйе жүйеден шығып қойған.
+      new:
+        sign_in: Кіру үшін
+      signed_in: Жүйеге кіру аяқталды.
+      signed_out: Жүйе жүйеден шықты.
+    shared:
+      links:
+        back: Артқа
+        didn_t_receive_confirmation_instructions: Растауды алған жоқсыз ба?
+        didn_t_receive_unlock_instructions: Құлыпты ашу кодын алған жоқсыз ба?
+        forgot_your_password: Забыли пароль?
+        sign_in: Құпия сөзіңізді ұмыттыңыз ба?
+        sign_in_with_provider: 'Войти с помощью: %{provider}'
+        sign_up: тіркеу
+      minimum_password_length:
+        few: "(ең аз %{count} таңба)"
+        many: "(ең аз %{count} таңба)"
+        one: "(ең аз %{count} белгісі)"
+        other: "(ең аз %{count} таңба)"
+    unlocks:
+      new:
+        resend_unlock_instructions: Растауды қайта жіберіңіз
+      send_instructions: Бірнеше минут ішінде сіз тіркелгіңіздің құлпын ашу нұсқаулары бар электрондық хат аласыз.
+      send_paranoid_instructions: Есептік жазбаңыз бар болса, бірнеше минут ішінде оның құлпын ашу туралы нұсқаулары бар электрондық хат аласыз.
+      unlocked: Есептік жазбаңыздың құлпы ашылды. Енді сіз жүйеге кіре аласыз.
+  errors:
+    messages:
+      already_confirmed: қазірдің өзінде расталды. Жүйеге кіріп көріңіз
+      confirmation_period_expired: '%{period} ішінде расталуы керек, растау сұрауын қайта жіберіңіз'
+      expired: ескірген. Жаңасын сұраңыз
+      not_found: табылмады
+      not_locked: блокталмаған
+      not_saved:
+        few: "%{resource}: %{count} қатесіне байланысты сақтау орындалмады:"
+        many: "%{resource}: %{count} қатесіне байланысты сақтау орындалмады:"
+        one: "%{resource}:%{count} қатесіне байланысты сақталмады:"
+        other: "%{resource}:%{count} қатесіне байланысты сақталмады:"
