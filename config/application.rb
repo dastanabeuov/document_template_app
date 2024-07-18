@@ -12,21 +12,20 @@ module DocumentTemplateApp
     config.load_defaults 7.1
     config.time_zone = 'Almaty'
     config.i18n.fallbacks = true
-    config.i18n.default_locale = :ru
+    config.i18n.default_locale = :en
     config.i18n.available_locales = %i[ru kz en]
 
     config.autoload_lib(ignore: %w(assets tasks))
 
     config.generators do |g|
       g.test_framework :rspec,
-                       # true specs ...
                        fixtures: true,
                        model_specs: true,
-                       request_specs: true,
-                       # false specs ...
-                       controller_specs: false,
+                       controller_specs: true,
+
                        view_specs: false,
                        helper_specs: false,
+                       request_specs: true,
                        routing_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end

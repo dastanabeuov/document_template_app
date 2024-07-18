@@ -2,7 +2,9 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'spec_helper'
 require 'rspec/rails'
-require 'cancan/matchers'
+require 'capybara/rspec'
+require 'capybara/rails'
+require 'launchy'
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
@@ -17,9 +19,9 @@ end
 
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
-  config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include FeatureHelpers, type: :feature
   config.include SphinxHelpers, type: :feature
   config.include ApiHelpers, type: :request

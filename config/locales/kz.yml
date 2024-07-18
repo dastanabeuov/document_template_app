@@ -1,0 +1,27 @@
+kz:
+  hello: "Сәлем Әлем"
+
+  all_list: "Барлық тізім"
+  back: "Артқа"
+  edit: "Өңдеу"
+  new: "Жаңа"
+  destroy: "Жою"
+
+  templates: "Үлгілер"
+  docs: "Құжаттар"
+  news: "Жаңалықтар"
+  about: "Біз туралы"
+  contact: "Байланыс"
+  faqs: "Көп сұрақтар"
+  pricing: "Бағалар"
+  features: "Мүмкіндіктер"
+
+  title: "Тақырып"
+  content: "Мазмұн"
+
+  subscribe: "Жазылу"
+  subscribe_newsletter: "Біздің хабарландыруымызға жазылу"
+  subscribe_newsletter_description: "Біздің жаңартулардың ежемесячық дайджесті."
+  email_address: "Электрондық пошта мекенжайы"
+
+  all_rights_reserved: "Барлық құқықтар қорғалған."

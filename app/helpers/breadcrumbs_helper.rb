@@ -2,7 +2,7 @@ module BreadcrumbsHelper
   def breadcrumbs(paths)
     content_tag(:nav, aria: { label: 'breadcrumb' }) do
       content_tag(:ol, class: 'breadcrumb') do
-        safe_join(paths.map { |path| breadcrumb_item(path) })
+        safe_join(paths&.map { |path| breadcrumb_item(path) })
       end
     end
   end

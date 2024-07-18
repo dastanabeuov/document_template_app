@@ -1,0 +1,27 @@
+ru:
+  hello: "Привет, мир"
+
+  all_list: "Весь список"
+  back: "Назад"
+  edit: "Редактировать"
+  new: "Новый"
+  destroy: "Удалить"
+
+  templates: "Шаблоны"
+  docs: "Документы"
+  news: "Новости"
+  about: "О нас"
+  contact: "Контакты"
+  faqs: "Часто задаваемые вопросы"
+  pricing: "Цены"
+  features: "Особенности"
+
+  title: "Заголовок"
+  content: "Содержание"
+
+  subscribe: "Подписаться"
+  subscribe_newsletter: "Подписаться на нашу рассылку"
+  subscribe_newsletter_description: "Ежемесячный дайджест новостей от нас."
+  email_address: "Адрес электронной почты"
+
+  all_rights_reserved: "Все права защищены."

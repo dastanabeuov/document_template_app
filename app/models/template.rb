@@ -3,9 +3,5 @@ class Template < ApplicationRecord
 
   belongs_to :user
 
-  validates :title, presence: true, uniqueness: {
-      message: ->(object, data) do
-        "Hey #{object.title}, #{data[:value]} is already taken."
-      end
-    }
+  validates :title, presence: true, uniqueness: true
 end

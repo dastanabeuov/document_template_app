@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  root "home#index"
-
+  root "homes#index"
   devise_for :users
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
+  resources :templates
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
