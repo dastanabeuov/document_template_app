@@ -1,0 +1,7 @@
+<h1><%= t('all_list') %></h1>
+
+<% @templates.each do |template| %>
+  <p><%= link_to template.title, template_path(template) %></p>
+<% end %>
+
+<%= render "shared/button", action_type: :index_template %>

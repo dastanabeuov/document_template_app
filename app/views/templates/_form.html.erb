@@ -1,0 +1,19 @@
+<%= form_for template, html: { class: "form", data: { turbo: false } } do |form| %>
+  <div class="form-group">
+    <%= render 'shared/errors', resource: template %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label t('title') %>
+    <%= form.text_field :title, class: "form-control", placeholder: t('title') %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label t('content') %>
+    <%= form.text_field :content, class: "form-control", placeholder: t('content') %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit nil, class: "btn btn-outline-success" %>
+  </div>
+<% end %>
