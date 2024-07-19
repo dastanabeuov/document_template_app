@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  resources :templates
+  resources :templates do
+    post :upload_image, on: :collection
+  end
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

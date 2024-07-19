@@ -3,6 +3,10 @@ class TemplatesController < ApplicationController
   before_action :set_template, only: %i[show edit update destroy]
   before_action :set_breadcrumbs
 
+  protect_from_forgery except: :upload_image
+
+  rescue_from ActiveRecord::RecordNotFound, with: :template_not_found
+
   def index
     @templates = Template.all
   end
@@ -45,20 +49,41 @@ class TemplatesController < ApplicationController
     redirect_to templates_url
   end
 
+  def upload_image
+    image = params[:image]
+
+    if image.nil?
+      render json: { success: 0, error: "No image found in request" }
+      return
+    end
+
+    uploaded_image = TemplateImage.create!(image: image)
+
+    stored_image_url = rails_blob_url(uploaded_image.image)
+
+    render json: { success: 1, file: { url: stored_image_url } }
+  rescue StandardError => e
+    render json: { success: 0, error: e.message }
+  end
+
   private
+    def template_not_found
+      flash[:alert] = 'Template not found.'
+      redirect_to templates_url
+    end
 
-  def set_template
-    @template ||= Template.find_by_id(params[:id])
-  end
+    def set_template
+      @template ||= Template.find_by_id(params[:id])
+    end
 
-  def set_breadcrumbs
-    @breadcrumbs = [
-      { name: '<i class="bi bi-house"></i>'.html_safe, url: root_path },
-      { name: 'Templates', current: true }
-    ]
-  end
+    def set_breadcrumbs
+      @breadcrumbs = [
+        { name: '<i class="bi bi-house"></i>'.html_safe, url: root_path },
+        { name: 'Templates', current: true }
+      ]
+    end
 
-  def template_params
-    params.require(:template).permit(:title, :content)
-  end
+    def template_params
+      params.require(:template).permit(:title, :content, :image)
+    end
 end

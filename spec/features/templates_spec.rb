@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Templates", type: :feature do
-  given(:user) { create(:user) }
-  let!(:template) { create(:template, user: user) }
+  let(:user) { create(:user) }
+  let(:template) { create(:template, user: user) }
 
   before do
     sign_in(user)

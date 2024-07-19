@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Template, type: :model do
   context 'associations' do
     it { should belong_to(:user) }
+    it { should have_many(:template_images).dependent(:destroy) }
   end
 
   context 'validations' do
