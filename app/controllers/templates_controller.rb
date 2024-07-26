@@ -7,6 +7,8 @@ class TemplatesController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :template_not_found
 
+  load_and_authorize_resource
+
   def index
     @templates = Template.all
   end
