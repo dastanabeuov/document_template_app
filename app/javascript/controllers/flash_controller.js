@@ -14,6 +14,6 @@ export default class extends Controller {
       alert.classList.remove("show");
       alert.classList.add("hide");
       alert.addEventListener("transitionend", () => alert.remove());
-    }, 10000); // 10000 миллисекунд = 10 секунды
+    }, 3000); // 3000 миллисекунд = 3 секунды
   }
 }
