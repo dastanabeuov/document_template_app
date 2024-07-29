@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Templates", type: :feature do
-  let(:admin) { create(:user, role: 2) }
-  let(:non_admin) { create(:user, role: 0) }
+  let(:admin) { create(:user) }
+  let(:guest_user) { create(:user, :guest_user) }
 
   let(:template) { create(:template, user: admin) }
 
@@ -69,7 +69,7 @@ RSpec.feature "Templates", type: :feature do
   context "when user non admin" do
 
     before do
-      sign_in(non_admin)
+      sign_in(guest_user)
     end
 
     scenario "GET /index" do
