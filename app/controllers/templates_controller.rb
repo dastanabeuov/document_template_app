@@ -1,5 +1,5 @@
 class TemplatesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new edit create update destroy]
+  before_action :authenticate_user!#, only: %i[new edit create update destroy]
   before_action :set_template, only: %i[show edit update destroy]
   before_action :set_breadcrumbs
 

@@ -1,2 +1,5 @@
-<%= breadcrumbs(@breadcrumbs) %>
-<hr>
+<% if @breadcrumbs %>
+  <div class="container pt-5">
+    <%= breadcrumbs(@breadcrumbs) %>
+  </div>
+<% end %>

@@ -9,7 +9,7 @@ RSpec.feature "Templates", type: :feature do
   context 'when user is admin' do
 
     before do
-      sign_in(admin)
+      sign_in admin
     end
 
     scenario "GET /new" do
@@ -52,7 +52,7 @@ RSpec.feature "Templates", type: :feature do
       expect(page).to have_content('Updated Title')
     end
 
-    scenario "user deletes a template", js: true do
+    scenario "user deletes a template" do
       visit template_path(template)
 
       expect(page).to have_content(template.title)
@@ -69,7 +69,7 @@ RSpec.feature "Templates", type: :feature do
   context "when user non admin" do
 
     before do
-      sign_in(guest_user)
+      sign_in guest_user
     end
 
     scenario "GET /index" do

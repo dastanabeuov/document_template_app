@@ -1,4 +1,10 @@
 <h1><%= @template.title %></h1>
 <p><%= display_content(@template.content) %></p>
 
-<%= render "shared/button", action_type: :show_template, resource: @template %>
+<% if current_user.admin? %>
+  <div class="btn-group pt-5">
+    <%= button_to t('destroy'), template_path(@template), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
+    <%= link_to t('edit'), edit_template_path(@template), class: "btn btn-warning" %>
+    <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

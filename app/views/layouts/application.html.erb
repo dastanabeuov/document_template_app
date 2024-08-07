@@ -12,11 +12,11 @@
 
   <body>
     <%= render 'layouts/header' %>
+      <%= render 'layouts/breadcrumbs' %>
       <div class="container pt-5 pb-5">
         <%= render 'layouts/flash' %>
-        <%= render 'layouts/breadcrumbs' %>
+        <%= yield %>
       </div>
-      <div class="container pb-5"><%= yield %></div>
     <%= render 'layouts/footer' %>
   </body>
 </html>

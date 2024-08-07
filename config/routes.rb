@@ -10,5 +10,9 @@ Rails.application.routes.draw do
     post :upload_image, on: :collection
   end
 
+  resources :companies do
+    resources :memberships, only: [:create, :destroy]
+  end
+
   get "up" => "rails/health#show", as: :rails_health_check
 end

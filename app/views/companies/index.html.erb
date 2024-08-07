@@ -1,0 +1,27 @@
+<h1><%= t('all_list') %></h1>
+
+<ul>
+  <% if current_user&.admin? %>
+
+    <% @companies.each do |c| %>
+      <li>
+        <%= link_to c.name, c %>
+      </li>
+    <% end %>
+
+  <% else %>
+
+    <% @user_companies&.each do |c| %>
+      <li>
+        <%= link_to c.name, c %>
+      </li>
+    <% end %>
+
+  <% end %>
+</ul>
+
+<% if current_user.admin? %>
+  <div class="btn-group pt-5">
+    <%= link_to t('new'), new_company_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>
