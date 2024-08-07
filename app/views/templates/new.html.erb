@@ -2,4 +2,8 @@
 
 <%= render "form", template: @template %>
 
-<%= render "shared/button", action_type: :new_template, resource: @template %>
+<% if current_user.admin? %>
+  <div class="btn-group pt-5">
+    <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

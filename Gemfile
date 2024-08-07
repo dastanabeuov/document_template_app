@@ -63,6 +63,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "webdrivers"
   gem "launchy"
   gem "shoulda-matchers"
   gem "faker", "~> 3.4"

@@ -4,6 +4,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'selenium/webdriver'
 require 'launchy'
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
