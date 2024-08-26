@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :companies, through: :memberships
   has_many :templates, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   belongs_to :company, optional: true
 

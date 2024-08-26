@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_29_054347) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_070803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_29_054347) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "document_images", force: :cascade do |t|
+    t.bigint "document_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["document_id"], name: "index_document_images_on_document_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "title", null: false
+    t.json "content", null: false
+    t.bigint "user_id", null: false
+    t.bigint "template_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["template_id"], name: "index_documents_on_template_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "user_id", null: false
@@ -65,8 +83,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_29_054347) do
   end
 
   create_table "templates", force: :cascade do |t|
-    t.string "title"
-    t.json "content"
+    t.string "title", null: false
+    t.json "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
@@ -102,6 +120,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_29_054347) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "document_images", "documents"
+  add_foreign_key "documents", "templates", on_delete: :nullify
+  add_foreign_key "documents", "users"
   add_foreign_key "memberships", "companies"
   add_foreign_key "memberships", "users"
   add_foreign_key "template_images", "templates"

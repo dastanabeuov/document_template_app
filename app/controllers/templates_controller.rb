@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
-  before_action :authenticate_user!#, only: %i[new edit create update destroy]
-  before_action :set_template, only: %i[show edit update destroy]
+  before_action :authenticate_user!
+  before_action :set_template, only: %i[show edit update destroy create_document]
   before_action :set_breadcrumbs
 
   protect_from_forgery except: :upload_image
@@ -27,28 +27,40 @@ class TemplatesController < ApplicationController
     @template = current_user.templates.new(template_params)
 
     if @template.save
-      flash[:notice] = 'Template was successfully created.'
-      redirect_to @template
+      redirect_to @template, notice: 'Template was successfully created.'
     else
-      flash.now[:alert] = 'Template was not created.'
-      render :new
+      render :new, alert: 'Template was not created.'
+    end
+  end
+
+  def create_document
+    unique_title = @template.title
+    count = 1
+    while Document.exists?(title: unique_title)
+      unique_title = "#{@template.title} (#{count})"
+      count += 1
+    end
+
+    @document = current_user.documents.new(title: unique_title, content: @template.content, template: @template)
+
+    if @document.save
+      redirect_to @document, notice: 'Document was successfully created from template.'
+    else
+      redirect_to @template, alert: 'Failed to create document from template.'
     end
   end
 
   def update
     if @template.update(template_params)
-      flash[:notice] = 'Template was successfully updated.'
-      redirect_to @template
+      redirect_to @template, notice: 'Template was successfully updated.'
     else
-      flash.now[:alert] = 'Template was not updated.'
-      render :edit
+      render :edit, alert: 'Template was not updated.'
     end
   end
 
   def destroy
     @template.destroy
-    flash[:notice] = 'Template was successfully destroyed.'
-    redirect_to templates_url
+    redirect_to templates_url, notice: 'Template was successfully destroyed.'
   end
 
   def upload_image
@@ -70,8 +82,7 @@ class TemplatesController < ApplicationController
 
   private
     def template_not_found
-      flash[:alert] = 'Template not found.'
-      redirect_to templates_url
+      redirect_to templates_url, alert: 'Template not found.'
     end
 
     def set_template

@@ -6,6 +6,8 @@ class Template < ApplicationRecord
   belongs_to :user, required: true
 
   has_many :template_images, dependent: :destroy
+  has_many :documents
 
   validates :title, presence: true, uniqueness: true
+  #validates :content, presence: true
 end
