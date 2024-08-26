@@ -8,9 +8,9 @@ import ImageTool from "@editorjs/image";
 import List from "@editorjs/list";
 import Paragraph from "@editorjs/paragraph";
 
-// Connects to data-controller="editor"
+// Connects to data-controller="document-editor"
 export default class extends Controller {
-  static targets = ["template_content"];
+  static targets = ["document_content"];
 
   csrfToken() {
     const metaTag = document.querySelector("meta[name='csrf-token']");
@@ -21,7 +21,7 @@ export default class extends Controller {
     const initialContent = this.getInitialContent();
 
     this.contentEditor = new EditorJS({
-      holder: this.template_contentTarget,
+      holder: this.document_contentTarget,
       data: initialContent,
       tools: {
         header: {
@@ -41,7 +41,7 @@ export default class extends Controller {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: `/templates/upload_image`,
+              byFile: `/documents/upload_image`,
             },
             additionalRequestHeaders: {
               "X-CSRF-Token": this.csrfToken(),
@@ -63,7 +63,7 @@ export default class extends Controller {
   }
 
   getInitialContent() {
-    const hiddenContentField = document.getElementById("template_content_hidden");
+    const hiddenContentField = document.getElementById("document_content_hidden");
 
     if (hiddenContentField && hiddenContentField.value) {
       return JSON.parse(hiddenContentField.value);
@@ -75,11 +75,11 @@ export default class extends Controller {
     event.preventDefault();
 
     const outputData = await this.contentEditor.save();
-    const templateForm = this.element;
+    const documentForm = this.element;
 
-    const hiddenInput = document.getElementById("template_content_hidden");
+    const hiddenInput = document.getElementById("document_content_hidden");
 
     hiddenInput.value = JSON.stringify(outputData);
-    templateForm.submit();
+    documentForm.submit();
   }
 }

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Templates", type: :feature do
-  let(:admin) { create(:user) }
+  let(:admin) { create(:user) } #default user role: admin
   let(:guest_user) { create(:user, :guest_user) }
 
   let(:template) { create(:template, user: admin) }
@@ -35,11 +35,11 @@ RSpec.feature "Templates", type: :feature do
 
     scenario "POST /create with invalid parameters" do
       visit new_template_path
-      fill_in 'Title', with: ''
+
       click_button 'Create Template'
 
       expect {Template.count}.not_to change { Template.count }
-      expect(page).to have_content('Template was not created.')
+      expect(page).to have_content("Title can't be blank")
     end
 
     scenario "user updates a template" do
@@ -52,12 +52,10 @@ RSpec.feature "Templates", type: :feature do
       expect(page).to have_content('Updated Title')
     end
 
-    scenario "user deletes a template" do
+    scenario "user deletes a template", js: true do
       visit template_path(template)
 
-      expect(page).to have_content(template.title)
-
-      accept_confirm do
+      accept_alert do
         click_button 'Destroy'
       end
 

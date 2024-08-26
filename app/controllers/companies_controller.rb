@@ -20,10 +20,11 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
+
     if @company.save
       redirect_to @company, notice: 'Company was successfully created.'
     else
-      render :new
+      render :new, alert: 'Company was not created.'
     end
   end
 
@@ -34,7 +35,7 @@ class CompaniesController < ApplicationController
     if @company.update(company_params)
       redirect_to @company, notice: 'Company was successfully updated.'
     else
-      render :edit
+      render :edit, alert: 'Company was not updated.'
     end
   end
 
@@ -52,7 +53,7 @@ class CompaniesController < ApplicationController
     end
 
     def set_company
-      @company = Company.find(params[:id])
+      @company ||= Company.find(params[:id])
     end
 
     def company_params

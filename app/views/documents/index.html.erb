@@ -1,0 +1,13 @@
+<h1><%= t('all_list') %></h1>
+
+<ul>
+  <% @documents&.each do |document| %>
+    <li><%= link_to document.title, document_path(document) %></li>
+  <% end %>
+</ul>
+
+<% if current_user.admin? %>
+  <div class="btn-group pt-5">
+    <%= link_to t('new'), new_document_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

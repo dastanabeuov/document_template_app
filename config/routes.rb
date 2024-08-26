@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
+  resources :documents do
+    post :upload_image, on: :collection
+  end
+
   resources :templates do
+    post :create_document, on: :member
     post :upload_image, on: :collection
   end
 
