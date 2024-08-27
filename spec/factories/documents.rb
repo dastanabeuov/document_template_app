@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :document do
     title { "Sample Title" }
-    content { "GoodWood" }
+    content { "" }
     association :user
     association :template
   end

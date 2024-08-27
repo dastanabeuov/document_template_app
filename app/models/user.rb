@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   belongs_to :company, optional: true
 
-  enum role: { guest: 0, manager: 1, admin: 2 }
+  enum role: { guest: 0, owner: 1, admin: 2 }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,

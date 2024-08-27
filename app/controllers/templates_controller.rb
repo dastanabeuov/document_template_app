@@ -29,7 +29,7 @@ class TemplatesController < ApplicationController
     if @template.save
       redirect_to @template, notice: 'Template was successfully created.'
     else
-      render :new, alert: 'Template was not created.'
+      render :new, alert: 'Template was not created.', status: :unprocessable_entity
     end
   end
 
@@ -54,7 +54,7 @@ class TemplatesController < ApplicationController
     if @template.update(template_params)
       redirect_to @template, notice: 'Template was successfully updated.'
     else
-      render :edit, alert: 'Template was not updated.'
+      render :edit, alert: 'Template was not updated.', status: :unprocessable_entity
     end
   end
 
