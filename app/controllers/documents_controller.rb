@@ -29,7 +29,7 @@ class DocumentsController < ApplicationController
     if @document.save
       redirect_to @document, notice: 'Document was successfully created.'
     else
-      render :new, alert: 'Document was not created.'
+      render :new, alert: 'Document was not created.', status: :unprocessable_entity
     end
   end
 
@@ -37,7 +37,7 @@ class DocumentsController < ApplicationController
     if @document.update(document_params)
       redirect_to @document, notice: 'Document was successfully updated.'
     else
-      render :edit, alert: 'Document was not updated.'
+      render :edit, alert: 'Document was not updated.', status: :unprocessable_entity
     end
   end
 
