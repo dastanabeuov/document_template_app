@@ -1,12 +1,26 @@
 <h1><%= t('all_list') %></h1>
 
 <ul>
-  <% @documents&.each do |document| %>
-    <li><%= link_to document.title, document_path(document) %></li>
+  <% if current_user&.admin? %>
+
+    <% @documents.each do |d| %>
+      <li>
+        <%= link_to d.title, d %>
+      </li>
+    <% end %>
+
+  <% else %>
+
+    <% @current_user_company_documents&.each do |d| %>
+      <li>
+        <%= link_to d.title, d, class: "#{'text-danger' if d.company.memberships.owner.exists?(user_id: current_user.id)}" %>
+      </li>
+    <% end %>
+
   <% end %>
 </ul>
 
-<% if current_user.admin? %>
+<% if can?(:create, Document) %>
   <div class="btn-group pt-5">
     <%= link_to t('new'), new_document_path, class: "btn btn-primary" %>
   </div>

@@ -1,10 +1,15 @@
 <h1><%= @document.title %></h1>
 <p><%= display_content(@document.content) %></p>
 
-<% if current_user.admin? %>
+<% if can?(:manage, @document) %>
   <div class="btn-group pt-5">
     <%= button_to t('destroy'), document_path(@document), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
     <%= link_to t('edit'), edit_document_path(@document), class: "btn btn-warning" %>
     <%= link_to t('back'), documents_path, class: "btn btn-secondary" %>
   </div>
+<% else %>
+  <div class="btn-group pt-5">
+    <%= link_to t('back'), documents_path, class: "btn btn-secondary" %>
+  </div>
 <% end %>
+

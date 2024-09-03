@@ -2,9 +2,7 @@
 
 <%= render "form", document: @document %>
 
-<% if current_user.admin? %>
-  <div class="btn-group pt-5">
-    <%= link_to t('back'), documents_path, class: "btn btn-secondary" %>
-  </div>
-<% end %>
+<div class="btn-group pt-5">
+  <%= link_to t('back'), documents_path, class: "btn btn-secondary" %>
+</div>
 

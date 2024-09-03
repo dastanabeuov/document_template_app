@@ -7,7 +7,10 @@ class RegistrationsController < Devise::RegistrationsController
     super do |resource|
       if params[:user][:company_name].present?
         company = Company.find_or_create_by(name: params[:user][:company_name])
-        Membership.create(user: resource, company: company)
+        membership = company.memberships.find_or_create_by(user: resource,
+                                                           role: :owner,
+                                                           company: company)
+        resource.update(company_id: company.id)
       end
     end
   end

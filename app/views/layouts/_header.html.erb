@@ -39,7 +39,7 @@
             <% if current_user.admin? %>
               <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-outline-success mr-2" %>
             <% else %>
-              <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-outline-info mr-2" %>
+              <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-warning mr-2" %>
             <% end %>
 
             <%= link_to "<i class='bi bi-door-closed'></i> Sign out".html_safe, destroy_user_session_path, method: :delete, class: "btn btn-outline-danger mr-2" %>

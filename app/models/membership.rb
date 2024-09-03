@@ -1,4 +1,6 @@
 class Membership < ApplicationRecord
+  enum role: { member: 0, owner: 1 }
+
   belongs_to :user
   belongs_to :company
 

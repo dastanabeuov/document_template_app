@@ -1,6 +1,7 @@
 class Company < ApplicationRecord
   has_many :memberships, dependent: :destroy
-  has_many :users, through: :memberships
+  has_many :users, through: :memberships, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   default_scope { order(created_at: :DESC) }
 

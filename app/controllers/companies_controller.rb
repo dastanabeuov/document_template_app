@@ -1,9 +1,9 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin, only: [:new, :create]
-
-  before_action :set_breadcrumbs
   before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin, only: [:new, :create]
+  before_action :check_owner, only: [:edit, :update, :destroy]
+  before_action :set_breadcrumbs
 
   def index
     @user_companies = current_user&.companies
@@ -11,7 +11,6 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @users = User.all
   end
 
   def new
@@ -45,6 +44,14 @@ class CompaniesController < ApplicationController
   end
 
   private
+    def check_owner
+      redirect_to companies_path, alert: 'Access denied!' unless current_user.role == 'owner' && current_user.company == @company || current_user.admin?
+    end
+
+    def check_admin
+      redirect_to companies_path, alert: 'Access denied!' unless current_user.admin?
+    end
+
     def set_breadcrumbs
       @breadcrumbs = [
         { name: '<i class="bi bi-house"></i>'.html_safe, url: root_path },
@@ -58,9 +65,5 @@ class CompaniesController < ApplicationController
 
     def company_params
       params.require(:company).permit(:name)
-    end
-
-    def check_admin
-      redirect_to(root_path, alert: 'Access denied!') unless current_user.admin?
     end
 end
