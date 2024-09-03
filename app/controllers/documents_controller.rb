@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_document, only: [:show, :edit, :update, :destroy]
+  before_action :check_membership, only: [:show, :edit, :update, :destroy]
   before_action :set_breadcrumbs
 
   protect_from_forgery except: :upload_image
@@ -10,22 +11,32 @@ class DocumentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @documents = Document.all
+    if current_user.admin?
+      @documents = Document.all
+    elsif !current_user.admin? && current_user.companies.any?
+      @current_user_company_documents = Document.where(company_id: current_user.companies.pluck(:id))
+    else
+      @current_user_company_documents = []
+    end
   end
 
   def show
   end
 
   def new
-    @document = current_user.documents.new
+    if current_user.company
+      @document = current_user.company.documents.new
+    else
+      redirect_to documents_path, alert: 'First company created.'
+    end
   end
 
   def edit
   end
 
   def create
-    @document = current_user.documents.new(document_params)
-
+    @document = current_user.company.documents.new(document_params)
+    @document.user = current_user
     if @document.save
       redirect_to @document, notice: 'Document was successfully created.'
     else
@@ -64,6 +75,7 @@ class DocumentsController < ApplicationController
   end
 
   private
+
     def document_not_found
       redirect_to documents_url, alert: 'Document not found.'
     end
@@ -77,6 +89,12 @@ class DocumentsController < ApplicationController
 
     def set_document
       @document ||= Document.find(params[:id])
+    end
+
+    def check_membership
+      unless current_user.companies.exists?(id: @document.company_id) || current_user.admin?
+        redirect_to root_path, alert: 'You are not authorized to access this document.'
+      end
     end
 
     def document_params

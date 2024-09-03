@@ -3,24 +3,24 @@
 <ul>
   <% if current_user&.admin? %>
 
-    <% @companies.each do |c| %>
+    <% @companies.each do |company| %>
       <li>
-        <%= link_to c.name, c %>
+        <%= link_to company.name, company %>
       </li>
     <% end %>
 
   <% else %>
 
-    <% @user_companies&.each do |c| %>
+    <% @user_companies&.each do |company| %>
       <li>
-        <%= link_to c.name, c %>
+        <%= link_to company.name, company, class: "#{'text-danger' if company.memberships.owner.exists?(user_id: current_user.id)}" %>
       </li>
     <% end %>
 
   <% end %>
 </ul>
 
-<% if current_user.admin? %>
+<% if can?(:create, Company) %>
   <div class="btn-group pt-5">
     <%= link_to t('new'), new_company_path, class: 'btn btn-primary' %>
   </div>

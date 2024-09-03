@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   end
 
   resources :companies do
-    resources :memberships, only: [:create, :destroy]
+    resources :memberships, only: [:create, :destroy] do
+      collection do
+        post :add_owner
+      end
+    end
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

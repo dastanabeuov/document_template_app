@@ -9,6 +9,33 @@ class TemplatesController < ApplicationController
 
   load_and_authorize_resource
 
+  def create_document
+    #debugger
+    if current_user.company
+      unique_title = @template.title
+      count = 1
+      while Document.exists?(title: unique_title)
+        unique_title = "#{@template.title} (#{count})"
+        count += 1
+      end
+
+      @document = current_user.company.documents.new(
+        title: unique_title,
+        content: @template.content,
+        template: @template,
+        user: current_user
+      )
+
+      if @document.save
+        redirect_to @document, notice: 'Document was successfully created from template.'
+      else
+        redirect_to @template, alert: 'Failed to create document from template: ' + @document.errors.full_messages.to_sentence
+      end
+    else
+      redirect_to @template, alert: 'First create a company.'
+    end
+  end
+
   def index
     @templates = Template.all
   end
@@ -30,23 +57,6 @@ class TemplatesController < ApplicationController
       redirect_to @template, notice: 'Template was successfully created.'
     else
       render :new, alert: 'Template was not created.', status: :unprocessable_entity
-    end
-  end
-
-  def create_document
-    unique_title = @template.title
-    count = 1
-    while Document.exists?(title: unique_title)
-      unique_title = "#{@template.title} (#{count})"
-      count += 1
-    end
-
-    @document = current_user.documents.new(title: unique_title, content: @template.content, template: @template)
-
-    if @document.save
-      redirect_to @document, notice: 'Document was successfully created from template.'
-    else
-      redirect_to @template, alert: 'Failed to create document from template.'
     end
   end
 

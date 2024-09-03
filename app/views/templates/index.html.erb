@@ -6,7 +6,7 @@
   <% end %>
 </ul>
 
-<% if current_user.admin? %>
+<% if can?(:create, Template) %>
   <div class="btn-group pt-5">
     <%= link_to t('new'), new_template_path, class: "btn btn-primary" %>
   </div>

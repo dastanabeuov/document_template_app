@@ -8,4 +8,9 @@
     <%= button_to 'Create Document from Template', create_document_template_path(@template), method: :post, class: 'btn btn-primary' %>
     <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
   </div>
+<% else %>
+  <div class="btn-group pt-5">
+    <%= button_to 'Create Document from Template', create_document_template_path(@template), method: :post, class: 'btn btn-primary' %>
+    <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+  </div>
 <% end %>

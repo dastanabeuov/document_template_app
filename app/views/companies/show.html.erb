@@ -3,13 +3,27 @@
 <div class="row">
 
   <div class="col col-3 border py-5 px-5">
-    <h2>Add Member</h2>
-    <%= form_with url: company_memberships_path(@company), local: true do |form| %>
-      <div class="mb-3">
-        <%= form.label :user_id, 'User', class: 'form-label' %>
-        <%= form.collection_select :user_id, User.all, :id, :email, { include_blank: true }, { class: 'form-select' } %>
+    <div class="add-member">
+      <h2>Add Member</h2>
+      <%= form_with url: company_memberships_path(@company), local: true do |form| %>
+        <div class="mb-3">
+          <%= form.label :user_id, 'User', class: 'form-label' %>
+          <%= form.collection_select :user_id, User.all, :id, :email, { include_blank: true }, { class: 'form-select' } %>
+        </div>
+        <%= form.submit 'Submit', class: 'btn btn-sm btn-primary' %>
+      <% end %>
+    </div>
+    <% if current_user.admin? %>
+      <div class="add-owner mt-5">
+        <h2>Add Owner</h2>
+        <%= form_with url: add_owner_company_memberships_path(@company), local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :user_id, 'User', class: 'form-label' %>
+            <%= form.collection_select :user_id, User.all, :id, :email, { include_blank: true }, { class: 'form-select' } %>
+          </div>
+          <%= form.submit 'Submit', class: 'btn btn-sm btn-primary' %>
+        <% end %>
       </div>
-      <%= form.submit 'Submit', class: 'btn btn-sm btn-primary' %>
     <% end %>
   </div>
 
@@ -24,10 +38,13 @@
       </thead>
       <tbody>
         <% @company.memberships.includes(:user).each do |membership| %>
-          <tr>
+          <tr class="<%= 'table-primary' if membership.owner? %>">
             <td><%= membership.user.email %></td>
             <td>
-              <%= button_to t('destroy'), company_membership_path(@company, membership), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+              <%= button_to 'Destroy', company_membership_path(@company, membership),
+                            method: :delete,
+                            data: { turbo_confirm: 'Are you sure?' },
+                            class: "btn btn-outline-danger btn-sm #{'hidden' unless can?(:destroy, membership)}" %>
             </td>
           </tr>
         <% end %>
@@ -37,10 +54,14 @@
 
 </div>
 
-<% if current_user.admin? %>
+<% if can?(:destroy, @company) && can?(:update, @company) %>
   <div class="btn-group pt-5">
-    <%= button_to t('destroy'), company_path(@company), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
+    <%= button_to t('destroy'), company_path(@company), method: :delete, data: { "turbo-confirm": t('are_you_sure') }, class: "btn btn-danger" %>
     <%= link_to t('edit'), edit_company_path(@company), class: "btn btn-warning" %>
+    <%= link_to t('back'), companies_path, class: "btn btn-secondary" %>
+  </div>
+<% else %>
+  <div class="btn-group pt-5">
     <%= link_to t('back'), companies_path, class: "btn btn-secondary" %>
   </div>
 <% end %>
