@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe DocumentsController, type: :controller do
-  let(:user) { create(:user) }
+  let(:company) { create(:company) }
+  let(:user) { create(:user, company: company) }
   let(:template) { create(:template, user: user) }
   let(:document) { create(:document, user: user, template: template) }
 

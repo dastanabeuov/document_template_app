@@ -13,8 +13,4 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
-  def become_guest!
-    update(role: :guest)
-  end
 end

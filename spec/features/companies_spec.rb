@@ -86,7 +86,7 @@ RSpec.feature "Companies", type: :feature do
     scenario "non-admin cannot create a company" do
       visit new_company_path
 
-      expect(current_path).to eq(root_path)
+      expect(current_path).to eq(companies_path)
       expect(page).to have_content('Access denied!')
     end
   end
