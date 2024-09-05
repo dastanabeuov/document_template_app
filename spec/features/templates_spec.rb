@@ -56,7 +56,7 @@ RSpec.feature "Templates", type: :feature do
       visit template_path(template)
 
       accept_alert do
-        click_button 'Destroy'
+        click_link 'Destroy'
       end
 
       expect(page).to have_content('Template was successfully destroyed.')

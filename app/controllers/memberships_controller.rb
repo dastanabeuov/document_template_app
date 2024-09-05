@@ -28,7 +28,6 @@ class MembershipsController < ApplicationController
 
   def destroy
     @membership.destroy
-    @membership.become_guest!
     redirect_to @company, notice: 'User was successfully removed from the company.'
   end
 

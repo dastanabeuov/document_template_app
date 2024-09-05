@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Documents", type: :feature do
-  let(:admin) { create(:user) } # default user role: admin
+  let(:company) { create(:company) }
+  let(:admin) { create(:user, company: company) } # default user role: admin
   let(:guest_user) { create(:user, :guest_user) }
   let(:document) { create(:document, user: admin) }
 

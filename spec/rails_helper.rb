@@ -28,6 +28,7 @@ RSpec.configure do |config|
   config.include ApiHelpers, type: :request
 
   Capybara.javascript_driver = :selenium_chrome_headless
+  #Capybara.javascript_driver = :selenium_chrome
 
   config.fixture_paths = "#{::Rails.root}/spec/fixtures"
 

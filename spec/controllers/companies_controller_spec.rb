@@ -59,7 +59,7 @@ RSpec.describe CompaniesController, type: :controller do
       end
 
       it "redirects to the root path" do
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(companies_path)
         expect(flash[:alert]).to eq('Access denied!')
       end
     end
@@ -105,7 +105,7 @@ RSpec.describe CompaniesController, type: :controller do
       end
 
       it "redirects to the root path" do
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(companies_path)
         expect(flash[:alert]).to eq('Access denied!')
       end
     end
