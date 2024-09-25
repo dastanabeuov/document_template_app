@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :document do
-    title { "Sample Title" }
+    sequence(:title) { |n| "Sample Title #{n}" }
     content { "" }
     association :user
     association :template

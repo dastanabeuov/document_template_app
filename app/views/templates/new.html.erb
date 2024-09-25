@@ -1,7 +1,11 @@
-<h1><%= t('new') %></h1>
+<%= turbo_frame_tag "right-panel" do %>
 
-<%= render "form", template: @template %>
+  <h1><%= t('new') %></h1>
 
-<div class="btn-group pt-5">
-  <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
-</div>
+  <%= render "form", template: @template %>
+
+  <div class="btn-group pt-5">
+    <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+  </div>
+
+<% end %>

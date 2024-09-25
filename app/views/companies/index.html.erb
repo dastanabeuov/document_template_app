@@ -1,24 +1,30 @@
 <h1><%= t('all_list') %></h1>
 
-<ul>
+<ol class="list-group list-group-numbered">
   <% if current_user&.admin? %>
 
     <% @companies.each do |company| %>
-      <li>
-        <%= link_to company.name, company %>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold"><%= link_to company.name, company %></div>
+        </div>
+        <span class="badge bg-primary rounded-pill"><%= company.memberships.count %></span>
       </li>
     <% end %>
 
   <% else %>
 
     <% @user_companies&.each do |company| %>
-      <li>
-        <%= link_to company.name, company, class: "#{'text-danger' if company.memberships.owner.exists?(user_id: current_user.id)}" %>
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold"><%= link_to company.name, company, class: "#{'text-danger' if company.memberships.owner.exists?(user_id: current_user.id)}" %></div>
+          <span class="badge bg-primary rounded-pill"><%= company.memberships.count %></span>
+        </div>
       </li>
     <% end %>
 
   <% end %>
-</ul>
+</ol>
 
 <% if can?(:create, Company) %>
   <div class="btn-group pt-5">

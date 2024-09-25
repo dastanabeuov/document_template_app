@@ -1,6 +1,8 @@
-<% flash.each do |key, message| %>
-  <div class="alert <%= flash_key(key) %> alert-dismissible fade show" role="alert" data-controller="flash" data-flash-target="message">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    <%= message %>
-  </div>
-<% end %>
+<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1050;">
+  <% flash.each do |key, message| %>
+    <div class="alert <%= flash_key(key) %> alert-dismissible fade show" role="alert" data-controller="flash" data-flash-target="message">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <%= message %>
+    </div>
+  <% end %>
+</div>

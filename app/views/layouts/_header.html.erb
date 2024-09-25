@@ -1,56 +1,43 @@
-<div class="container-flouid shadow-sm">
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <h3>OwlPlanner</h3>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <%= nav_link_to 'Templates', templates_path %>
-          </li>
-          <li class="nav-item">
-            <%= nav_link_to 'Documents', documents_path %>
-          </li>
-          <li class="nav-item">
-            <%= nav_link_to 'Company users', companies_path %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Features</a>
-          </li>
+<nav class="navbar navbar-expand-lg bg-gray-200 shadow">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <h1>OwlPlanner</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">About</a>
-          </li>
+        <li class="nav-item">
+          <%= nav_link_to I18n.t('.about'), "#" %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link_to I18n.t('.contact'), "#" %>
+        </li>
+        <li class="nav-item">
+          <%= nav_link_to I18n.t('.features'), "#" %>
+        </li>
 
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Contact</a>
-          </li>
-        <% end %>
-        </ul>
-        <% if user_signed_in? %>
-          <form class="">
+      </ul>
+      <% if user_signed_in? %>
+        <form class="">
 
-            <% if current_user.admin? %>
-              <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-outline-success mr-2" %>
-            <% else %>
-              <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-warning mr-2" %>
-            <% end %>
+          <% if current_user.admin? %>
+            <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-outline-success mr-2" %>
+          <% else %>
+            <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-warning mr-2" %>
+          <% end %>
 
-            <%= link_to "<i class='bi bi-door-closed'></i> Sign out".html_safe, destroy_user_session_path, method: :delete, class: "btn btn-outline-danger mr-2" %>
-          </form>
-        <% else %>
-          <form class="">
-            <%= link_to "<i class='bi bi-door-open'></i> Sign in".html_safe, new_user_session_path, class: "btn btn-outline-primary mr-2" %>
-            <%= link_to "<i class='bi bi-person-check'></i> Sign up".html_safe, new_user_registration_path, class: "btn btn-outline-success" %>
-          </form>
-        <% end %>
-      </div>
+          <%= link_to "<i class='bi bi-door-closed'></i> Sign out".html_safe, destroy_user_session_path, method: :delete, class: "btn btn-outline-danger mr-2" %>
+        </form>
+      <% else %>
+        <form class="">
+          <%= link_to "<i class='bi bi-door-open'></i> Sign in".html_safe, new_user_session_path, class: "btn btn-outline-primary mr-2" %>
+          <%= link_to "<i class='bi bi-person-check'></i> Sign up".html_safe, new_user_registration_path, class: "btn btn-outline-success" %>
+        </form>
+      <% end %>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>
+

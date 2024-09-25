@@ -2,7 +2,6 @@ class DocumentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :check_membership, only: [:show, :edit, :update, :destroy]
-  before_action :set_breadcrumbs
 
   protect_from_forgery except: :upload_image
 
@@ -11,16 +10,27 @@ class DocumentsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.documents')}", current: true }
+    ]
+
     if current_user.admin?
-      @documents = Document.all
-    elsif !current_user.admin? && current_user.companies.any?
-      @current_user_company_documents = Document.where(company_id: current_user.companies.pluck(:id))
+      @documents = Document.all.includes(:company)
+    elsif current_user.companies.any?
+      @current_user_company_documents = Document.where(company_id: current_user.companies.pluck(:id)).includes(:company)
     else
       @current_user_company_documents = []
     end
+    render partial: 'homes/right_panels/documents' if turbo_frame_request?
   end
 
   def show
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.documents')}", url: documents_path },
+      { name: "#{@document.id}", current: true }
+    ]
   end
 
   def new
@@ -44,11 +54,27 @@ class DocumentsController < ApplicationController
     end
   end
 
+  # def update
+  #   if @document.update(document_params)
+  #     redirect_to @document, notice: 'Document was successfully updated.'
+  #   else
+  #     render :edit, alert: 'Document was not updated.', status: :unprocessable_entity
+  #   end
+  # end
+
   def update
     if @document.update(document_params)
-      redirect_to @document, notice: 'Document was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace('right-panel', partial: 'documents/show', locals: { document: @document })
+        end
+      end
     else
-      render :edit, alert: 'Document was not updated.', status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, alert: 'Документ не был обновлён.', status: :unprocessable_entity }
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -77,14 +103,7 @@ class DocumentsController < ApplicationController
   private
 
     def document_not_found
-      redirect_to documents_url, alert: 'Document not found.'
-    end
-
-    def set_breadcrumbs
-      @breadcrumbs = [
-        { name: '<i class="bi bi-house"></i>'.html_safe, url: root_path },
-        { name: 'Documents', current: true }
-      ]
+      redirect_to documents_path, alert: 'Document not found.'
     end
 
     def set_document

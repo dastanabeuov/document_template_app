@@ -5,3 +5,13 @@ body {
 .hidden {
   display: none;
 }
+.bg-gray-200 {
+  background-color: #E9ECEF;
+}
+.navbar .navbar-brand {
+  color: #344767; /* Цвет текста */
+  font-weight: bold; /* Жирное начертание текста */
+  font-size: 1.50rem; /* Размер шрифта */
+  font-weight: bold;
+  /* text-transform: uppercase;  Преобразование текста в верхний регистр */
+}

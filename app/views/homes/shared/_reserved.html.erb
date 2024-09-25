@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+        <div class="card">
+            <h5 class="card-header">Последние транзакции</h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Order</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Date</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @latest_trunsactions_documents.each do |document| %>
+                            <tr>
+                              <th scope="row"><%= document.id %></th>
+                              <td><%= document.title %></td>
+                              <td><%= document.user.email %></td>
+                              <td><%= document.company.memberships.count %></td>
+                              <td><%= document.created_at %></td>
+                              <td><%= link_to t('.show'), document_path(document), class: 'btn btn-sm btn-primary' %></td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="d-grid">
+                  <%= link_to t('all_list'), documents_path, class: 'btn btn-light' %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-xl-4">
+        <div class="card">
+            <h5 class="card-header">Трафик за последние 6 мес.</h5>
+            <div class="card-body">
+              <div data-controller="chart"
+                   data-chart-labels='<%= @users_by_month.keys.map { |date| date.strftime("%B %Y") } %>'
+                   data-chart-data='<%= @users_by_month.values %>'>
+                <canvas data-chart-target="canvas"></canvas>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

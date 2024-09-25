@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "right-panel" do %>
+
+  <%= render 'layouts/breadcrumbs' %>
+  <%= render 'layouts/flash' %>
+
+  <h1 class="h2"><%= I18n.t('.dashboard') %></h1>
+  <p><%= I18n.t('.dashboard_description') %></p>
+
+  <div class="row my-4">
+    <%= render collection: @templates.limit(4), partial: 'templates/template', as: :template %>
+  </div>
+  <%= render 'homes/shared/reserved' %>
+
+<% end %>
