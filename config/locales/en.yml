@@ -1,5 +1,14 @@
 en:
-  hello: "Hello world"
+  dashboard: "Dashboard"
+  dashboard_description: "Create your document using pre-made templates or design your own from scratch. Plan your documents ahead of time to ensure everything is organized and ready when you need it. Whether you're using a template or starting fresh, take control of your document creation process and stay ahead with careful planning and foresight."
+
+  templates: "Templates"
+  documents: "Documents"
+  сompany_employees: "Сompany employees"
+  customers: "Customers"
+  read_tutorial: "Read tutorial"
+  volt_qna: "Volt QnA"
+  coffee_chat: "Сoffee Сhat"
 
   all_list: "All list"
   back: "Back"
@@ -7,8 +16,13 @@ en:
   new: "New"
   destroy: "Destroy"
 
-  templates: "Templates"
-  docs: "Docs"
+  title: "Title"
+  content: "Content"
+
+  companies: "Companies"
+  сompany: "Company"
+  сompany_employees: "Сompany employees"
+
   news: "News"
   about: "About"
   contact: "Contact"
@@ -16,12 +30,10 @@ en:
   pricing: "Pricing"
   features: "Features"
 
-  title: "Title"
-  content: "Content"
-
   subscribe: "Subscribe"
   subscribe_newsletter: "Subscribe to our newsletter"
   subscribe_newsletter_description: "Monthly digest of what's new and exciting from us."
   email_address: "Email address"
 
   all_rights_reserved: "All rights reserved."
+  copyright: "Copyright"

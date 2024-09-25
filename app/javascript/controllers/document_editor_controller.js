@@ -1,16 +1,16 @@
 import { Controller } from "@hotwired/stimulus";
 import EditorJS from "@editorjs/editorjs";
 
-// These are the plugins
+// Эти плагины подключены к Editor.js
 import CodeTool from "@editorjs/code";
 import Header from "@editorjs/header";
 import ImageTool from "@editorjs/image";
 import List from "@editorjs/list";
 import Paragraph from "@editorjs/paragraph";
 
-// Connects to data-controller="document-editor"
+// Контроллер Stimulus
 export default class extends Controller {
-  static targets = ["document_content"];
+  static targets = ["document_content"];  // Привязка цели для Editor.js
 
   csrfToken() {
     const metaTag = document.querySelector("meta[name='csrf-token']");
@@ -20,28 +20,23 @@ export default class extends Controller {
   connect() {
     const initialContent = this.getInitialContent();
 
+    // Инициализация Editor.js
     this.contentEditor = new EditorJS({
       holder: this.document_contentTarget,
       data: initialContent,
       tools: {
-        header: {
-          class: Header,
-        },
-        list: {
-          class: List,
-        },
+        header: { class: Header },
+        list: { class: List },
         paragraph: {
           class: Paragraph,
-          config: {
-            inlineToolbar: true,
-          },
+          config: { inlineToolbar: true }
         },
         code: CodeTool,
         image: {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: `/documents/upload_image`,
+              byFile: `/documents/upload_image`, // Маршрут для загрузки изображений
             },
             additionalRequestHeaders: {
               "X-CSRF-Token": this.csrfToken(),
@@ -52,19 +47,21 @@ export default class extends Controller {
         },
       },
       onReady: () => {
-        console.log('Editor.js is ready to work!');
+        console.log('Editor.js готов к работе!');
       },
       onChange: () => {
-        console.log('Editor.js content changed!');
+        console.log('Изменения в Editor.js!');
       }
     });
 
+    // Обработка отправки формы
     this.element.addEventListener("submit", this.saveEditorData.bind(this));
   }
 
   getInitialContent() {
     const hiddenContentField = document.getElementById("document_content_hidden");
 
+    // Получение начального контента для Editor.js
     if (hiddenContentField && hiddenContentField.value) {
       return JSON.parse(hiddenContentField.value);
     }
@@ -72,14 +69,20 @@ export default class extends Controller {
   }
 
   async saveEditorData(event) {
-    event.preventDefault();
+    event.preventDefault(); // блокируем стандартную отправку формы
 
+    // Получение данных из Editor.js
     const outputData = await this.contentEditor.save();
-    const documentForm = this.element;
 
+    // Записываем данные в скрытое поле
     const hiddenInput = document.getElementById("document_content_hidden");
-
     hiddenInput.value = JSON.stringify(outputData);
-    documentForm.submit();
+
+    // Здесь нужно использовать Turbo для отправки формы
+    if (window.Turbo) {
+      Turbo.navigator.submitForm(this.element); // Отправляем форму с помощью Turbo
+    } else {
+      this.element.submit(); // Стандартная отправка, если Turbo не загружен
+    }
   }
 }

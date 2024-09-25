@@ -62,8 +62,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
+  gem "selenium-webdriver", "~> 4.11"  # Ensure you're using the latest version
   gem "launchy"
   gem "shoulda-matchers"
   gem "faker", "~> 3.4"
@@ -71,10 +70,13 @@ group :test do
   gem "rspec-rails"
   gem "rails-controller-testing"
   gem "database_cleaner-active_record", "~> 2.2"
+  # Remove the 'webdrivers' gem if you are using Selenium 4.11+
 end
 
 ## Additional gems
-gem "bootstrap"
+gem 'bootstrap', '~> 5.3.3'
+gem 'popper_js', '~> 2.11.8'
+gem 'jquery-rails'
 gem "sassc-rails"
 gem "mysql2"
 gem "thinking-sphinx"
@@ -89,3 +91,4 @@ gem "devise-i18n", "~> 1.12"
 gem "devise", "~> 4.9"
 gem "cancancan", "~> 3.6"
 gem "strong_migrations", "~> 2.0"
+gem "groupdate", "6.4.0"

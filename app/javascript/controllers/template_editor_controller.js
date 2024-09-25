@@ -1,14 +1,14 @@
 import { Controller } from "@hotwired/stimulus";
 import EditorJS from "@editorjs/editorjs";
 
-// These are the plugins
+// Эти плагины подключены к Editor.js
 import CodeTool from "@editorjs/code";
 import Header from "@editorjs/header";
 import ImageTool from "@editorjs/image";
 import List from "@editorjs/list";
 import Paragraph from "@editorjs/paragraph";
 
-// Connects to data-controller="template-editor"
+// Подключается к data-controller="template-editor"
 export default class extends Controller {
   static targets = ["template_content"];
 
@@ -20,6 +20,7 @@ export default class extends Controller {
   connect() {
     const initialContent = this.getInitialContent();
 
+    // Инициализация Editor.js
     this.contentEditor = new EditorJS({
       holder: this.template_contentTarget,
       data: initialContent,
@@ -52,13 +53,14 @@ export default class extends Controller {
         },
       },
       onReady: () => {
-        console.log('Editor.js is ready to work!');
+        console.log('Editor.js готов к работе!');
       },
       onChange: () => {
-        console.log('Editor.js content changed!');
+        console.log('Содержимое Editor.js изменилось!');
       }
     });
 
+    // Обработка отправки формы
     this.element.addEventListener("submit", this.saveEditorData.bind(this));
   }
 
@@ -72,14 +74,20 @@ export default class extends Controller {
   }
 
   async saveEditorData(event) {
-    event.preventDefault();
+    event.preventDefault(); // Блокируем стандартное поведение формы
 
     const outputData = await this.contentEditor.save();
     const templateForm = this.element;
 
+    // Записываем данные в скрытое поле
     const hiddenInput = document.getElementById("template_content_hidden");
-
     hiddenInput.value = JSON.stringify(outputData);
-    templateForm.submit();
+
+    // Используем Turbo для отправки формы
+    if (window.Turbo) {
+      Turbo.navigator.submitForm(templateForm); // Отправляем форму с помощью Turbo
+    } else {
+      templateForm.submit(); // Стандартная отправка, если Turbo не загружен
+    }
   }
 }

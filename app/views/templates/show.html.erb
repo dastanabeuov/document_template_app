@@ -1,16 +1,23 @@
-<h1><%= @template.title %></h1>
-<p><%= display_content(@template.content) %></p>
+<%= turbo_frame_tag "right-panel" do %>
 
-<% if current_user.admin? %>
-  <div class="btn-group pt-5">
-    <%= button_to t('destroy'), template_path(@template), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
-    <%= link_to t('edit'), edit_template_path(@template), class: "btn btn-warning" %>
-    <%= button_to 'Create Document from Template', create_document_template_path(@template), method: :post, class: 'btn btn-primary' %>
-    <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
-  </div>
-<% else %>
-  <div class="btn-group pt-5">
-    <%= button_to 'Create Document from Template', create_document_template_path(@template), method: :post, class: 'btn btn-primary' %>
-    <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
-  </div>
+  <%= render 'layouts/breadcrumbs' %>
+  <%= render 'layouts/flash' %>
+
+  <h1><%= @template.title %></h1>
+  <div id="show_content"><%= display_content(@template.content) %></div>
+
+  <% if current_user.admin? %>
+    <div class="btn-group pt-5">
+      <%= button_to t('destroy'), template_path(@template), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
+      <%= link_to t('edit'), edit_template_path(@template), data: { turbo_frame: "right-panel" }, class: "btn btn-warning" %>
+      <%= button_to 'Create Document from Template', create_document_template_path(@template), method: :post, class: 'btn btn-primary' %>
+      <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+    </div>
+  <% else %>
+    <div class="btn-group pt-5">
+      <%= button_to 'Create Document from Template', create_document_template_path(@template), method: :post, class: 'btn btn-primary' %>
+      <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+
 <% end %>

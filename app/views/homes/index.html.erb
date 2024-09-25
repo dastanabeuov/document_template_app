@@ -1,9 +1,11 @@
-<div class="card">
-  <div class="card-body">
-    <h1 class="card-title text-bold">Simple document create</h1>
-    <p class="card-text">Create you'r document using templates.
-                         Doing this has never been easier.
-                         Try creating your first document.</p>
-    <%= link_to "Go to create Documents <i class='bi bi-caret-right'></i>".html_safe, templates_path, class: "btn btn-primary" %>
-  </div>
+<div class="row">
+    <%= render 'homes/shared/nav' %>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+        <%= turbo_frame_tag "right-panel" do %>
+            <%= render 'homes/right_panels/dashboard' %>
+        <% end %>
+
+        <%= render 'homes/shared/footer' %>
+    </main>
 </div>

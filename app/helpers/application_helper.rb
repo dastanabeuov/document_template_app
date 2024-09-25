@@ -13,4 +13,8 @@ module ApplicationHelper
   def flash_key(key)
     FLASH_KEY[key.to_sym] || key.to_s
   end
+
+  def current_year
+    Time.now.year
+  end
 end

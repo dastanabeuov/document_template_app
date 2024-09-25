@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="auto">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>OwlPlanner: Template --> Document</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
+    <link rel="apple-touch-icon" sizes="76x76" href="<%= asset_path("apple-icon.png") %>">
+    <link rel="icon" type="image/png" href="<%= asset_path("favicon.ico") %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,12 +14,23 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
-      <%= render 'layouts/breadcrumbs' %>
-      <div class="container pt-5 pb-5">
-        <%= render 'layouts/flash' %>
+    <%= render 'layouts/color_modes' %>
+
+    <% if current_page?(root_path) %>
+      <%= render 'layouts/header_2' %>
+      <div class="container-fluid">
         <%= yield %>
       </div>
-    <%= render 'layouts/footer' %>
+    <% else %>
+      <%= render 'layouts/header' %>
+        <div class="container pt-5 pb-5">
+          <%= render 'layouts/breadcrumbs' %>
+          <%= render 'layouts/flash' %>
+          <%= yield %>
+        </div>
+      <%= render 'layouts/footer' %>
+    <% end %>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>

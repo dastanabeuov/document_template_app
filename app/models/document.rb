@@ -9,6 +9,8 @@ class Document < ApplicationRecord
 
   validates :title, presence: true, uniqueness: true
 
+  scope :latest, ->(limit = 10) { order(created_at: :desc).limit(limit) }
+
   def author_of_document?(document, user)
     document.user_id == user.id
   end

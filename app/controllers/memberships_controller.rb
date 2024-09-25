@@ -4,11 +4,13 @@ class MembershipsController < ApplicationController
   before_action :set_membership, only: [:destroy]
   before_action :check_owner, only: [:create, :destroy, :add_owner]
 
+  load_and_authorize_resource
+
   def add_owner
     user = User.find(params[:user_id])
-    membership = @company.memberships.find_by(user: user)
-    if membership
-      membership.update(role: :owner)
+    user.company_id = @company.id
+    membership = @company.memberships.new(user: user, role: :owner)
+    if membership.save && user.save
       redirect_to @company, notice: 'User was successfully updated as owner.'
     else
       redirect_to @company, alert: 'User is not a member of this company.'

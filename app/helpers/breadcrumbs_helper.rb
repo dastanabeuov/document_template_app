@@ -1,6 +1,6 @@
 module BreadcrumbsHelper
   def breadcrumbs(paths)
-    content_tag(:nav, aria: { label: 'breadcrumb' }) do
+    content_tag(:nav, class: 'data-bs-theme rounded', aria: { label: 'breadcrumb' }) do
       content_tag(:ol, class: 'breadcrumb') do
         safe_join(paths&.map { |path| breadcrumb_item(path) })
       end
@@ -14,7 +14,7 @@ module BreadcrumbsHelper
       content_tag(:li, path[:name], class: 'breadcrumb-item active', aria: { current: 'page' })
     else
       content_tag(:li, class: 'breadcrumb-item') do
-        link_to(path[:name], path[:url])
+        link_to(path[:name], path[:url], data: { turbo_frame: "right-panel" })
       end
     end
   end

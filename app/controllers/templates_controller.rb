@@ -1,7 +1,6 @@
 class TemplatesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_template, only: %i[show edit update destroy create_document]
-  before_action :set_breadcrumbs
 
   protect_from_forgery except: :upload_image
 
@@ -37,10 +36,22 @@ class TemplatesController < ApplicationController
   end
 
   def index
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.templates')}", current: true }
+    ]
+
     @templates = Template.all
+
+    render partial: 'homes/right_panels/templates' if turbo_frame_request?
   end
 
   def show
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.templates')}", url: templates_path },
+      { name: "#{@template.id}", current: true }
+    ]
   end
 
   def new
@@ -60,11 +71,27 @@ class TemplatesController < ApplicationController
     end
   end
 
+  # def update
+  #   if @template.update(template_params)
+  #     redirect_to root_path, notice: 'Template was successfully updated.'
+  #   else
+  #     render :edit, alert: 'Template was not updated.', status: :unprocessable_entity
+  #   end
+  # end
+
   def update
     if @template.update(template_params)
-      redirect_to @template, notice: 'Template was successfully updated.'
+      respond_to do |format|
+        format.html { redirect_to @template, notice: 'Template was successfully updated.' }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace('right-panel', partial: 'templates/show', locals: { template: @template })
+        end
+      end
     else
-      render :edit, alert: 'Template was not updated.', status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :edit, alert: 'Шаблон не был обновлён.', status: :unprocessable_entity }
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -97,13 +124,6 @@ class TemplatesController < ApplicationController
 
     def set_template
       @template ||= Template.find_by_id(params[:id])
-    end
-
-    def set_breadcrumbs
-      @breadcrumbs = [
-        { name: '<i class="bi bi-house"></i>'.html_safe, url: root_path },
-        { name: 'Templates', current: true }
-      ]
     end
 
     def template_params

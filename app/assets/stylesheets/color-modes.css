@@ -1,0 +1,59 @@
+/* Для светлой темы */
+[data-bs-theme="light"] .navbar {
+  background-color: #e9ecef; /* светлый цвет */
+}
+
+[data-bs-theme="light"] .navbar-brand {
+  color: #344767; /* темный текст для светлой темы */
+}
+
+/* Для темной темы */
+[data-bs-theme="dark"] .navbar {
+  background-color: #343a40; /* темный цвет */
+}
+
+[data-bs-theme="dark"] .navbar-brand {
+  color: #ffffff; /* светлый текст для темной темы */
+}
+
+
+/* Для светлой темы */
+[data-bs-theme="light"] #sidebar {
+  background-color: #e9ecef;
+}
+
+[data-bs-theme="light"] .sidebar .nav-link {
+  color: #495057;
+}
+
+/* Для темной темы */
+[data-bs-theme="dark"] #sidebar {
+  background-color: #343A40;
+}
+
+[data-bs-theme="dark"] .sidebar .nav-link {
+  color: #adb5bd;
+}
+
+
+/* Для светлой темы */
+[data-bs-theme="light"] .breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+}
+
+/* Для темной темы */
+[data-bs-theme="dark"] .breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: #343A40;
+  border-radius: 0.25rem;
+}

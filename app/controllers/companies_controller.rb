@@ -2,15 +2,29 @@ class CompaniesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :check_admin, only: [:new, :create]
-  before_action :check_owner, only: [:edit, :update, :destroy]
-  before_action :set_breadcrumbs
+
+  rescue_from ActiveRecord::RecordNotFound, with: :company_not_found
+
+  load_and_authorize_resource
 
   def index
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.companies')}", current: true }
+    ]
+
     @user_companies = current_user&.companies
     @companies = Company.all
+
+    render partial: 'homes/right_panels/companies' if turbo_frame_request?
   end
 
   def show
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.companies')}", url: companies_path },
+      { name: "#{@company.id}", current: true }
+    ]
   end
 
   def new
@@ -44,19 +58,13 @@ class CompaniesController < ApplicationController
   end
 
   private
-    def check_owner
-      redirect_to companies_path, alert: 'Access denied!' unless current_user.role == 'owner' && current_user.company == @company || current_user.admin?
+
+    def company_not_found
+      redirect_to companies_path, alert: 'Company not found.'
     end
 
     def check_admin
       redirect_to companies_path, alert: 'Access denied!' unless current_user.admin?
-    end
-
-    def set_breadcrumbs
-      @breadcrumbs = [
-        { name: '<i class="bi bi-house"></i>'.html_safe, url: root_path },
-        { name: 'Companies', current: true }
-      ]
     end
 
     def set_company

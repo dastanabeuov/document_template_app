@@ -1,0 +1,50 @@
+#show_content {
+  /*  width: 793px; Ширина A4 в пикселях */
+  width: 100%;
+  margin: 0 auto; /* Центрирование */
+  padding: 20px; /* Внутренние отступы */
+  border: 1px solid #ccc; /* рамка для визуализации */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Легкая тень для эффекта листа */
+  min-height: 1123px; /* минимальная высота A4 (297 мм) */
+}
+
+#template_content {
+  /*  width: 793px; Ширина A4 в пикселях */
+  width: 100%;
+  margin: 0 auto; /* Центрирование */
+  padding: 20px; /* Внутренние отступы */
+  border: 1px solid #ccc; /* рамка для визуализации */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Легкая тень для эффекта листа */
+  min-height: 1123px; /* минимальная высота A4 (297 мм) */
+}
+
+#document_content {
+  /*  width: 793px; Ширина A4 в пикселях */
+  width: 100%;
+  margin: 0 auto; /* Центрирование */
+  padding: 20px; /* Внутренние отступы */
+  border: 1px solid #ccc; /* рамка для визуализации */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Легкая тень для эффекта листа */
+  min-height: 1123px; /* минимальная высота A4 (297 мм) */
+}
+
+.codex-editor {
+  width: 89%; /* Чтобы редактор занимал всю ширину родительского контейнера */
+  /*  max-width: 793px; Максимальная ширина, не превышающая формат A4 */
+}
+
+.ce-block__content {
+  max-width: 100%; /* Контент внутри блоков также адаптируется под формат A4 */
+}
+
+.form-group {
+  /*  width: 794px; ширина формы, рав */
+  width: 100%;
+}
+.ce-toolbar__plus svg, .ce-toolbar__settings-btn svg {
+  width: 24px;
+  height: 24px;
+  color: red;
+  background-color: #cdcdcd;
+  border-radius: 5px;
+}
