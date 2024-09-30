@@ -1,5 +1,4 @@
 class MembershipsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_company, only: [:create, :destroy, :add_owner]
   before_action :set_membership, only: [:destroy]
   before_action :check_owner, only: [:create, :destroy, :add_owner]

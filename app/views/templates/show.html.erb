@@ -1,23 +1,25 @@
-<%= turbo_frame_tag "right-panel" do %>
+<div class="row">
+  <%= render 'nav' %>
 
-  <%= render 'layouts/breadcrumbs' %>
-  <%= render 'layouts/flash' %>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
 
-  <h1><%= @template.title %></h1>
-  <div id="show_content"><%= display_content(@template.content) %></div>
+    <%= render 'layouts/breadcrumbs' %>
 
-  <% if current_user.admin? %>
-    <div class="btn-group pt-5">
-      <%= button_to t('destroy'), template_path(@template), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
-      <%= link_to t('edit'), edit_template_path(@template), data: { turbo_frame: "right-panel" }, class: "btn btn-warning" %>
-      <%= button_to 'Create Document from Template', create_document_template_path(@template), method: :post, class: 'btn btn-primary' %>
-      <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
-    </div>
-  <% else %>
-    <div class="btn-group pt-5">
-      <%= button_to 'Create Document from Template', create_document_template_path(@template), method: :post, class: 'btn btn-primary' %>
-      <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
-    </div>
-  <% end %>
+    <h1><%= @template.title %></h1>
+    <div id="show_content"><%= display_content(@template.content) %></div>
 
-<% end %>
+    <% if can?(:destroy, @template) && can?(:update, @template) %>
+      <div class="btn-group pt-5">
+        <%= button_to t('destroy'), template_path(@template), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
+        <%= link_to t('edit'), edit_template_path(@template), class: "btn btn-warning" %>
+        <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+      </div>
+    <% else %>
+      <div class="btn-group pt-5">
+        <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+
+    <%= render 'shared/footer' %>
+  </main>
+</div>

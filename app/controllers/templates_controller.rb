@@ -1,39 +1,9 @@
 class TemplatesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_template, only: %i[show edit update destroy create_document]
+  before_action :set_template, only: %i[show edit update destroy]
 
   protect_from_forgery except: :upload_image
 
-  rescue_from ActiveRecord::RecordNotFound, with: :template_not_found
-
   load_and_authorize_resource
-
-  def create_document
-    #debugger
-    if current_user.company
-      unique_title = @template.title
-      count = 1
-      while Document.exists?(title: unique_title)
-        unique_title = "#{@template.title} (#{count})"
-        count += 1
-      end
-
-      @document = current_user.company.documents.new(
-        title: unique_title,
-        content: @template.content,
-        template: @template,
-        user: current_user
-      )
-
-      if @document.save
-        redirect_to @document, notice: 'Document was successfully created from template.'
-      else
-        redirect_to @template, alert: 'Failed to create document from template: ' + @document.errors.full_messages.to_sentence
-      end
-    else
-      redirect_to @template, alert: 'First create a company.'
-    end
-  end
 
   def index
     @breadcrumbs = [
@@ -42,15 +12,13 @@ class TemplatesController < ApplicationController
     ]
 
     @templates = Template.all
-
-    render partial: 'homes/right_panels/templates' if turbo_frame_request?
   end
 
   def show
     @breadcrumbs = [
       { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
       { name: "#{I18n.t('.templates')}", url: templates_path },
-      { name: "#{@template.id}", current: true }
+      { name: "#{@template.title}", current: true }
     ]
   end
 
@@ -71,27 +39,11 @@ class TemplatesController < ApplicationController
     end
   end
 
-  # def update
-  #   if @template.update(template_params)
-  #     redirect_to root_path, notice: 'Template was successfully updated.'
-  #   else
-  #     render :edit, alert: 'Template was not updated.', status: :unprocessable_entity
-  #   end
-  # end
-
   def update
     if @template.update(template_params)
-      respond_to do |format|
-        format.html { redirect_to @template, notice: 'Template was successfully updated.' }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('right-panel', partial: 'templates/show', locals: { template: @template })
-        end
-      end
+      redirect_to root_path, notice: 'Template was successfully updated.'
     else
-      respond_to do |format|
-        format.html { render :edit, alert: 'Шаблон не был обновлён.', status: :unprocessable_entity }
-        format.turbo_stream { render :edit, status: :unprocessable_entity }
-      end
+      render :edit, alert: 'Template was not updated.', status: :unprocessable_entity
     end
   end
 
@@ -118,12 +70,8 @@ class TemplatesController < ApplicationController
   end
 
   private
-    def template_not_found
-      redirect_to templates_url, alert: 'Template not found.'
-    end
-
     def set_template
-      @template ||= Template.find_by_id(params[:id])
+      @template = Template.find_by_id(params[:template_id])
     end
 
     def template_params

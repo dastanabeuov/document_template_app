@@ -26,6 +26,13 @@
   color: #495057;
 }
 
+[data-bs-theme="light"] .nav-tabs .nav-link.active {
+  color: #0a58ca;
+}
+[data-bs-theme="light"] .nav-tabs .nav-link {
+  color: #000;
+}
+
 /* Для темной темы */
 [data-bs-theme="dark"] #sidebar {
   background-color: #343A40;
@@ -35,6 +42,12 @@
   color: #adb5bd;
 }
 
+[data-bs-theme="dark"] .nav-tabs .nav-link.active {
+  color: #0a58ca;
+}
+[data-bs-theme="dark"] .nav-tabs .nav-link {
+  color: #adb5bd;
+}
 
 /* Для светлой темы */
 [data-bs-theme="light"] .breadcrumb {

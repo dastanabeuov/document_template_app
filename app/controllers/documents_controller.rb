@@ -1,86 +1,156 @@
 class DocumentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_document, only: [:show, :edit, :update, :destroy]
-  before_action :check_membership, only: [:show, :edit, :update, :destroy]
+  before_action :set_company,      only:  [:create_from_template, :index, :show, :edit, :update, :new, :create, :destroy]
+  before_action :set_project,      only:  [:create_from_template, :index, :show, :edit, :update, :new, :create, :destroy]
+  before_action :set_template,     only:  [:create_from_template]
+  before_action :set_document,     only:  [:show, :edit, :update, :destroy]
+  before_action :check_membership, only:  [:show, :edit, :update, :destroy]
 
   protect_from_forgery except: :upload_image
 
-  rescue_from ActiveRecord::RecordNotFound, with: :document_not_found
-
   load_and_authorize_resource
+
+  def create_from_template
+    if current_user.company
+      unique_title = @template.title
+      count = 1
+      while Document.exists?(title: unique_title)
+        unique_title = "#{@template.title} (#{count})"
+        count += 1
+      end
+
+      # Создание документа с определением всех необходимых отношений
+      @document = Document.new(
+        title: unique_title,
+        content: @template.content,
+        template: @template,
+        user: current_user,
+        company: @company,
+        project: @project
+      )
+
+      if @document.save
+        redirect_to company_project_document_path(@document.company, @document.project, @document), notice: 'Document was successfully created from template.'
+      else
+        redirect_to company_project_documents_path(@document.company, @document.project), alert: 'Failed to create document from template: ' + @document.errors.full_messages.to_sentence
+      end
+    else
+      redirect_to root_path, alert: 'First create a company.'
+    end
+  end
 
   def index
     @breadcrumbs = [
       { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.companies')}", url: companies_path },
+      { name: "#{@company.name}", url: company_path(@company) },
+      { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
+      { name: "#{@project.title}", url: company_project_path(@company, @project) },
       { name: "#{I18n.t('.documents')}", current: true }
     ]
 
-    if current_user.admin?
-      @documents = Document.all.includes(:company)
-    elsif current_user.companies.any?
-      @current_user_company_documents = Document.where(company_id: current_user.companies.pluck(:id)).includes(:company)
-    else
-      @current_user_company_documents = []
-    end
-    render partial: 'homes/right_panels/documents' if turbo_frame_request?
+    @templates = Template.all
+    @project_documents = @project.documents.includes(:project)
   end
 
   def show
     @breadcrumbs = [
       { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
-      { name: "#{I18n.t('.documents')}", url: documents_path },
-      { name: "#{@document.id}", current: true }
+      { name: "#{I18n.t('.companies')}", url: companies_path },
+      { name: "#{@company.name}", url: company_path(@company) },
+      { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
+      { name: "#{@project.title}", url: company_project_path(@company, @project) },
+      { name: "#{I18n.t('.documents')}", url: company_project_documents_path(@company, @project) },
+      { name: "#{@document.title}", current: true },
     ]
   end
 
   def new
-    if current_user.company
-      @document = current_user.company.documents.new
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.companies')}", url: companies_path },
+      { name: "#{@company.name}", url: company_path(@company) },
+      { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
+      { name: "#{@project.title}", url: company_project_path(@company, @project) },
+      { name: "#{I18n.t('.documents')}", url: company_project_documents_path(@company, @project) },
+      { name: "#{I18n.t('.new')}", current: true }
+    ]
+
+    @document = @project.documents.new
+  end
+
+  def create
+    @document = @project.documents.new(document_params)
+    @document.user = current_user
+    @document.company = @company
+    @document.project = @project
+
+    if @document.save
+      @breadcrumbs = [
+        { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+        { name: "#{I18n.t('.companies')}", url: companies_path },
+        { name: "#{@company.name}", url: company_path(@company) },
+        { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
+        { name: "#{@project.title}", url: company_project_path(@company, @project) },
+        { name: "#{I18n.t('.documents')}", current: true }
+      ]
+
+      redirect_to [@company, @project, @document], notice: 'Document was successfully created.'
     else
-      redirect_to documents_path, alert: 'First company created.'
+      @breadcrumbs = [
+        { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+        { name: "#{I18n.t('.companies')}", url: companies_path },
+        { name: "#{@company.name}", url: company_path(@company) },
+        { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
+        { name: "#{@project.title}", url: company_project_path(@company, @project) },
+        { name: "#{I18n.t('.documents')}", current: true }
+      ]
+
+      redirect_to new_company_project_document_path(@company, @project), alert: 'Document was not created.'#, status: :unprocessable_entity
     end
   end
 
   def edit
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.companies')}", url: companies_path },
+      { name: "#{@company.name}", url: company_path(@company) },
+      { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
+      { name: "#{@project.title}", url: company_project_path(@company, @project) },
+      { name: "#{I18n.t('.documents')}", url: company_project_documents_path(@company, @project) },
+      { name: "#{@document.title}", url: company_project_document_path(@company, @project, @document) },
+      { name: "#{I18n.t('.edit')}", current: true },
+    ]
   end
-
-  def create
-    @document = current_user.company.documents.new(document_params)
-    @document.user = current_user
-    if @document.save
-      redirect_to @document, notice: 'Document was successfully created.'
-    else
-      render :new, alert: 'Document was not created.', status: :unprocessable_entity
-    end
-  end
-
-  # def update
-  #   if @document.update(document_params)
-  #     redirect_to @document, notice: 'Document was successfully updated.'
-  #   else
-  #     render :edit, alert: 'Document was not updated.', status: :unprocessable_entity
-  #   end
-  # end
 
   def update
     if @document.update(document_params)
-      respond_to do |format|
-        format.html { redirect_to @document, notice: 'Document was successfully updated.' }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace('right-panel', partial: 'documents/show', locals: { document: @document })
-        end
-      end
+      @breadcrumbs = [
+        { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+        { name: "#{I18n.t('.companies')}", url: companies_path },
+        { name: "#{@company.name}", url: company_path(@company) },
+        { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
+        { name: "#{@project.title}", url: company_project_path(@company, @project) },
+        { name: "#{I18n.t('.documents')}", current: true }
+      ]
+
+      redirect_to company_project_document_path(@company, @project, @document), notice: 'Document was successfully updated.'
     else
-      respond_to do |format|
-        format.html { render :edit, alert: 'Документ не был обновлён.', status: :unprocessable_entity }
-        format.turbo_stream { render :edit, status: :unprocessable_entity }
-      end
+      @breadcrumbs = [
+        { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+        { name: "#{I18n.t('.companies')}", url: companies_path },
+        { name: "#{@company.name}", url: company_path(@company) },
+        { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
+        { name: "#{@project.title}", url: company_project_path(@company, @project) },
+        { name: "#{I18n.t('.documents')}", current: true }
+      ]
+
+      render :edit, alert: 'Document was not updated.', status: :unprocessable_entity
     end
   end
 
   def destroy
     @document.destroy
-    redirect_to documents_url, notice: 'Document was successfully destroyed.'
+    redirect_to company_project_documents_path(@company, @project), notice: 'Document was successfully destroyed.'
   end
 
   def upload_image
@@ -102,12 +172,20 @@ class DocumentsController < ApplicationController
 
   private
 
-    def document_not_found
-      redirect_to documents_path, alert: 'Document not found.'
+    def set_template
+      @template = Template.find(params[:template_id])
     end
 
     def set_document
-      @document ||= Document.find(params[:id])
+      @document = Document.find(params[:id])
+    end
+
+    def set_company
+      @company = Company.find_by(id: params[:company_id])
+    end
+
+    def set_project
+      @project = Project.find_by(id: params[:project_id])
     end
 
     def check_membership

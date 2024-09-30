@@ -2,15 +2,18 @@ require "application_responder"
 
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
-  respond_to :html
+
+  before_action :authenticate_user!
+
+  respond_to :html, :js, :json
+
+  include ErrorHandling
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_path, alert: exception.message
-  end
-
-  protected
-
-  def after_sign_in_path_for(resource)
-    root_path
+    respond_to do |format|
+      format.html { redirect_to root_url, alert: exception.message }
+      format.js { head :forbiddens }
+      format.json { head :forbidden }
+    end
   end
 end

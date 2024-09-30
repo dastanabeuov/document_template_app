@@ -8,17 +8,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
         <li class="nav-item">
-          <%= nav_link_to I18n.t('.about'), "#" %>
+          <input class="form-control form-control-dark" type="text" placeholder="Поиск" aria-label="Search">
         </li>
-        <li class="nav-item">
-          <%= nav_link_to I18n.t('.contact'), "#" %>
-        </li>
-        <li class="nav-item">
-          <%= nav_link_to I18n.t('.features'), "#" %>
-        </li>
-
       </ul>
       <% if user_signed_in? %>
         <form class="">

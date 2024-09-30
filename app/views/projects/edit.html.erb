@@ -6,10 +6,10 @@
 
     <h1><%= t('edit') %></h1>
 
-    <%= render "form", company: @company %>
+    <%= render "form", company: @company, project: @project %>
 
     <div class="btn-group pt-5">
-      <%= link_to t('back'), companies_path, class: "btn btn-secondary" %>
+      <%= link_to t('back'), company_projects_path, class: "btn btn-secondary" %>
     </div>
 
     <%= render 'shared/footer' %>

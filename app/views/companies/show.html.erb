@@ -1,29 +1,21 @@
-<%= turbo_frame_tag "right-panel" do %>
+<div class="row">
+  <%= render 'nav' %>
 
-  <%= render 'layouts/breadcrumbs' %>
-  <%= render 'layouts/flash' %>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+    <%= render 'layouts/breadcrumbs' %>
 
-  <div class="m-2">
-    <h1><%= @company.name %></h1>
+    <div class="m-2">
 
-    <% if current_user.admin? || @company.memberships.exists?(user: current_user, role: :owner) %>
-      <div class="row">
 
-        <div class="rounded col col-3 border py-3 px-3">
-          <div class="add-member">
-            <h3>Add Member</h3>
-            <%= form_with url: company_memberships_path(@company), local: true do |form| %>
-              <div class="mb-3">
-                <%= form.label :user_id, 'User', class: 'form-label' %>
-                <%= form.collection_select :user_id, User.all, :id, :email, { include_blank: true }, { class: 'form-select' } %>
-              </div>
-              <%= form.submit 'Submit', class: 'btn btn-sm btn-primary' %>
-            <% end %>
-          </div>
-          <% if current_user.admin? %>
-            <div class="add-owner mt-5">
-              <h3>Add Owner</h3>
-              <%= form_with url: add_owner_company_memberships_path(@company), local: true do |form| %>
+      <h1><%= @company.name %></h1>
+
+      <% if current_user.admin? || @company.memberships.exists?(user: current_user, role: :owner) %>
+        <div class="row">
+
+          <div class="rounded col col-3 border py-3 px-3">
+            <div class="add-member">
+              <h3>Add Member</h3>
+              <%= form_with url: company_memberships_path(@company), local: true do |form| %>
                 <div class="mb-3">
                   <%= form.label :user_id, 'User', class: 'form-label' %>
                   <%= form.collection_select :user_id, User.all, :id, :email, { include_blank: true }, { class: 'form-select' } %>
@@ -31,77 +23,90 @@
                 <%= form.submit 'Submit', class: 'btn btn-sm btn-primary' %>
               <% end %>
             </div>
-          <% end %>
-        </div>
+            <% if current_user.admin? %>
+              <div class="add-owner mt-5">
+                <h3>Add Owner</h3>
+                <%= form_with url: add_owner_company_memberships_path(@company), local: true do |form| %>
+                  <div class="mb-3">
+                    <%= form.label :user_id, 'User', class: 'form-label' %>
+                    <%= form.collection_select :user_id, User.all, :id, :email, { include_blank: true }, { class: 'form-select' } %>
+                  </div>
+                  <%= form.submit 'Submit', class: 'btn btn-sm btn-primary' %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
 
-        <div class="rounded col col-9 border py-3 px-3">
-          <h3>Members</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Email</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @company.memberships.includes(:user).each do |membership| %>
-                <tr class="<%= 'table-primary' if membership.owner? %>">
-                  <td><%= membership.user.email %></td>
-                  <td>
-                    <%= button_to 'Destroy', company_membership_path(@company, membership),
-                                  method: :delete,
-                                  data: { turbo_confirm: 'Are you sure?' },
-                                  class: "btn btn-outline-danger btn-sm #{'hidden' unless can?(:destroy, membership)}" %>
-                  </td>
+          <div class="rounded col col-9 border py-3 px-3">
+            <h3>Members</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Email</th>
+                  <th scope="col">Actions</th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <% @company.memberships.includes(:user).each do |membership| %>
+                  <tr class="<%= 'table-primary' if membership.owner? %>">
+                    <td><%= membership.user.email %></td>
+                    <td>
+                      <%= button_to 'Destroy', company_membership_path(@company, membership),
+                                    method: :delete,
+                                    data: { turbo_confirm: 'Are you sure?' },
+                                    class: "btn btn-outline-danger btn-sm #{'hidden' unless can?(:destroy, membership)}" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
         </div>
+      <% else %>
+        <div class="row">
 
-      </div>
-    <% else %>
-      <div class="row">
-
-        <div class="rounded col col-12 border py-3 px-3">
-          <h3>Members</h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Email</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @company.memberships.includes(:user).each do |membership| %>
-                <tr class="<%= 'table-primary' if membership.owner? %>">
-                  <td><%= membership.user.email %></td>
-                  <td>
-                    <%= button_to 'Destroy', company_membership_path(@company, membership),
-                                  method: :delete,
-                                  data: { turbo_confirm: 'Are you sure?' },
-                                  class: "btn btn-outline-danger btn-sm #{'hidden' unless can?(:destroy, membership)}" %>
-                  </td>
+          <div class="rounded col col-12 border py-3 px-3">
+            <h3>Members</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Email</th>
+                  <th scope="col">Actions</th>
                 </tr>
-              <% end %>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <% @company.memberships.includes(:user).each do |membership| %>
+                  <tr class="<%= 'table-primary' if membership.owner? %>">
+                    <td><%= membership.user.email %></td>
+                    <td>
+                      <%= button_to 'Destroy', company_membership_path(@company, membership),
+                                    method: :delete,
+                                    data: { turbo_confirm: 'Are you sure?' },
+                                    class: "btn btn-outline-danger btn-sm #{'hidden' unless can?(:destroy, membership)}" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
         </div>
+      <% end %>
 
-      </div>
-    <% end %>
+      <% if can?(:destroy, @company) && can?(:update, @company) %>
+        <div class="btn-group pt-5">
+          <%= button_to t('destroy'), company_path(@company), method: :delete, data: { "turbo-confirm": t('are_you_sure') }, class: "btn btn-danger" %>
+          <%= link_to t('edit'), edit_company_path(@company), class: "btn btn-warning" %>
+          <%= link_to t('back'), companies_path, class: "btn btn-secondary" %>
+        </div>
+      <% else %>
+        <div class="btn-group pt-5">
+          <%= link_to t('back'), companies_path, class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
 
-    <% if can?(:destroy, @company) && can?(:update, @company) %>
-      <div class="btn-group pt-5">
-        <%= button_to t('destroy'), company_path(@company), method: :delete, data: { "turbo-confirm": t('are_you_sure') }, class: "btn btn-danger" %>
-        <%= link_to t('edit'), edit_company_path(@company), class: "btn btn-warning" %>
-        <%= link_to t('back'), companies_path, class: "btn btn-secondary" %>
-      </div>
-    <% else %>
-      <div class="btn-group pt-5">
-        <%= link_to t('back'), companies_path, class: "btn btn-secondary" %>
-      </div>
-    <% end %>
-  </div>
-
-<% end %>
+    <%= render 'shared/footer' %>
+  </main>
+</div>

@@ -12,7 +12,6 @@
                             <th scope="col">Customer</th>
                             <th scope="col">Total</th>
                             <th scope="col">Date</th>
-                            <th scope="col"></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -21,16 +20,19 @@
                               <th scope="row"><%= document.id %></th>
                               <td><%= document.title %></td>
                               <td><%= document.user.email %></td>
-                              <td><%= document.company.memberships.count %></td>
+                              <% if document.company %>
+                                <td><%= document.company.memberships.count %></td>
+                              <% else %>
+                                <td>0</td>
+                              <% end %>
                               <td><%= document.created_at %></td>
-                              <td><%= link_to t('.show'), document_path(document), class: 'btn btn-sm btn-primary' %></td>
                             </tr>
                           <% end %>
                         </tbody>
                       </table>
                 </div>
                 <div class="d-grid">
-                  <%= link_to t('all_list'), documents_path, class: 'btn btn-light' %>
+                  <%= link_to t('all_list'), companies_path, class: 'btn btn-light' %>
                 </div>
             </div>
         </div>

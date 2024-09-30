@@ -17,4 +17,13 @@ module ApplicationHelper
   def current_year
     Time.now.year
   end
+
+  def project_documents_active?(company, project, document = nil)
+    current_page?(company_project_documents_path(company, project)) ||
+    current_page?(new_company_project_document_path(company, project)) ||
+    (document.present? && (
+      current_page?(edit_company_project_document_path(company, project, document)) ||
+      current_page?(company_project_document_path(company, project, document))
+    ))
+  end
 end

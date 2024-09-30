@@ -1,15 +1,15 @@
 <div class="row">
-  <%= render 'nav' %>
+  <%= render 'companies/nav' %>
 
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
     <%= render 'layouts/breadcrumbs' %>
 
-    <h1><%= t('edit') %></h1>
+    <h1><%= t('new') %></h1>
 
-    <%= render "form", company: @company %>
+    <%= render "form", company: @company, project: @project %>
 
     <div class="btn-group pt-5">
-      <%= link_to t('back'), companies_path, class: "btn btn-secondary" %>
+      <%= link_to t('back'), company_projects_path(@company), class: "btn btn-secondary" %>
     </div>
 
     <%= render 'shared/footer' %>
