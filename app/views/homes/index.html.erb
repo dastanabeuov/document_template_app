@@ -1,11 +1,18 @@
 <div class="row">
-    <%= render 'homes/shared/nav' %>
+  <%= render 'nav' %>
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-        <%= turbo_frame_tag "right-panel" do %>
-            <%= render 'homes/right_panels/dashboard' %>
-        <% end %>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+    <%= render 'layouts/breadcrumbs' %>
+    <%= render 'layouts/flash' %>
 
-        <%= render 'homes/shared/footer' %>
-    </main>
+    <h1 class="h2"><%= I18n.t('.dashboard') %></h1>
+    <p><%= I18n.t('.dashboard_description') %></p>
+
+    <div class="row my-4">
+      <%= render collection: @templates.limit(4), partial: 'templates/template', as: :template %>
+    </div>
+    <%= render 'reserved' %>
+
+    <%= render 'shared/footer' %>
+  </main>
 </div>

@@ -1,0 +1,10 @@
+<div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
+  <div class="card border-success mb-3">
+    <div class="card-header"><%= project.updated_at %></div>
+    <div class="card-body">
+      <h5 class="card-title"><%= project.title.truncate(20) %></h5>
+      <p class="card-text"><%= project.description.truncate(47) %></p>
+        <p class="card-link"><%= link_to project.title.truncate(10), company_project_path(project.company, project) %></p>
+    </div>
+  </div>
+</div>

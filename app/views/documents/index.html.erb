@@ -1,27 +1,63 @@
-<h1><%= t('all_list') %></h1>
+<div class="row">
+  <%= render 'nav' %>
 
-<ul>
-  <% if current_user&.admin? %>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+    <%= render 'layouts/breadcrumbs' %>
 
-    <% @documents.each do |d| %>
-      <li>
-        <%= link_to d.title, d %>
+    <h1><%= t('all_list') %></h1>
+
+    <ul class="nav nav-fill nav-tabs mb-3" id="pills-tab" role="tablist">
+      <!-- Вкладки для проектов -->
+      <% @project_documents.group_by(&:project).each_with_index do |(project, docs), index| %>
+        <li class="nav-item" role="presentation">
+          <a class="data-bs-theme text-uppercase fw-bold shadow nav-link <%= 'active' if index == 0 %>" id="pills-project-<%= project.id %>-tab" data-bs-toggle="tab" data-bs-target="#pills-project-<%= project.id %>" role="tab" aria-controls="pills-project-<%= project.id %>" aria-selected="<%= index == 0 %>">
+            <%= project.title %>
+          </a>
+        </li>
+      <% end %>
+
+      <!-- Вкладка для шаблонов -->
+      <li class="nav-item" role="presentation">
+        <a class="data-bs-theme text-uppercase fw-bold shadow nav-link" id="pills-templates-tab" data-bs-toggle="tab" data-bs-target="#pills-templates" role="tab" aria-controls="pills-templates" aria-selected="false">
+          Templates
+        </a>
       </li>
-    <% end %>
+    </ul>
 
-  <% else %>
+    <div class="tab-content" id="pills-tabContent">
+      <!-- Содержимое для проектов -->
+      <% @project_documents.group_by(&:project).each do |project, docs| %>
+        <div class="tab-pane fade <%= 'show active' if docs.first == @project_documents.first %>" id="pills-project-<%= project.id %>" role="tabpanel" aria-labelledby="pills-project-<%= project.id %>-tab" tabindex="0">
+          <% docs.each_slice(4) do |d4| %>
+            <div class="row my-4">
+              <%= render collection: d4, partial: 'documents/document', as: :document %>
+            </div>
+          <% end %>
 
-    <% @current_user_company_documents&.each do |d| %>
-      <li>
-        <%= link_to d.title, d, class: "#{'text-danger' if d.company.memberships.owner.exists?(user_id: current_user.id)}" %>
-      </li>
-    <% end %>
+          <% if can?(:create, Document) %>
+            <div class="btn-group pt-5">
+              <%= link_to t('new'), new_company_project_document_path, class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
 
-  <% end %>
-</ul>
+      <!-- Содержимое для шаблонов -->
+      <div class="tab-pane fade" id="pills-templates" role="tabpanel" aria-labelledby="pills-templates-tab" tabindex="0">
+        <% @templates.each_slice(4) do |t4| %>
+          <div class="row my-4">
+            <%= render partial: 'templates/template', collection: t4, as: :template, locals: { company: @company, project: @project } %>
+          </div>
+        <% end %>
 
-<% if can?(:create, Document) %>
-  <div class="btn-group pt-5">
-    <%= link_to t('new'), new_document_path, class: "btn btn-primary" %>
-  </div>
-<% end %>
+        <% if can?(:create, Template) %>
+          <div class="btn-group pt-5">
+            <%= link_to t('new'), new_template_path, class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render 'shared/footer' %>
+  </main>
+</div>

@@ -1,11 +1,18 @@
-<%= turbo_frame_tag "right-panel" do %>
+<div class="row">
+  <%= render 'nav' %>
 
-  <h1><%= t('new') %></h1>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
 
-  <%= render "form", template: @template %>
+    <%= render 'layouts/breadcrumbs' %>
 
-  <div class="btn-group pt-5">
-    <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
-  </div>
+    <h1><%= t('new') %></h1>
 
-<% end %>
+    <%= render "form", template: @template %>
+
+    <div class="btn-group pt-5">
+      <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
+    </div>
+
+    <%= render 'shared/footer' %>
+  </main>
+</div>

@@ -1,21 +1,24 @@
-<%= turbo_frame_tag "right-panel" do %>
+<div class="row">
+  <%= render 'nav' %>
 
-  <%= render 'layouts/breadcrumbs' %>
-  <%= render 'layouts/flash' %>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+    <%= render 'layouts/breadcrumbs' %>
 
-  <h1><%= @document.title %></h1>
-  <div id="show_content"><%= display_content(@document.content) %></div>
+    <h1><%= @document.title %></h1>
+    <div id="show_content"><%= display_content(@document.content) %></div>
 
-  <% if can?(:manage, @document) %>
-    <div class="btn-group pt-5">
-      <%= button_to t('destroy'), document_path(@document), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
-      <%= link_to t('edit'), edit_document_path(@document), class: "btn btn-warning" %>
-      <%= link_to t('back'), documents_path, class: "btn btn-secondary" %>
-    </div>
-  <% else %>
-    <div class="btn-group pt-5">
-      <%= link_to t('back'), documents_path, class: "btn btn-secondary" %>
-    </div>
-  <% end %>
+    <% if can?(:manage, @document) %>
+      <div class="btn-group pt-5">
+        <%= button_to t('destroy'), company_project_document_path(@company, @project, @document), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
+        <%= link_to t('edit'), edit_company_project_document_path(@company, @project, @document), class: "btn btn-warning" %>
+        <%= link_to t('back'), company_project_documents_path(@company, @project), class: "btn btn-secondary" %>
+      </div>
+    <% else %>
+      <div class="btn-group pt-5">
+        <%= link_to t('back'), company_project_documents_path(@company, @project), class: "btn btn-secondary" %>
+      </div>
+    <% end %>
 
-<% end %>
+    <%= render 'shared/footer' %>
+  </main>
+</div>

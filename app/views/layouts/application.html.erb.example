@@ -15,11 +15,12 @@
 
   <body>
     <%= render 'layouts/color_modes' %>
-    <%= render 'layouts/flash' %>
 
     <% if devise_controller? %>
       <%= render 'layouts/header' %>
       <div class="container pt-5 pb-5">
+        <%= render 'layouts/breadcrumbs' %>
+        <%= render 'layouts/flash' %>
         <%= yield %>
       </div>
       <%= render 'layouts/footer' %>

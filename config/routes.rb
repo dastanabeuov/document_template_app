@@ -6,12 +6,7 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  resources :documents do
-    post :upload_image, on: :collection
-  end
-
   resources :templates do
-    post :create_document, on: :member
     post :upload_image, on: :collection
   end
 
@@ -19,6 +14,14 @@ Rails.application.routes.draw do
     resources :memberships, only: [:create, :destroy] do
       collection do
         post :add_owner
+      end
+    end
+
+    resources :projects do
+      resources :documents do
+        post :upload_image, on: :collection
+
+        post 'create_from_template', on: :collection, as: 'create_from_template'
       end
     end
   end

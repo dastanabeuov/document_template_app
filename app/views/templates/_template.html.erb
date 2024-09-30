@@ -4,7 +4,25 @@
     <div class="card-body">
       <h5 class="card-title"><%= template.title.truncate(20) %></h5>
       <p class="card-text"><%= get_text(template.content).truncate(47) %></p>
-        <p class="card-link"><%= link_to template.title.truncate(10), template_path(template), data: { turbo_frame: "right-panel" } %></p>
+        <% if controller_name == 'documents' %>
+          <%= button_to create_from_template_company_project_documents_path(template_id: template.id,
+            company_id: company.id,
+            project_id: project.id),
+            method: :post, class: 'btn btn-sm btn-outline-success' do %>
+              <span class="ms-2" title="Reading document...">Create Document with Template</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+              </svg>
+            <% end %>
+        <% else %>
+          <%= link_to template_path(template), class: "btn btn-sm btn-outline-success" do %>
+            <span class="ms-2" title="Reading document...">Read template</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+            </svg>
+          <% end %>
+        <% end %>
+      </p>
     </div>
   </div>
 </div>

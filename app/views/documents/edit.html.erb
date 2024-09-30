@@ -1,11 +1,17 @@
-<%= turbo_frame_tag "right-panel" do %>
+<div class="row">
+  <%= render 'nav' %>
 
-  <h1><%= t('edit') %></h1>
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+    <%= render 'layouts/breadcrumbs' %>
 
-  <%= render "form", document: @document %>
+    <h1><%= t('edit') %></h1>
 
-  <div class="btn-group pt-5">
-    <%= link_to t('back'), documents_path, class: "btn btn-secondary" %>
-  </div>
+    <%= render "form", company: @company, project: @project, document: @document %>
 
-<% end %>
+    <div class="btn-group pt-5">
+      <%= link_to t('back'), company_project_document_path(@company, @project, @document), class: "btn btn-secondary" %>
+    </div>
+
+    <%= render 'shared/footer' %>
+  </main>
+</div>

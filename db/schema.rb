@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_27_125553) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_25_120150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,7 +63,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_125553) do
     t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "project_id"
     t.index ["company_id"], name: "index_documents_on_company_id"
+    t.index ["project_id"], name: "index_documents_on_project_id"
     t.index ["template_id"], name: "index_documents_on_template_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
@@ -76,6 +78,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_125553) do
     t.integer "role", default: 0
     t.index ["company_id"], name: "index_memberships_on_company_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_projects_on_company_id"
   end
 
   create_table "template_images", force: :cascade do |t|
@@ -131,6 +142,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_125553) do
   add_foreign_key "documents", "users"
   add_foreign_key "memberships", "companies"
   add_foreign_key "memberships", "users"
+  add_foreign_key "projects", "companies"
   add_foreign_key "template_images", "templates"
   add_foreign_key "templates", "users"
 end
