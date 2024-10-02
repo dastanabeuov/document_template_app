@@ -7,4 +7,8 @@ class Company < ApplicationRecord
   default_scope { order(created_at: :DESC) }
 
   validates :name, presence: true, uniqueness: true
+
+  def member?(user)
+    memberships.exists?(user_id: user.id)
+  end
 end

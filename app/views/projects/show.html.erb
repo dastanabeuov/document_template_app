@@ -4,20 +4,20 @@
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
     <%= render 'layouts/breadcrumbs' %>
 
-    <h1><%= @project.title %></h1>
-    <p><%= @project.description %></p>
+    <div class="border rounded p-3">
+      <h1><%= @project.title %></h1>
+      <p><%= @project.description %></p>
+    </div>
 
-    <% if can?(:destroy, @company) && can?(:update, @company) %>
-      <div class="btn-group pt-5">
+    <div class="btn-group position-fixed bottom-0 end-50" style="z-index: 1000;">
+      <% if can?(:destroy, @project) && can?(:update, @project) %>
         <%= button_to t('destroy'), company_project_path(@company, @project), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
         <%= link_to t('edit'), edit_company_project_path(@company, @project), data: { turbo_frame: "right-panel" }, class: "btn btn-warning" %>
         <%= link_to t('back'), company_projects_path(@company), class: "btn btn-secondary" %>
-      </div>
-    <% else %>
-      <div class="btn-group pt-5">
+      <% else %>
         <%= link_to t('back'), company_projects_path(@company), class: "btn btn-secondary" %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 
     <%= render 'shared/footer' %>
   </main>

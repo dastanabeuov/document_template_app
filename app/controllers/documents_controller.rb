@@ -10,7 +10,7 @@ class DocumentsController < ApplicationController
   load_and_authorize_resource
 
   def create_from_template
-    if current_user.company
+    if @company.member?(current_user)
       unique_title = @template.title
       count = 1
       while Document.exists?(title: unique_title)
@@ -60,7 +60,7 @@ class DocumentsController < ApplicationController
       { name: "#{I18n.t('.projects')}", url: company_projects_path(@company) },
       { name: "#{@project.title}", url: company_project_path(@company, @project) },
       { name: "#{I18n.t('.documents')}", url: company_project_documents_path(@company, @project) },
-      { name: "#{@document.title}", current: true },
+      { name: "#{@document.title.truncate(70)}", current: true },
     ]
   end
 

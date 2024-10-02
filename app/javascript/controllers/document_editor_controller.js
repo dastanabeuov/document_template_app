@@ -20,6 +20,10 @@ export default class extends Controller {
   connect() {
     const initialContent = this.getInitialContent();
 
+    // Получаем companyId и projectId из data-атрибутов формы
+    const companyId = this.element.dataset.companyId;
+    const projectId = this.element.dataset.projectId;
+
     // Инициализация Editor.js
     this.contentEditor = new EditorJS({
       holder: this.document_contentTarget,
@@ -36,7 +40,7 @@ export default class extends Controller {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: `/documents/upload_image`, // Маршрут для загрузки изображений
+              byFile: `/companies/${companyId}/projects/${projectId}/documents/upload_image`, // Правильный маршрут для загрузки изображений
             },
             additionalRequestHeaders: {
               "X-CSRF-Token": this.csrfToken(),

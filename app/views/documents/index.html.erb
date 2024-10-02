@@ -10,7 +10,7 @@
       <!-- Вкладки для проектов -->
       <% @project_documents.group_by(&:project).each_with_index do |(project, docs), index| %>
         <li class="nav-item" role="presentation">
-          <a class="data-bs-theme text-uppercase fw-bold shadow nav-link <%= 'active' if index == 0 %>" id="pills-project-<%= project.id %>-tab" data-bs-toggle="tab" data-bs-target="#pills-project-<%= project.id %>" role="tab" aria-controls="pills-project-<%= project.id %>" aria-selected="<%= index == 0 %>">
+          <a class="data-bs-theme text-uppercase fw-bold nav-link shadow-lg <%= 'active' if index == 0 %>" id="pills-project-<%= project.id %>-tab" data-bs-toggle="tab" data-bs-target="#pills-project-<%= project.id %>" role="tab" aria-controls="pills-project-<%= project.id %>" aria-selected="<%= index == 0 %>">
             <%= project.title %>
           </a>
         </li>
@@ -18,7 +18,7 @@
 
       <!-- Вкладка для шаблонов -->
       <li class="nav-item" role="presentation">
-        <a class="data-bs-theme text-uppercase fw-bold shadow nav-link" id="pills-templates-tab" data-bs-toggle="tab" data-bs-target="#pills-templates" role="tab" aria-controls="pills-templates" aria-selected="false">
+        <a class="data-bs-theme text-uppercase fw-bold nav-link" id="pills-templates-tab" data-bs-toggle="tab" data-bs-target="#pills-templates" role="tab" aria-controls="pills-templates" aria-selected="false">
           Templates
         </a>
       </li>
@@ -35,7 +35,7 @@
           <% end %>
 
           <% if can?(:create, Document) %>
-            <div class="btn-group pt-5">
+            <div class="btn-group position-fixed bottom-0 end-50" style="z-index: 1000;">
               <%= link_to t('new'), new_company_project_document_path, class: "btn btn-primary" %>
             </div>
           <% end %>
@@ -51,7 +51,7 @@
         <% end %>
 
         <% if can?(:create, Template) %>
-          <div class="btn-group pt-5">
+          <div class="btn-group position-fixed bottom-0 end-50" style="z-index: 1000;">
             <%= link_to t('new'), new_template_path, class: "btn btn-primary" %>
           </div>
         <% end %>
