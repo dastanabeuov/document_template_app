@@ -5,11 +5,12 @@
 
     <%= render 'layouts/breadcrumbs' %>
 
-    <h1><%= t('edit') %></h1>
+    <div class="border rounded p-3">
+      <h1><%= t('edit') %></h1>
+      <%= render "form", template: @template %>
+    </div>
 
-    <%= render "form", template: @template %>
-
-    <div class="btn-group pt-5">
+    <div class="btn-group position-fixed bottom-0 end-50" style="z-index: 1000;">
       <%= link_to t('back'), templates_path, class: "btn btn-secondary" %>
     </div>
 

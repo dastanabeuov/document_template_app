@@ -9,7 +9,7 @@
     <p><%= I18n.t('.dashboard_description') %></p>
 
     <div class="row my-4">
-      <%= render collection: @templates.limit(4), partial: 'templates/template', as: :template %>
+      <%= render collection: @templates, partial: 'templates/template', as: :template %>
     </div>
     <%= render 'reserved' %>
 

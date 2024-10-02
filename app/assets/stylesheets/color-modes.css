@@ -70,3 +70,13 @@
   background-color: #343A40;
   border-radius: 0.25rem;
 }
+
+/* Для темной темы */
+[data-bs-theme="dark"] .content {
+  border: 1px solid #495057; /* рамка для визуализации */
+}
+
+/* Для светлой темы */
+[data-bs-theme="light"] .content {
+  border: 1px solid #dee2e6; /* рамка для визуализации */
+}

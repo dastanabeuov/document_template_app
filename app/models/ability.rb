@@ -9,7 +9,7 @@ class Ability
     else
       user.memberships.each do |membership|
         # Права на создание и чтение шаблонов
-        can [:create_document, :read], Template
+        can [:create_from_template, :read], Template
 
         # Управление документами компании, где пользователь является участником
         can :manage, Document, company_id: membership.company_id

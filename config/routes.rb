@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       resources :documents do
         post :upload_image, on: :collection
 
-        post 'create_from_template', on: :collection, as: 'create_from_template'
+        post :create_from_template, on: :collection
       end
     end
   end

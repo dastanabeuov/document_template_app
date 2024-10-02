@@ -5,3 +5,5 @@ import "@popperjs/core";
 import "bootstrap";
 import "color-modes";
 import "chart.js";
+
+import "./custom/tabs"
