@@ -8,7 +8,7 @@
       <div class="card-header"><%= document.updated_at %></div>
       <div class="card-body">
         <h5 class="card-title"><%= document.title.truncate(20) %></h5>
-        <p class="card-text"><%= get_text(document.content).truncate(47) %></p>
+        <!-- <p class="card-text"><%#= sanitize(document.content).truncate(47) %></p> -->
         <p class="card-link">
           <%= link_to company_project_document_path(@company, @project, document), class: "btn btn-sm btn-outline-primary" do %>
             <span class="ms-2" title="Reading document...">Read document</span>

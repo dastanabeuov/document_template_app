@@ -4,7 +4,11 @@
 @import "chartist.min";
 @import "sidebar";
 @import "color-modes";
-@import "editor";
+@import "print";
+@import "suneditor";
+@import "suneditor-contents";
+@import "katex.min";
+@import "codemirror.min";
 
 .btn-bd-primary {
   --bd-violet-bg: #712cf9;

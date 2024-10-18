@@ -16,6 +16,9 @@ en:
   edit: "Edit"
   new: "New"
   destroy: "Destroy"
+  download_docx: "Download DOCX"
+  download_pdf: "Download PDF"
+  print: "Print"
 
   title: "Title"
   content: "Content"

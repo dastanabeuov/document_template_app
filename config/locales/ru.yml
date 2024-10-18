@@ -16,6 +16,9 @@ ru:
   edit: "Редактировать"
   new: "Новый"
   destroy: "Удалить"
+  download_docx: "Скачать DOCX"
+  download_pdf: "Скачать PDF"
+  print: "Печать"
 
   title: "Заголовок"
   content: "Содержание"

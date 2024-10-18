@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
 
   resources :templates do
-    post :upload_image, on: :collection
+    collection do
+      post :upload_image
+    end
   end
 
   resources :companies do
@@ -18,10 +20,19 @@ Rails.application.routes.draw do
     end
 
     resources :projects do
-      resources :documents do
-        post :upload_image, on: :collection
+      post :sample_document, on: :member
 
-        post :create_from_template, on: :collection
+      resources :documents do
+        member do
+          get  :document_images
+          post :upload_image
+          get :download_pdf
+          get :download_docx
+        end
+
+        collection do
+          post :create_from_template
+        end
       end
     end
   end
