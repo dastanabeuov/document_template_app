@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_25_120150) do
 
   create_table "documents", force: :cascade do |t|
     t.string "title", null: false
-    t.json "content", null: false
+    t.text "content", null: false
     t.bigint "user_id", null: false
     t.bigint "template_id"
     t.bigint "company_id"
@@ -98,7 +98,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_25_120150) do
 
   create_table "templates", force: :cascade do |t|
     t.string "title", null: false
-    t.json "content", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false

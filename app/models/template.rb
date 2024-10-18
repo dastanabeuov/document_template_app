@@ -1,6 +1,4 @@
 class Template < ApplicationRecord
-  include TemplateImagesHandler
-
   default_scope { order(created_at: :DESC) }
 
   belongs_to :user, required: true

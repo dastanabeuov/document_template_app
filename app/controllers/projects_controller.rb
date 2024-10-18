@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_company
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[sample_document show edit update destroy]
 
   load_and_authorize_resource
 
@@ -68,6 +68,22 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     redirect_to company_projects_path(@company), notice: 'Project was successfully destroyed.'
+  end
+
+  def sample_document
+    @document = Document.create(
+      title: "Новый документ-#{SecureRandom.urlsafe_base64(4)}",
+      content: "<h3>Заполните контент...</h3>".html_safe,
+      user_id: current_user.id,
+      project_id: @project.id,
+      company_id: @company.id
+    )
+
+    if @document.persisted?
+      redirect_to edit_company_project_document_path(@company, @project, @document), notice: 'Document created and ready for editing.'
+    else
+      redirect_to company_project_path(@company, @project), alert: 'Failed to create document.'
+    end
   end
 
   private

@@ -16,6 +16,9 @@ kz:
   edit: "Өңдеу"
   new: "Жаңа"
   destroy: "Жою"
+  download_docx: "DOCX жүктеп алу"
+  download_pdf: "PDF жүктеп алу"
+  print: "Басып шығару"
 
   title: "Тақырып"
   content: "Мазмұн"

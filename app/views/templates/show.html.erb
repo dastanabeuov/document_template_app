@@ -7,11 +7,11 @@
 
     <div class="border rounded p-3">
       <h1><%= @template.title %></h1>
-      <div><%= display_content(@template.content) %></div>
+      <div><%= raw @template.content %></div>
     </div>
 
 
-    <div class="btn-group position-fixed bottom-0 end-50" style="z-index: 1000;">
+    <div class="btn-group pt-3">
       <% if can?(:destroy, @template) && can?(:update, @template) %>
         <%= button_to t('destroy'), template_path(@template), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
         <%= link_to t('edit'), edit_template_path(@template), class: "btn btn-warning" %>

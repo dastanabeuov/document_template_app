@@ -1,20 +1,17 @@
-<%= form_for([company, project, document], html: { class: "form", data: { controller: "document-editor", company_id: company.id, project_id: project.id } }) do |form| %>
+<%= form_with model: [company, project, document], local: true, data: { controller: "document-editor", document_editor_upload_url: upload_image_company_project_document_path(company, project, document) } do |form| %>
   <div class="form-group mb-3">
     <%= render 'shared/errors', resource: document %>
   </div>
 
   <div class="form-group mb-3">
-    <%= form.label t('title'), class: 'form-label' %>
+    <%= form.label :title, t('title'), class: 'form-label' %>
     <%= form.text_field :title, class: "form-control", placeholder: t('title') %>
   </div>
 
   <div class="form-group mb-3">
-    <%= form.label t('content'), class: 'form-label' %>
-    <div id="document_content" data-document-editor-target="document_content" class="content"></div>
-  </div>
-
-  <div class="form-group mb-3">
-    <%= form.hidden_field :content, id: 'document_content_hidden' %>
+    <%= form.label :content, t('content'), class: 'form-label' %>
+    <%= form.text_area :content, class: "form-control", data: { document_editor_target: "content" }, hidden: true %>
+    <%= form.hidden_field :content, id: "document_content_hidden", data: { document_editor_target: "hiddenContent" } %>
   </div>
 
   <div class="form-group d-grid mb-3">

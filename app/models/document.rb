@@ -1,12 +1,11 @@
 class Document < ApplicationRecord
-  include TemplateImagesHandler
-
   belongs_to :user
   belongs_to :template, optional: true
   belongs_to :company, optional: true
   belongs_to :project, optional: true
 
   has_many :document_images, dependent: :destroy
+  accepts_nested_attributes_for :document_images, allow_destroy: true
 
   validates :title, presence: true, uniqueness: true
 
