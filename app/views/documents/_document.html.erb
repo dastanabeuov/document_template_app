@@ -1,22 +1,30 @@
 <div class="col-12 col-md-6 col-lg-3 mb-4 mb-lg-0">
-  <%# if document.company.memberships.owner.exists?(user_id: current_user.id) %>
-  <% if document.company && document.company.memberships.exists?(user_id: current_user.id, role: Membership.roles[:owner]) %>
-    <div class="card border-danger mb-3">
-  <% else %>
-    <div class="card border-primary mb-3">
-  <% end %>
-      <div class="card-header"><%= document.updated_at %></div>
-      <div class="card-body">
-        <h5 class="card-title"><%= document.title.truncate(20) %></h5>
-        <!-- <p class="card-text"><%#= sanitize(document.content).truncate(47) %></p> -->
-        <p class="card-link">
-          <%= link_to company_project_document_path(@company, @project, document), class: "btn btn-sm btn-outline-primary" do %>
-            <span class="ms-2" title="Reading document...">Read document</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-            </svg>
-          <% end %>
-        </p>
-      </div>
+  <div class="card mb-3">
+    <div class="card-header"><%= document.updated_at %></div>
+    <div class="card-body">
+      <h5 class="card-title"><%= document.title.truncate(20) %></h5>
+      <!-- <p class="card-text"><%#= sanitize(document.content).truncate(47) %></p> -->
+
+      <%# if document.company.memberships.owner.exists?(user_id: current_user.id) %>
+      <% if document.company && document.company.memberships.exists?(user_id: current_user.id, role: Membership.roles[:owner]) %>
+        <%= link_to company_project_document_path(@company, @project, document), class: "position-relative btn btn-sm btn-outline-danger" do %>
+          <span class="ms-2" title="Reading document...">Read document</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+          </svg>
+
+          <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+        <% end %>
+      <% else %>
+        <%= link_to company_project_document_path(@company, @project, document), class: "position-relative btn btn-sm btn-outline-success" do %>
+          <span class="ms-2" title="Reading document...">Read document</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
+          </svg>
+
+          <span class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle"></span>
+        <% end %>
+      <% end %>
     </div>
+  </div>
 </div>
