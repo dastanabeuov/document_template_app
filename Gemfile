@@ -57,6 +57,15 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
   gem "letter_opener", "~> 1.10"
+
+  #deployers
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-sidekiq', require: false
+  # gem 'capistrano3-unicorn', require: false
+  gem 'capistrano-passenger', require: false
 end
 
 group :test do
