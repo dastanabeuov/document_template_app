@@ -196,6 +196,13 @@ GEM
       childprocess (~> 5.0)
     letter_opener (1.10.0)
       launchy (>= 2.2, < 4)
+    libv8-node (18.19.0.0)
+    libv8-node (18.19.0.0-aarch64-linux)
+    libv8-node (18.19.0.0-aarch64-linux-musl)
+    libv8-node (18.19.0.0-arm64-darwin)
+    libv8-node (18.19.0.0-x86_64-darwin)
+    libv8-node (18.19.0.0-x86_64-linux)
+    libv8-node (18.19.0.0-x86_64-linux-musl)
     logger (1.6.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -209,6 +216,8 @@ GEM
     matrix (0.4.2)
     middleware (0.1.0)
     mini_mime (1.1.5)
+    mini_racer (0.16.0)
+      libv8-node (~> 18.19.0.0)
     minitest (5.25.1)
     msgpack (1.7.2)
     mustermann (3.0.3)
@@ -466,6 +475,7 @@ DEPENDENCIES
   kredis
   launchy
   letter_opener (~> 1.10)
+  mini_racer
   mysql2
   oj
   pg (~> 1.1)
