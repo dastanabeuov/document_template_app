@@ -2,7 +2,7 @@
 
 server '192.168.10.17', user: 'deploy', roles: %w[app web db], primary: true
 
-set :rails_env, :development
+set :rails_env, :production
 
 set :branch, 'stage'
 
