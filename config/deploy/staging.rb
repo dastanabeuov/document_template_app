@@ -4,7 +4,7 @@ server '192.168.10.17', user: 'deploy', roles: %w[app web db], primary: true
 
 set :rails_env, :development
 
-set :branch, 'stage'
+set :branch, 'staging'
 
 # Custom SSH Options
 # ==================

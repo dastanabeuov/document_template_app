@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-lock "~> 3.19.1"
+lock '~> 3.19.1'
 
 set :application, 'document_template_app'
 set :repo_url, 'git@github.com:dastanabeuov/document_template_app.git'
