@@ -6,8 +6,7 @@
 
     <div class="border rounded p-3">
       <h1 class="text-secondary"><%= @document.title %></h1>
-      <div class="se-component border rounded overflow-y-scroll h-600 p-5"><%= raw @document.content %></div>
-      <%#  sun-editor-editable  %>
+      <div class="sun-editor-editable border rounded overflow-y-scroll h-600 p-5"><%= raw @document.content %></div>
 
       <div class="no-print btn-group pt-3">
         <% if can?(:manage, @document) %>
