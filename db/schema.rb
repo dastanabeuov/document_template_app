@@ -140,8 +140,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_24_044845) do
   add_foreign_key "documents", "companies", on_delete: :nullify
   add_foreign_key "documents", "templates", on_delete: :nullify
   add_foreign_key "documents", "users"
-  add_foreign_key "memberships", "companies"
-  add_foreign_key "memberships", "users"
+  add_foreign_key "memberships", "companies", on_delete: :cascade
+  add_foreign_key "memberships", "users", on_delete: :cascade
   add_foreign_key "projects", "companies"
   add_foreign_key "template_images", "templates"
   add_foreign_key "templates", "users"
