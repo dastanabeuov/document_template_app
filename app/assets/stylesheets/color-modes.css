@@ -1,4 +1,35 @@
 /* Для светлой темы */
+[data-bs-theme="light"] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/buildings-1.svg');
+  background-position: bottom;
+  background-size: cover; /* Растягивает фон по ширине */
+  background-repeat: no-repeat;
+  z-index: -1; /* Помещает фон позади всех элементов */
+}
+
+/* Для темной темы */
+[data-bs-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/buildings-2.svg');
+  background-position: bottom;
+  background-size: cover; /* Растягивает фон по ширине */
+  background-repeat: no-repeat;
+  z-index: -1; /* Помещает фон позади всех элементов */
+}
+
+
+/* Для светлой темы */
 [data-bs-theme="light"] .navbar {
   background-color: #e9ecef; /* светлый цвет */
 }

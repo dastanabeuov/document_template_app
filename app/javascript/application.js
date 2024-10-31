@@ -7,5 +7,5 @@ import "bootstrap";
 import "color-modes";
 import "chart.js";
 import "@kurkle/color";
-import "./custom/tabs";
+//import "./custom/tabs";
 

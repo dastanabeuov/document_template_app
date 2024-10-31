@@ -6,9 +6,12 @@
 
     <h1><%= t('all_list') %>
       <small>
-        <% if can?(:create, Document) %>
+        <% if can?(:create, Document) && @project.documents.empty? %>
           <div class="btn-group">
-            <%= button_to "+", sample_document_company_project_path(@company, @project), method: :post, class: "btn btn-sm btn-outline-primary", title: "Create document" %>
+            <%= button_to "+", sample_document_company_project_path(@company, @project),
+              method: :post,
+              class: "btn btn-sm btn-outline-primary rounded-pill mb-2",
+              title: "Create document" %>
           </div>
         <% end %>
       </small>
@@ -18,7 +21,7 @@
       <!-- Вкладки для проектов -->
       <% @project_documents.group_by(&:project).each_with_index do |(project, docs), index| %>
         <li class="nav-item" role="presentation">
-          <a class="data-bs-theme text-uppercase fw-bold nav-link shadow-none <%= 'active' if index == 0 %>" id="pills-project-<%= project.id %>-tab" data-bs-toggle="tab" data-bs-target="#pills-project-<%= project.id %>" role="tab" aria-controls="pills-project-<%= project.id %>" aria-selected="<%= index == 0 %>">
+          <a class="data-bs-theme text-uppercase fw-bold nav-link <%= 'active' if index == 0 %>" id="pills-project-<%= project.id %>-tab" data-bs-toggle="tab" data-bs-target="#pills-project-<%= project.id %>" role="tab" aria-controls="pills-project-<%= project.id %>" aria-selected="<%= index == 0 %>">
             <%= project.title %>
           </a>
         </li>
@@ -26,7 +29,7 @@
 
       <!-- Вкладка для шаблонов -->
       <li class="nav-item" role="presentation">
-        <a class="data-bs-theme text-uppercase fw-bold nav-link shadow-none" id="pills-templates-tab" data-bs-toggle="tab" data-bs-target="#pills-templates" role="tab" aria-controls="pills-templates" aria-selected="false">
+        <a class="data-bs-theme text-uppercase fw-bold nav-link" id="pills-templates-tab" data-bs-toggle="tab" data-bs-target="#pills-templates" role="tab" aria-controls="pills-templates" aria-selected="false">
           Templates
         </a>
       </li>
@@ -39,6 +42,12 @@
           <% docs.each_slice(4) do |d4| %>
             <div class="row my-4">
               <%= render collection: d4, partial: 'documents/document', as: :document %>
+            </div>
+          <% end %>
+
+          <% if can?(:create, Document) %>
+            <div class="btn-group">
+              <%= button_to t('new'), sample_document_company_project_path(@company, @project), method: :post, class: "btn btn-primary", title: "Create document" %>
             </div>
           <% end %>
         </div>
@@ -59,7 +68,5 @@
         <% end %>
       </div>
     </div>
-
-    <%= render 'shared/footer' %>
   </main>
 </div>
