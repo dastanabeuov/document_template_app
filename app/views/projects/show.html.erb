@@ -4,7 +4,7 @@
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
     <%= render 'layouts/breadcrumbs' %>
 
-    <div class="border rounded p-3">
+    <div class="p-3">
       <h1><%= @project.title %></h1>
       <p><%= @project.description %></p>
     </div>
@@ -18,7 +18,5 @@
         <%= link_to t('back'), company_projects_path(@company), class: "btn btn-secondary" %>
       <% end %>
     </div>
-
-    <%= render 'shared/footer' %>
   </main>
 </div>

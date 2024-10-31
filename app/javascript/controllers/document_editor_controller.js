@@ -191,7 +191,7 @@ export default class extends Controller {
         { name: "Template 2", html: "<p>Template 2 content</p>" }
       ],
       width: "100%",
-      height: "300px",
+      height: "600px",
       plugins: plugins,
       lang: lang,
       katex: katex,

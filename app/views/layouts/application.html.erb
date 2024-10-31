@@ -13,21 +13,23 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= render 'layouts/color_modes' %>
-    <%= render 'layouts/flash' %>
-
+  <body class="data-bs-theme">
     <% if devise_controller? %>
       <%= render 'layouts/header' %>
       <div class="container pt-5 pb-5">
+        <%= render 'layouts/color_modes' %>
+        <%= render 'layouts/flash' %>
         <%= yield %>
       </div>
       <%= render 'layouts/footer' %>
     <% else %>
       <%= render 'layouts/header_2' %>
       <div class="container-fluid">
+        <%= render 'layouts/color_modes' %>
+        <%= render 'layouts/flash' %>
         <%= yield %>
       </div>
+      <%= render 'shared/footer' %>
     <% end %>
 
     <%# <script async defer src="https://buttons.github.io/buttons.js"></script> %>
