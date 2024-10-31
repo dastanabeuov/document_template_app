@@ -27,6 +27,6 @@ main {
   font-weight: bold;
   /* text-transform: uppercase;  Преобразование текста в верхний регистр */
 }
-.h-600 {
-  height: 600px !important;
+.h-1000 {
+  height: 1000px !important;
 }
