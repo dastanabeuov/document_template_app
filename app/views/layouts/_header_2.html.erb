@@ -1,31 +1,31 @@
 <nav class="navbar navbar-light data-bs-theme p-3">
-    <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
-        <a class="navbar-brand" href="#">OwlPlanner</a>
-        <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+  <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+    <a class="navbar-brand" href="#">OwlPlanner</a>
+    <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+  <div class="col-12 col-md-4 col-lg-2">
+    <input class="form-control form-control-dark" type="text" placeholder="Поиск" aria-label="Search">
+  </div>
+  <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+    <div class="me-3 mt-1">
+      <a class="github-button" href="https://github.com/dastanabeuov/document_template_app" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /dastanabeuov/document_template_app"></a>
+    </div>
+    <div class="dropdown">
+      <% if user_signed_in? %>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= current_user.email %>
         </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><%= link_to "<i class='bi bi-chat-dots'></i> Сообщение".html_safe, "#", class: "dropdown-item" %></li>
+          <li><%= link_to "<i class='bi bi-person-vcard'></i> Профиль".html_safe, edit_user_registration_path, class: "dropdown-item" %></li>
+          <li><%= link_to "<i class='bi bi-door-closed'></i> Выйти".html_safe, destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+        </ul>
+      <% else %>
+        <%= link_to "<i class='bi bi-door-open'></i> Sign in".html_safe, new_user_session_path, class: "btn btn-outline-primary mr-2" %>
+        <%= link_to "<i class='bi bi-person-check'></i> Sign up".html_safe, new_user_registration_path, class: "btn btn-outline-success" %>
+      <% end %>
     </div>
-    <div class="col-12 col-md-4 col-lg-2">
-        <input class="form-control form-control-dark" type="text" placeholder="Поиск" aria-label="Search">
-    </div>
-    <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-        <div class="me-3 mt-1">
-            <a class="github-button" href="https://github.com/dastanabeuov/document_template_app" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /dastanabeuov/document_template_app"></a>
-        </div>
-        <div class="dropdown">
-            <% if user_signed_in? %>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  <%= current_user.email %>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><%= link_to "<i class='bi bi-chat-dots'></i> Сообщение".html_safe, "#", class: "dropdown-item" %></li>
-                  <li><%= link_to "<i class='bi bi-person-vcard'></i> Профиль".html_safe, edit_user_registration_path, class: "dropdown-item" %></li>
-                  <li><%= link_to "<i class='bi bi-door-closed'></i> Выйти".html_safe, destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-                </ul>
-            <% else %>
-                <%= link_to "<i class='bi bi-door-open'></i> Sign in".html_safe, new_user_session_path, class: "btn btn-outline-primary mr-2" %>
-                <%= link_to "<i class='bi bi-person-check'></i> Sign up".html_safe, new_user_registration_path, class: "btn btn-outline-success" %>
-            <% end %>
-        </div>
-    </div>
+  </div>
 </nav>

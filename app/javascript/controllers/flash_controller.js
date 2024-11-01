@@ -1,19 +1,41 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="flash"
 export default class extends Controller {
-  static targets = ["message"];
+  static targets = ["message"]
 
   connect() {
-    this.hideAfterDelay();
+    this.timeoutId = setTimeout(() => this.hideFlash(), 3000)
+
+    // Добавляем слушатель события closed.bs.alert
+    this.element.addEventListener('closed.bs.alert', this.handleManualClose.bind(this))
   }
 
-  hideAfterDelay() {
-    setTimeout(() => {
-      const alert = this.element;
-      alert.classList.remove("show");
-      alert.classList.add("hide");
-      alert.addEventListener("transitionend", () => alert.remove());
-    }, 3000); // 3000 миллисекунд = 3 секунды
+  disconnect() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId)
+    }
+
+    if (this.boundTransitionendHandler) {
+      this.element.removeEventListener("transitionend", this.boundTransitionendHandler)
+    }
+
+    // Удаляем слушатель события Bootstrap
+    this.element.removeEventListener('closed.bs.alert', this.handleManualClose.bind(this))
+  }
+
+  // Обработчик для ручного закрытия через Bootstrap
+  handleManualClose() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId)
+    }
+  }
+
+  hideFlash() {
+    const alert = this.element
+    alert.classList.remove("show")
+    alert.classList.add("hide")
+
+    this.boundTransitionendHandler = () => alert.remove()
+    alert.addEventListener("transitionend", this.boundTransitionendHandler)
   }
 }

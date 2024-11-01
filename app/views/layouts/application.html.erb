@@ -8,11 +8,9 @@
     <link rel="icon" type="image/png" href="<%= asset_path("favicon.ico") %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body class="data-bs-theme">
     <% if devise_controller? %>
       <%= render 'layouts/header' %>
@@ -31,7 +29,6 @@
       </div>
       <%= render 'shared/footer' %>
     <% end %>
-
     <%# <script async defer src="https://buttons.github.io/buttons.js"></script> %>
   </body>
 </html>

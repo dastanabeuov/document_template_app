@@ -5,17 +5,6 @@ class MembershipsController < ApplicationController
 
   load_and_authorize_resource
 
-  def add_owner
-    user = User.find(params[:user_id])
-    user.company_id = @company.id
-    membership = @company.memberships.new(user: user, role: :owner)
-    if membership.save && user.save
-      redirect_to @company, notice: 'User was successfully updated as owner.'
-    else
-      redirect_to @company, alert: 'User is not a member of this company.'
-    end
-  end
-
   def create
     user = User.find(params[:user_id])
     @membership = @company.memberships.new(user: user, role: :member)
@@ -32,17 +21,28 @@ class MembershipsController < ApplicationController
     redirect_to @company, notice: 'User was successfully removed from the company.'
   end
 
+  def add_owner
+    user = User.find(params[:user_id])
+    user.company_id = @company.id
+    membership = @company.memberships.new(user: user, role: :owner)
+    if membership.save && user.save
+      redirect_to @company, notice: 'User was successfully updated as owner.'
+    else
+      redirect_to @company, alert: 'User is not a member of this company.'
+    end
+  end
+
   private
 
-  def set_company
-    @company ||= Company.find(params[:company_id])
-  end
+    def set_company
+      @company ||= Company.find(params[:company_id])
+    end
 
-  def set_membership
-    @membership = @company.memberships.find(params[:id])
-  end
+    def set_membership
+      @membership = @company.memberships.find(params[:id])
+    end
 
-  def check_owner
-    redirect_to @company, alert: 'Access denied.' unless current_user.admin? || current_user.memberships.find_by(company: @company)&.role == 'owner'
-  end
+    def check_owner
+      redirect_to @company, alert: 'Access denied.' unless current_user.admin? || current_user.memberships.find_by(company: @company)&.role == 'owner'
+    end
 end

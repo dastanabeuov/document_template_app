@@ -1,0 +1,12 @@
+kk:
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} сәтті құрылды.'
+        # alert: '%{resource_name} құру мүмкін болмады.'
+      update:
+        notice: '%{resource_name} сәтті жаңартылды.'
+        # alert: '%{resource_name} жаңарту мүмкін болмады.'
+      destroy:
+        notice: '%{resource_name} сәтті жойылды.'
+        alert: '%{resource_name} жою мүмкін болмады.'

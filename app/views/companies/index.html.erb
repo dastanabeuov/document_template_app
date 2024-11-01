@@ -1,14 +1,10 @@
 <div class="row">
   <%= render 'homes/nav' %>
-
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
     <%= render 'layouts/breadcrumbs' %>
-
     <h1><%= t('all_list') %></h1>
-
     <div class="list-group">
       <% if current_user&.admin? %>
-
         <% @companies.each do |company| %>
           <a href="<%= company_path(company) %>" class="list-group-item list-group-item-action list-group-item-info d-flex justify-content-between align-items-center">
             <%= company.name %>
@@ -16,9 +12,7 @@
             <span class="badge bg-primary rounded-pill"><%= company.memberships.count %></span>
           </a>
         <% end %>
-
       <% else %>
-
         <% @user_companies&.each do |company| %>
           <% if company.memberships.owner.exists?(user_id: current_user.id) %>
             <a href="<%= company_path(company) %>" class="list-group-item list-group-item-action list-group-item-danger d-flex justify-content-between align-items-center">
@@ -29,12 +23,9 @@
               <small><%= company.updated_at %></small>
               <span class="badge bg-primary rounded-pill"><%= company.memberships.count %></span>
             </a>
-
         <% end %>
-
       <% end %>
     </div>
-
     <% if current_user.admin? && can?(:create, Company) %>
       <div class="btn-group pt-3">
         <%= link_to t('new'), new_company_path, class: 'btn btn-primary' %>

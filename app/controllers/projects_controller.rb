@@ -88,15 +88,15 @@ class ProjectsController < ApplicationController
 
   private
 
-  def set_company
-    @company = Company.find(params[:company_id])
-  end
+    def set_company
+      @company = Company.find(params[:company_id])
+    end
 
-  def set_project
-    @project = @company.projects.find(params[:id])
-  end
+    def set_project
+      @project = @company.projects.find(params[:id])
+    end
 
-  def project_params
-    params.require(:project).permit(:title, :description)
-  end
+    def project_params
+      params.require(:project).permit(:title, :description)
+    end
 end
