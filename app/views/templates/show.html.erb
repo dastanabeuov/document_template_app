@@ -1,16 +1,11 @@
 <div class="row">
   <%= render 'nav' %>
-
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-
     <%= render 'layouts/breadcrumbs' %>
-
     <div class="p-3">
       <h1><%= @template.title %></h1>
       <div><%= raw @template.content %></div>
     </div>
-
-
     <div class="btn-group pt-3">
       <% if can?(:destroy, @template) && can?(:update, @template) %>
         <%= button_to t('destroy'), template_path(@template), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>

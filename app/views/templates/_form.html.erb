@@ -2,21 +2,17 @@
   <div class="form-group mb-3">
     <%= render 'shared/errors', resource: template %>
   </div>
-
   <div class="form-group mb-3">
     <%= form.label t('title'), class: 'form-label' %>
     <%= form.text_field :title, class: "form-control", placeholder: t('title') %>
   </div>
-
   <div class="form-group mb-3">
     <%= form.label t('content'), class: 'form-label' %>
     <div id="template_content" data-template-editor-target="template_content" class="content"></div>
   </div>
-
   <div class="form-group mb-3">
     <%= form.hidden_field :content, id: 'template_content_hidden' %>
   </div>
-
   <div class="form-group d-grid mb-3">
     <%= form.submit nil, class: "btn btn-success" %>
   </div>

@@ -1,14 +1,11 @@
 <div class="row">
   <%= render 'companies/nav' %>
-
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
     <%= render 'layouts/breadcrumbs' %>
-
     <div class="p-3">
       <h1><%= t('new') %></h1>
       <%= render "form", company: @company, project: @project %>
     </div>
-
     <div class="btn-group pt-3">
       <%= link_to t('back'), company_projects_path(@company), class: "btn btn-secondary" %>
     </div>

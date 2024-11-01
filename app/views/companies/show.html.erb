@@ -1,17 +1,11 @@
 <div class="row">
   <%= render 'nav' %>
-
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
     <%= render 'layouts/breadcrumbs' %>
-
     <div class="m-2">
-
-
       <h1><%= @company.name %></h1>
-
       <% if current_user.admin? || @company.memberships.exists?(user: current_user, role: :owner) %>
         <div class="row">
-
           <div class="rounded col col-3 border py-3 px-3">
             <div class="add-member">
               <h3>Add Member</h3>
@@ -36,7 +30,6 @@
               </div>
             <% end %>
           </div>
-
           <div class="rounded col col-9 border py-3 px-3">
             <h3>Members</h3>
             <table class="table">
@@ -61,11 +54,9 @@
               </tbody>
             </table>
           </div>
-
         </div>
       <% else %>
         <div class="row">
-
           <div class="rounded col col-12 border py-3 px-3">
             <h3>Members</h3>
             <table class="table">
@@ -90,10 +81,8 @@
               </tbody>
             </table>
           </div>
-
         </div>
       <% end %>
-
       <div class="btn-group pt-3">
         <% if can?(:destroy, @company) && can?(:update, @company) %>
           <%= button_to t('destroy'), company_path(@company), method: :delete, data: { "turbo-confirm": t('are_you_sure') }, class: "btn btn-danger" %>

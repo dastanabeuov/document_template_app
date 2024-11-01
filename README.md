@@ -6,7 +6,7 @@
 
 - **Ruby** 3.3.4
 - **Rails** 7
-- **PostgreSQL**
+- **PostgreSQL 10+**
 - **Bootstrap** 5
 - **Rspec** для тестирования
 - **ActiveStorage** для управления файлами

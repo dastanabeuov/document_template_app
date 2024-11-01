@@ -26,8 +26,6 @@ Rails.application.routes.draw do
         member do
           get  :document_images
           post :upload_image
-          get :download_pdf
-          get :download_docx
         end
 
         collection do

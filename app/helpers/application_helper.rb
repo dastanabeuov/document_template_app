@@ -4,14 +4,19 @@ module ApplicationHelper
     link_to name, path, class: class_name, 'aria-current': ('page' if current_page?(path))
   end
 
-  FLASH_KEY = {
-    notice: 'alert-success',
-    alert: 'alert-warning',
-    error: 'alert-danger'
-  }.freeze
-
   def flash_key(key)
-    FLASH_KEY[key.to_sym] || key.to_s
+    case key.to_sym
+    when :notice, :success
+      'alert-success'
+    when :info
+      'alert-info'
+    when :warning
+      'alert-warning'
+    when :error, :alert, :danger
+      'alert-danger'
+    else
+      'alert-primary'
+    end
   end
 
   def current_year

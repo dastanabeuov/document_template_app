@@ -1,45 +1,24 @@
 <div class="row">
-  <div class="no-print"><%= render 'nav' %></div>
-
+  <%= render 'nav' %>
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-    <div class="no-print"><%= render 'layouts/breadcrumbs' %></div>
-
+    <%= render 'layouts/breadcrumbs' %>
     <div class="p-3">
       <h1 class="text-secondary"><%= @document.title %></h1>
       <div class="sun-editor-editable border rounded overflow-y-scroll h-1000 p-5"><%= raw @document.content %></div>
-
-      <div class="no-print btn-group pt-3">
+      <div class="btn-group pt-3">
         <% if can?(:manage, @document) %>
           <%= button_to company_project_document_path(@company, @project, @document), method: :delete, data: { turbo_confirm: t('are_you_sure') }, class: "btn btn-danger", title: t('destroy') do %>
             <i class="bi bi-trash3-fill"></i>
           <% end %>
-
           <%= link_to edit_company_project_document_path(@company, @project, @document), class: "btn btn-warning", title: t('edit') do %>
             <i class="bi bi-pencil-fill"></i>
           <% end %>
-
           <%= link_to company_project_documents_path(@company, @project), class: "btn btn-secondary", title: t('back') do %>
             <i class="bi bi-arrow-left-circle-fill"></i>
           <% end %>
         <% else %>
           <%= link_to company_project_documents_path(@company, @project), class: "btn btn-secondary", title: t('back') do %>
             <i class="bi bi-arrow-left-circle-fill"></i> <%= t('back') %>
-          <% end %>
-        <% end %>
-      </div>
-
-      <div class="no-print btn-group pt-3">
-        <% if can?(:manage, @document) %>
-          <%= link_to download_pdf_company_project_document_path(@company, @project, @document, format: :pdf), class: 'btn btn-success', title: t('download_pdf') do %>
-            <i class="bi bi-file-earmark-pdf-fill"></i>
-          <% end %>
-
-          <%= link_to download_docx_company_project_document_path(@company, @project, @document, format: :docx), class: 'btn btn-primary', title: t('download_docx') do %>
-            <i class="bi bi-file-earmark-word-fill"></i>
-          <% end %>
-
-          <%= link_to '#', class: 'btn btn-info', onclick: 'window.print();', title: t('print') do %>
-            <i class="bi bi-printer-fill"></i>
           <% end %>
         <% end %>
       </div>

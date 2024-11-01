@@ -2,18 +2,15 @@
   <div class="form-group mb-3">
     <%= render 'shared/errors', resource: document %>
   </div>
-
   <div class="form-group mb-3">
     <%= form.label :title, t('title'), class: 'form-label' %>
     <%= form.text_field :title, class: "form-control", placeholder: t('title') %>
   </div>
-
   <div class="form-group mb-3">
     <%= form.label :content, t('content'), class: 'form-label' %>
     <%= form.text_area :content, class: "form-control", data: { document_editor_target: "content" }, hidden: true %>
     <%= form.hidden_field :content, id: "document_content_hidden", data: { document_editor_target: "hiddenContent" } %>
   </div>
-
   <div class="form-group d-grid mb-3">
     <%= form.submit nil, class: "btn btn-success" %>
   </div>
