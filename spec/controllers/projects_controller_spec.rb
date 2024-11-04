@@ -1,6 +1,14 @@
+require 'rails_helper'
+
 RSpec.describe ProjectsController, type: :controller do
+  let(:user) { create(:user) }
   let(:company) { create(:company) }
+  let(:membership) { create(:membership, user: user, company: company) }
   let(:project) { create(:project, company: company) }
+
+  before do
+    login(user)
+  end
 
   describe 'GET #index' do
     it 'returns a success response' do
