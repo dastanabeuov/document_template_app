@@ -6,7 +6,7 @@ RSpec.describe TemplateImage, type: :model do
 
   it 'can have one attached image' do
     template_image = TemplateImage.new
-    template_image.image.attach(io: File.open(Rails.root.join('spec', 'support', 'image.png')), filename: 'test_image.png', content_type: 'image/png')
+    template_image.image.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'files', 'image.png')), filename: 'test_image.png', content_type: 'image/png')
 
     expect(template_image.image).to be_attached
   end

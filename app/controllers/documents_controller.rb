@@ -84,7 +84,6 @@ class DocumentsController < ApplicationController
     @document = @project.documents.new(document_params)
     @document.user = current_user
     @document.company = @company
-    @document.project = @project
 
     if @document.save
       @breadcrumbs = [
@@ -107,7 +106,7 @@ class DocumentsController < ApplicationController
         { name: "#{I18n.t('.documents')}", current: true }
       ]
 
-      redirect_to new_company_project_document_path(@company, @project), alert: 'Document was not created.'#, status: :unprocessable_entity
+      redirect_to new_company_project_document_path(@company, @project), alert: 'Document was not created.', status: :unprocessable_entity
     end
   end
 
@@ -167,7 +166,6 @@ class DocumentsController < ApplicationController
         url: url_for(document_image.image),
         message: 'Image uploaded successfully!'
       }
-      debugger
     else
       render json: {
         success: false,

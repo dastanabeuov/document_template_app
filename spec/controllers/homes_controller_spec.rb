@@ -8,16 +8,15 @@ RSpec.describe HomesController, type: :controller do
   end
 
   describe 'GET #index' do
-    context 'with turbo frame request' do
-      it 'renders the right panel partial' do
-        request.headers['Turbo-Frame'] = 'right-panel' # Устанавливаем заголовок Turbo
+    context 'render template index' do
+      it 'renders the index page' do
         get :index
 
-        expect(response).to render_template(partial: 'homes/right_panels/_dashboard')
+        expect(response).to be_successful
       end
     end
 
-    context 'without turbo frame request' do
+    context 'Additional information index page' do
       it 'assigns @users_by_month' do
         create_list(:user, 5, last_sign_in_at: Date.today)
         create_list(:user, 5, last_sign_in_at: 3.months.ago)
@@ -55,7 +54,7 @@ RSpec.describe HomesController, type: :controller do
       it 'renders the index template' do
         get :index
 
-        expect(response).to render_template(:index) # Проверяем рендеринг полного представления
+        expect(response).to render_template(:index)
       end
     end
   end

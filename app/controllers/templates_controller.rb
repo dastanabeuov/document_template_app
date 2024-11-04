@@ -41,7 +41,7 @@ class TemplatesController < ApplicationController
 
   def update
     if @template.update(template_params)
-      redirect_to root_path, notice: 'Template was successfully updated.'
+      redirect_to @template, notice: 'Template was successfully updated.'
     else
       render :edit, alert: 'Template was not updated.', status: :unprocessable_entity
     end
