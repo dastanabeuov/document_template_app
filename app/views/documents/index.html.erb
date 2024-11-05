@@ -1,6 +1,6 @@
 <div class="row">
   <%= render 'nav' %>
-  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
     <%= render 'layouts/breadcrumbs' %>
     <h1><%= t('all_list') %>
       <small>
@@ -14,7 +14,7 @@
         <% end %>
       </small>
     </h1>
-    <ul class="nav nav-fill nav-tabs mb-3" id="pills-tab" role="tablist">
+    <ul class="nav nav-fill nav-tabs" id="pills-tab" role="tablist">
       <!-- Вкладки для проектов -->
       <% @project_documents.group_by(&:project).each_with_index do |(project, docs), index| %>
         <li class="nav-item" role="presentation">
@@ -23,42 +23,48 @@
           </a>
         </li>
       <% end %>
+      <!-- Вкладки для проектов -->
+
       <!-- Вкладка для шаблонов -->
       <li class="nav-item" role="presentation">
         <a class="data-bs-theme text-uppercase fw-bold nav-link" id="pills-templates-tab" data-bs-toggle="tab" data-bs-target="#pills-templates" role="tab" aria-controls="pills-templates" aria-selected="false">
           Templates
         </a>
       </li>
+      <!-- Вкладка для шаблонов -->
     </ul>
     <div class="tab-content" id="pills-tabContent">
       <!-- Содержимое для проектов -->
       <% @project_documents.group_by(&:project).each do |project, docs| %>
         <div class="tab-pane fade <%= 'show active' if docs.first == @project_documents.first %>" id="pills-project-<%= project.id %>" role="tabpanel" aria-labelledby="pills-project-<%= project.id %>-tab" tabindex="0">
           <% docs.each_slice(4) do |d4| %>
-            <div class="row my-4">
+            <div class="row mt-4">
               <%= render collection: d4, partial: 'documents/document', as: :document %>
             </div>
           <% end %>
           <% if can?(:create, Document) %>
-            <div class="btn-group">
-              <%= button_to t('new'), sample_document_company_project_path(@company, @project), method: :post, class: "btn btn-primary", title: "Create document" %>
+            <div class="btn-group mt-3">
+              <%= button_to t('new'), sample_document_company_project_path(@company, @project), method: :post, class: "btn btn-sm btn-outline-primary", title: "Create document" %>
             </div>
           <% end %>
         </div>
       <% end %>
+      <!-- Содержимое для проектов -->
+
       <!-- Содержимое для шаблонов -->
       <div class="tab-pane fade" id="pills-templates" role="tabpanel" aria-labelledby="pills-templates-tab" tabindex="0">
         <% @templates.each_slice(4) do |t4| %>
-          <div class="row my-4">
+          <div class="row mt-4">
             <%= render partial: 'templates/template', collection: t4, as: :template, locals: { company: @company, project: @project } %>
           </div>
         <% end %>
         <% if can?(:create, Template) %>
-          <div class="btn-group pt-3">
-            <%= link_to t('new'), new_template_path, class: "btn btn-primary", title: "Create template" %>
+          <div class="btn-group mt-3">
+            <%= link_to t('new'), new_template_path, class: "btn btn-sm btn-outline-primary", title: "Create template" %>
           </div>
         <% end %>
       </div>
+      <!-- Содержимое для шаблонов -->
     </div>
   </main>
 </div>

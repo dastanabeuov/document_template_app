@@ -1,6 +1,6 @@
 <div class="row">
   <%= render 'homes/nav' %>
-  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+  <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 my-4">
     <%= render 'layouts/breadcrumbs' %>
     <h1><%= t('all_list') %></h1>
     <div class="list-group">
@@ -28,7 +28,7 @@
     </div>
     <% if current_user.admin? && can?(:create, Company) %>
       <div class="btn-group pt-3">
-        <%= link_to t('new'), new_company_path, class: 'btn btn-primary' %>
+        <%= link_to t('new'), new_company_path, class: 'btn btn-sm btn-outline-primary' %>
       </div>
     <% end %>
   </main>

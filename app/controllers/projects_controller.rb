@@ -89,11 +89,11 @@ class ProjectsController < ApplicationController
   private
 
     def set_company
-      @company = Company.find(params[:company_id])
+      @company = Company.find_by_id(params[:company_id])
     end
 
     def set_project
-      @project = @company.projects.find(params[:id])
+      @project = @company.projects.find_by_id(params[:id])
     end
 
     def project_params

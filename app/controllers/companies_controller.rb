@@ -71,7 +71,7 @@ class CompaniesController < ApplicationController
     end
 
     def set_company
-      @company ||= Company.find(params[:id])
+      @company ||= Company.find_by_id(params[:id])
     end
 
     def company_params

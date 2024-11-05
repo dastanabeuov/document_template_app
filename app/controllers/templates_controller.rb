@@ -23,10 +23,22 @@ class TemplatesController < ApplicationController
   end
 
   def new
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.templates')}", url: templates_path },
+      { name: "#{I18n.t('.new')}", current: true }
+    ]
+
     @template = current_user.templates.new
   end
 
   def edit
+    @breadcrumbs = [
+      { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
+      { name: "#{I18n.t('.templates')}", url: templates_path },
+      { name: "#{@template.title}", url: template_path(@template) },
+      { name: "#{I18n.t('.edit')}", current: true }
+    ]
   end
 
   def create
@@ -53,20 +65,37 @@ class TemplatesController < ApplicationController
   end
 
   def upload_image
-    image = params[:image]
+    template = Template.find_by_id(params[:id])
 
-    if image.nil?
-      render json: { success: 0, error: "No image found in request" }
-      return
+    template_image = template.template_images.build
+    template_image.image.attach(params["file-0"])
+
+    if template_image.save
+      render json: {
+        success: true,
+        url: url_for(template_image.image),
+        message: 'Image uploaded successfully!'
+      }
+    else
+      render json: {
+        success: false,
+        message: 'Image upload failed.'
+      }, status: :unprocessable_entity
     end
+  end
 
-    uploaded_image = TemplateImage.create!(image: image)
+  def sample_template
+    @template = Template.create(
+      title: "Новый документ-#{SecureRandom.urlsafe_base64(4)}",
+      content: "<h3>Заполните контент...</h3>".html_safe,
+      user_id: current_user.id
+    )
 
-    stored_image_url = rails_blob_url(uploaded_image.image)
-
-    render json: { success: 1, file: { url: stored_image_url } }
-  rescue StandardError => e
-    render json: { success: 0, error: e.message }
+    if @template.persisted?
+      redirect_to edit_template_path(@template), notice: 'Template created and ready for editing.'
+    else
+      redirect_to templates_path, alert: 'Failed to create template.'
+    end
   end
 
   private

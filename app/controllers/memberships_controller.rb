@@ -35,11 +35,11 @@ class MembershipsController < ApplicationController
   private
 
     def set_company
-      @company ||= Company.find(params[:company_id])
+      @company ||= Company.find_by_id(params[:company_id])
     end
 
     def set_membership
-      @membership = @company.memberships.find(params[:id])
+      @membership = @company.memberships.find_by_id(params[:id])
     end
 
     def check_owner
