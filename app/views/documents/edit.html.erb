@@ -3,11 +3,11 @@
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
     <%= render 'layouts/breadcrumbs' %>
     <div class="p-3">
-      <h1 class="text-secondary"><%= t('edit') %></h1>
+      <h1><%= t('edit') %></h1>
       <%= render "form", company: @company, project: @project, document: @document %>
-      <div class="btn-group pt-3">
-        <%= link_to t('back'), company_project_document_path(@company, @project, @document), class: "btn btn-secondary" %>
-      </div>
+    </div>
+    <div class="btn-group pt-3">
+      <%= link_to t('back'), company_project_document_path(@company, @project, @document), class: "btn btn-secondary" %>
     </div>
   </main>
 </div>

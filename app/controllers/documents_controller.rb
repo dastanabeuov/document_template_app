@@ -177,19 +177,19 @@ class DocumentsController < ApplicationController
   private
 
     def set_template
-      @template = Template.find(params[:template_id])
+      @template = Template.find_by_id(params[:template_id])
     end
 
     def set_document
-      @document = Document.find(params[:id])
+      @document = Document.find_by_id(params[:id])
     end
 
     def set_company
-      @company = Company.find_by(id: params[:company_id])
+      @company = Company.find_by_id(params[:company_id])
     end
 
     def set_project
-      @project = Project.find_by(id: params[:project_id])
+      @project = Project.find_by_id(params[:project_id])
     end
 
     def check_membership

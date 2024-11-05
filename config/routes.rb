@@ -7,7 +7,13 @@ Rails.application.routes.draw do
   end
 
   resources :templates do
+    member do
+      post :sample_template
+      post :upload_image
+    end
+
     collection do
+      post :sample_template
       post :upload_image
     end
   end
