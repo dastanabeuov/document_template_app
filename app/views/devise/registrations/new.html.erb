@@ -1,73 +1,77 @@
-<h2>Sign up</h2>
+<div class="row justify-content-center">
+  <div class="col col-md-6">
+    <h2>Sign up</h2>
 
-<ul class="nav nav-tabs" id="registrationTabs" role="tablist">
-  <li class="nav-item" role="presentation">
-    <a class="nav-link active" id="user-tab" data-bs-toggle="tab" href="#user-form" role="tab" aria-controls="user-form" aria-selected="true">Register as User</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link" id="company-tab" data-bs-toggle="tab" href="#company-form" role="tab" aria-controls="company-form" aria-selected="false">Register as Company</a>
-  </li>
-</ul>
+    <ul class="nav nav-tabs" id="registrationTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="user-tab" data-bs-toggle="tab" href="#user-form" role="tab" aria-controls="user-form" aria-selected="true">Register as User</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="company-tab" data-bs-toggle="tab" href="#company-form" role="tab" aria-controls="company-form" aria-selected="false">Register as Company</a>
+      </li>
+    </ul>
 
-<div class="tab-content mt-4" id="registrationTabsContent">
-  <div class="tab-pane fade show active" id="user-form" role="tabpanel" aria-labelledby="user-tab">
-    <div class="card card-body">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'user-form' }) do |f| %>
-        <%= devise_error_messages! %>
+    <div class="tab-content mt-4" id="registrationTabsContent">
+      <div class="tab-pane fade show active" id="user-form" role="tabpanel" aria-labelledby="user-tab">
+        <div class="card card-body">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'user-form' }) do |f| %>
+            <%= devise_error_messages! %>
 
-        <div class="mb-3">
-          <%= f.label :email, class: 'form-label' %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            <div class="mb-3">
+              <%= f.label :email, class: 'form-label' %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password, class: 'form-label' %> <% if @minimum_password_length %><small>(<%= @minimum_password_length %> characters minimum)</small><% end %>
+              <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password_confirmation, class: 'form-label' %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+            </div>
+
+            <div class="d-grid">
+              <%= f.submit "Sign up", class: 'btn btn-primary' %>
+            </div>
+          <% end %>
         </div>
+      </div>
 
-        <div class="mb-3">
-          <%= f.label :password, class: 'form-label' %> <% if @minimum_password_length %><small>(<%= @minimum_password_length %> characters minimum)</small><% end %>
-          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-        </div>
+      <div class="tab-pane fade" id="company-form" role="tabpanel" aria-labelledby="company-tab">
+        <div class="card card-body">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'company-form' }) do |f| %>
+            <%= devise_error_messages! %>
 
-        <div class="mb-3">
-          <%= f.label :password_confirmation, class: 'form-label' %>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-        </div>
+            <div class="mb-3">
+              <%= f.label :email, class: 'form-label' %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+            </div>
 
-        <div class="d-grid">
-          <%= f.submit "Sign up", class: 'btn btn-primary' %>
+            <div class="mb-3">
+              <%= f.label :password, class: 'form-label' %> <% if @minimum_password_length %><small>(<%= @minimum_password_length %> characters minimum)</small><% end %>
+              <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password_confirmation, class: 'form-label' %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :company_name, class: 'form-label' %>
+              <%= f.text_field :company_name, class: 'form-control' %>
+            </div>
+
+            <div class="d-grid">
+              <%= f.submit "Sign up", class: 'btn btn-secondary' %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
 
-  <div class="tab-pane fade" id="company-form" role="tabpanel" aria-labelledby="company-tab">
-    <div class="card card-body">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'company-form' }) do |f| %>
-        <%= devise_error_messages! %>
-
-        <div class="mb-3">
-          <%= f.label :email, class: 'form-label' %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.label :password, class: 'form-label' %> <% if @minimum_password_length %><small>(<%= @minimum_password_length %> characters minimum)</small><% end %>
-          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.label :password_confirmation, class: 'form-label' %>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.label :company_name, class: 'form-label' %>
-          <%= f.text_field :company_name, class: 'form-control' %>
-        </div>
-
-        <div class="d-grid">
-          <%= f.submit "Sign up", class: 'btn btn-secondary' %>
-        </div>
-      <% end %>
-    </div>
+    <%= render "devise/shared/links" %>
   </div>
 </div>
-
-<%= render "devise/shared/links" %>
