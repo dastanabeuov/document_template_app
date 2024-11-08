@@ -7,7 +7,9 @@
       <%= render "form", company: @company, project: @project %>
     </div>
     <div class="btn-group pt-3">
-      <%= link_to t('back'), company_projects_path, class: "btn btn-secondary" %>
+      <%= link_to company_projects_path, class: "btn btn-secondary", title: t('back') do %>
+        <i class="bi bi-arrow-left-circle-fill"></i>
+      <% end %>
     </div>
   </main>
 </div>

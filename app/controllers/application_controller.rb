@@ -1,6 +1,7 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  include Localization
   self.responder = ApplicationResponder
 
   before_action :authenticate_user!

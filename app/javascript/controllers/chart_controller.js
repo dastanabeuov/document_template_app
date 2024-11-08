@@ -21,6 +21,8 @@ export default class extends Controller {
   // Инициализация графика
   initializeChart() {
     try {
+      const translateUsers = this.element.dataset.translateUsers || "[]"
+      const translateActiveUsers = this.element.dataset.translateActiveUsers || "[]"
       const labels = JSON.parse(this.element.dataset.chartLabels || "[]")
       const data = JSON.parse(this.element.dataset.chartData || "[]")
       const ctx = this.canvasTarget.getContext('2d')
@@ -35,7 +37,7 @@ export default class extends Controller {
         data: {
           labels: labels,
           datasets: [{
-            label: 'Активные пользователи',
+            label: translateActiveUsers,
             data: data,
             borderColor: 'rgba(75, 192, 192, 1)',
             backgroundColor: gradient,
@@ -52,7 +54,7 @@ export default class extends Controller {
             pointHoverBorderWidth: 3,
           }]
         },
-        options: this.chartOptions()
+        options: this.chartOptions(translateUsers)
       })
     } catch (error) {
       console.error("Ошибка при создании графика:", error)
@@ -84,7 +86,7 @@ export default class extends Controller {
   }
 
   // Настройки графика
-  chartOptions() {
+  chartOptions(translateUsers) {
     return {
       responsive: true,
       plugins: {
@@ -111,7 +113,7 @@ export default class extends Controller {
           displayColors: false,
           callbacks: {
             label: function(context) {
-              return `Пользователи: ${context.raw}`
+              return `${translateUsers}: ${context.raw}`
             }
           }
         }

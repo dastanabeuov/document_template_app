@@ -1,0 +1,29 @@
+<div class="dropdown me-1">
+  <button class="btn btn-sm btn-warning dropdown-toggle"
+          type="button"
+          id="languageDropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false">
+    <i class="bi bi-translate"></i>
+  </button>
+  <ul class="dropdown-menu shadow" aria-labelledby="languageDropdown">
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="?locale=kz">
+        <%= image_tag "flags/qazaqstan.png", alt: "Kazakh Flag", class: "flag-icon" %>
+        <span>Қазақша</span>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="?locale=ru">
+        <%= image_tag "flags/russa.png", alt: "Russian Flag", class: "flag-icon" %>
+        <span>Русский</span>
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="?locale=en">
+        <%= image_tag "flags/england.png", alt: "English Flag", class: "flag-icon" %>
+        <span>English</span>
+      </a>
+    </li>
+  </ul>
+</div>

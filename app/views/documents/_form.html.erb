@@ -1,4 +1,10 @@
-<%= form_with model: [company, project, document], local: true, data: { controller: "document-editor", document_editor_upload_url: upload_image_company_project_document_path(company, project, document) } do |form| %>
+<%= form_with model: [company, project, document],
+              local: true,
+              data: {
+                controller: "document-editor",
+                current_language: I18n.locale,
+                document_editor_upload_url: upload_image_company_project_document_path(company, project, document)
+              } do |form| %>
   <div class="form-group mb-3">
     <%= render 'shared/errors', resource: document %>
   </div>
@@ -8,10 +14,12 @@
   </div>
   <div class="form-group mb-3">
     <%= form.label :content, t('content'), class: 'form-label' %>
-    <%= form.text_area :content, class: "form-control", data: { document_editor_target: "content" }, hidden: true %>
+    <%= form.text_area :content, class: "form-control",
+                                 data: { document_editor_target: "content"},
+                                 hidden: true %>
     <%= form.hidden_field :content, id: "document_content_hidden", data: { document_editor_target: "hiddenContent" } %>
   </div>
   <div class="form-group d-grid mb-3">
-    <%= form.submit nil, class: "btn btn-success" %>
+    <%= form.submit I18n.t('.save'), class: "btn btn-success" %>
   </div>
 <% end %>

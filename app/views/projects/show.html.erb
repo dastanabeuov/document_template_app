@@ -8,11 +8,23 @@
     </div>
     <div class="btn-group mt-3">
       <% if can?(:destroy, @project) && can?(:update, @project) %>
-        <%= button_to t('destroy'), company_project_path(@company, @project), method: :delete, data: { "turbo-confirm": 'Are you sure?' }, class: "btn btn-danger" %>
-        <%= link_to t('edit'), edit_company_project_path(@company, @project), data: { turbo_frame: "right-panel" }, class: "btn btn-warning" %>
-        <%= link_to t('back'), company_projects_path(@company), class: "btn btn-secondary" %>
+        <%= button_to company_project_path(@company, @project),
+            method: :delete,
+            data: { turbo_confirm: t('are_you_sure') },
+            class: "btn btn-danger",
+            title: t('destroy') do %>
+          <i class="bi bi-trash3-fill"></i>
+        <% end %>
+        <%= link_to edit_company_project_path(@company, @project), class: "btn btn-warning", title: t('edit') do %>
+          <i class="bi bi-pencil-fill"></i>
+        <% end %>
+        <%= link_to company_projects_path(@company), class: "btn btn-secondary", title: t('back') do %>
+          <i class="bi bi-arrow-left-circle-fill"></i>
+        <% end %>
       <% else %>
-        <%= link_to t('back'), company_projects_path(@company), class: "btn btn-secondary" %>
+        <%= link_to company_projects_path(@company), class: "btn btn-secondary", title: t('back') do %>
+          <i class="bi bi-arrow-left-circle-fill"></i>
+        <% end %>
       <% end %>
     </div>
   </main>

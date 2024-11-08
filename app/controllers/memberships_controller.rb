@@ -10,7 +10,7 @@ class MembershipsController < ApplicationController
     @membership = @company.memberships.new(user: user, role: :member)
 
     if @membership.save
-      redirect_to @company, notice: 'User was successfully added to the company.'
+      redirect_to @company, notice: I18n.t('.user_added_company')
     else
       redirect_to @company, alert: @membership.errors.full_messages.join(', ')
     end
@@ -18,7 +18,7 @@ class MembershipsController < ApplicationController
 
   def destroy
     @membership.destroy
-    redirect_to @company, notice: 'User was successfully removed from the company.'
+    redirect_to @company, notice: I18n.t('.user_removed_company')
   end
 
   def add_owner
@@ -26,9 +26,9 @@ class MembershipsController < ApplicationController
     user.company_id = @company.id
     membership = @company.memberships.new(user: user, role: :owner)
     if membership.save && user.save
-      redirect_to @company, notice: 'User was successfully updated as owner.'
+      redirect_to @company, notice: I18n.t('.user_added_owner_company')
     else
-      redirect_to @company, alert: 'User is not a member of this company.'
+      redirect_to @company, alert: I18n.t('.not_added_owner_company')
     end
   end
 
@@ -43,6 +43,6 @@ class MembershipsController < ApplicationController
     end
 
     def check_owner
-      redirect_to @company, alert: 'Access denied.' unless current_user.admin? || current_user.memberships.find_by(company: @company)&.role == 'owner'
+      redirect_to @company, alert: I18n.t('.access_denied') unless current_user.admin? || current_user.memberships.find_by(company: @company)&.role == 'owner'
     end
 end

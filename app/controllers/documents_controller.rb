@@ -28,12 +28,12 @@ class DocumentsController < ApplicationController
       )
 
       if @document.save
-        redirect_to company_project_document_path(@document.company, @document.project, @document), notice: 'Document was successfully created from template.'
+        redirect_to company_project_document_path(@document.company, @document.project, @document), notice: I18n.t('.created')
       else
-        redirect_to company_project_documents_path(@document.company, @document.project), alert: 'Failed to create document from template: ' + @document.errors.full_messages.to_sentence
+        redirect_to company_project_documents_path(@document.company, @document.project), alert: I18n.t('.not_created')
       end
     else
-      redirect_to root_path, alert: 'First create a company.'
+      redirect_to root_path, alert: I18n.t('.first_create_a_company')
     end
   end
 
@@ -95,7 +95,7 @@ class DocumentsController < ApplicationController
         { name: "#{I18n.t('.documents')}", current: true }
       ]
 
-      redirect_to [@company, @project, @document], notice: 'Document was successfully created.'
+      redirect_to [@company, @project, @document], notice: I18n.t('.created')
     else
       @breadcrumbs = [
         { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
@@ -106,7 +106,7 @@ class DocumentsController < ApplicationController
         { name: "#{I18n.t('.documents')}", current: true }
       ]
 
-      redirect_to new_company_project_document_path(@company, @project), alert: 'Document was not created.', status: :unprocessable_entity
+      redirect_to new_company_project_document_path(@company, @project), alert: I18n.t('.not_created'), status: :unprocessable_entity
     end
   end
 
@@ -134,7 +134,7 @@ class DocumentsController < ApplicationController
         { name: "#{I18n.t('.documents')}", current: true }
       ]
 
-      redirect_to company_project_document_path(@company, @project, @document), notice: 'Document was successfully updated.'
+      redirect_to company_project_document_path(@company, @project, @document), notice: I18n.t('.updated')
     else
       @breadcrumbs = [
         { name: "<i class='bi bi-house'></i> #{I18n.t('.dashboard')}".html_safe, url: root_path },
@@ -145,13 +145,13 @@ class DocumentsController < ApplicationController
         { name: "#{I18n.t('.documents')}", current: true }
       ]
 
-      render :edit, alert: 'Document was not updated.', status: :unprocessable_entity
+      render :edit, alert: I18n.t('.not_updated'), status: :unprocessable_entity
     end
   end
 
   def destroy
     @document.destroy
-    redirect_to company_project_documents_path(@company, @project), notice: 'Document was successfully destroyed.'
+    redirect_to company_project_documents_path(@company, @project), notice: I18n.t('.destroyed')
   end
 
   def upload_image
@@ -164,12 +164,12 @@ class DocumentsController < ApplicationController
       render json: {
         success: true,
         url: url_for(document_image.image),
-        message: 'Image uploaded successfully!'
+        message: I18n.t('.uploaded')
       }
     else
       render json: {
         success: false,
-        message: 'Image upload failed.'
+        message: I18n.t('.not_uploaded')
       }, status: :unprocessable_entity
     end
   end
@@ -194,7 +194,7 @@ class DocumentsController < ApplicationController
 
     def check_membership
       unless current_user.companies.exists?(id: @document.company_id) || current_user.admin?
-        redirect_to root_path, alert: 'You are not authorized to access this document.'
+        redirect_to root_path, alert: I18n.t('.not_authorized')
       end
     end
 
