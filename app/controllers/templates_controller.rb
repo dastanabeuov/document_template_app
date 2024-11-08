@@ -45,23 +45,23 @@ class TemplatesController < ApplicationController
     @template = current_user.templates.new(template_params)
 
     if @template.save
-      redirect_to @template, notice: 'Template was successfully created.'
+      redirect_to @template, notice: I18n.t('.created')
     else
-      render :new, alert: 'Template was not created.', status: :unprocessable_entity
+      render :new, alert: I18n.t('.not_created'), status: :unprocessable_entity
     end
   end
 
   def update
     if @template.update(template_params)
-      redirect_to @template, notice: 'Template was successfully updated.'
+      redirect_to @template, notice: I18n.t('.updated')
     else
-      render :edit, alert: 'Template was not updated.', status: :unprocessable_entity
+      render :edit, alert: I18n.t('.not_updated'), status: :unprocessable_entity
     end
   end
 
   def destroy
     @template.destroy
-    redirect_to templates_url, notice: 'Template was successfully destroyed.'
+    redirect_to templates_url, notice: I18n.t('.destroyed')
   end
 
   def upload_image
@@ -74,27 +74,27 @@ class TemplatesController < ApplicationController
       render json: {
         success: true,
         url: url_for(template_image.image),
-        message: 'Image uploaded successfully!'
+        message: I18n.t('.uploaded')
       }
     else
       render json: {
         success: false,
-        message: 'Image upload failed.'
+        message: I18n.t('.not_uploaded')
       }, status: :unprocessable_entity
     end
   end
 
   def sample_template
     @template = Template.create(
-      title: "Новый документ-#{SecureRandom.urlsafe_base64(4)}",
-      content: "<h3>Заполните контент...</h3>".html_safe,
+      title: "#{I18n.t('.sample_title')}-#{SecureRandom.urlsafe_base64(4)}",
+      content: "#{I18n.t('.sample_content')}".html_safe,
       user_id: current_user.id
     )
 
     if @template.persisted?
-      redirect_to edit_template_path(@template), notice: 'Template created and ready for editing.'
+      redirect_to edit_template_path(@template), notice: I18n.t('.created')
     else
-      redirect_to templates_path, alert: 'Failed to create template.'
+      redirect_to templates_path, alert: I18n.t('.not_created')
     end
   end
 

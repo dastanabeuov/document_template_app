@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-gray-200 shadow">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <h1>BIM Templates</h1>
+      <h1><%= I18n.t('.bim_templates') %></h1>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,25 +9,26 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <input class="form-control form-control-dark" type="text" placeholder="Поиск" aria-label="Search">
+          <%= render 'layouts/lang' %>
         </li>
+        <li class="nav-item">
+          <%= render 'layouts/color_modes' %>
+        </li>
+        <%# <li class="nav-item">
+          <input class="form-control form-control-dark" type="text" placeholder="Поиск" aria-label="Search">
+        </li> %>
       </ul>
       <% if user_signed_in? %>
         <form class="">
-          <% if current_user.admin? %>
-            <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-outline-success mr-2" %>
-          <% else %>
-            <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-warning mr-2" %>
-          <% end %>
-          <%= link_to "<i class='bi bi-door-closed'></i> Sign out".html_safe, destroy_user_session_path, method: :delete, class: "btn btn-outline-danger mr-2" %>
+          <%= link_to "<i class='bi bi-person-vcard'></i> #{current_user.email}".html_safe, edit_user_registration_path, class: "btn btn-outline-success mr-2" %>
+          <%= link_to "<i class='bi bi-door-closed'></i> #{I18n.t('.sign_out')}".html_safe, destroy_user_session_path, method: :delete, class: "btn btn-outline-danger mr-2" %>
         </form>
       <% else %>
         <form class="">
-          <%= link_to "<i class='bi bi-door-open'></i> Sign in".html_safe, new_user_session_path, class: "btn btn-outline-primary mr-2" %>
-          <%= link_to "<i class='bi bi-person-check'></i> Sign up".html_safe, new_user_registration_path, class: "btn btn-outline-success" %>
+          <%= link_to "<i class='bi bi-door-open'></i> #{I18n.t('.sign_in')}".html_safe, new_user_session_path, class: "btn btn-outline-primary mr-2" %>
+          <%= link_to "<i class='bi bi-person-check'></i> #{I18n.t('.sign_up')}".html_safe, new_user_registration_path, class: "btn btn-outline-success" %>
         </form>
       <% end %>
     </div>
   </div>
 </nav>
-

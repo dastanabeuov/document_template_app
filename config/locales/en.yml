@@ -1,4 +1,57 @@
 en:
+  created: 'Successfully created.'
+  not_created: 'Not created.'
+  updated: 'Successfully updated.'
+  not_updated: 'Not updated.'
+  destroyed: 'Successfully destroyed.'
+  access_denied: 'Access denied!'
+  first_create_a_company: 'First create a company.'
+  not_authorized: 'You are not authorized to access this resource.'
+  user_added_company: 'User was successfully added to the company.'
+  user_removed_company: 'User was successfully removed from the company.'
+  user_added_owner_company: 'Successfully updated company owner.'
+  not_added_owner_company: 'User is not a member of this company.'
+  uploaded: 'Image uploaded successfully!'
+  not_uploaded: 'Image upload failed.'
+  sample_title: 'New document'
+  sample_content: '<h3>Fill in the content...</h3>'
+
+  open: 'Open'
+  save: 'Save'
+  traffic_last_6_months: 'Traffic for the last 6 months'
+  active_users: 'Active users'
+  users: 'Users'
+
+  only_one_membership: 'should only have one membership per company'
+  read_tutorial: 'Read Tutorial'
+  volt_qna: 'QnA'
+  coffee_chat: 'Coffee chat'
+  add_member: 'Add Member'
+  add_owner: 'Add Owner'
+  add: 'Add'
+  only_admins_can_add_owners: 'Only admins can add owners'
+  members: 'Members'
+  email: 'Email'
+  actions: 'Actions'
+  are_you_sure: 'Are you sure?'
+  latest_transactions: 'Latest transactions'
+  data: 'Date'
+  light: 'Light'
+  dark: 'Dark'
+  auto: 'Auto'
+  profile: 'Profile'
+  sign_out: 'Sign out'
+  sign_in: 'Sign in'
+  sign_up: 'Sign up'
+  bim_templates: 'BIM Templates'
+  create_document_with_template: 'Create document with template'
+  contacts: 'Contacts'
+  terms_and_conditions: 'Terms and conditions'
+  privacy_policy: 'Privacy policy'
+  subscribe_to_our_newsletter: 'Subscribe to our newsletter'
+  jsc_kazrica: 'JSC "KazRICA"'
+
+  ######################
   dashboard: "Dashboard"
   dashboard_description: "Create your document using pre-made templates or design your own from scratch. Plan your documents ahead of time to ensure everything is organized and ready when you need it. Whether you're using a template or starting fresh, take control of your document creation process and stay ahead with careful planning and foresight."
 
@@ -7,9 +60,6 @@ en:
   documents: "Documents"
   сompany_employees: "Сompany employees"
   customers: "Customers"
-  read_tutorial: "Read tutorial"
-  volt_qna: "Volt QnA"
-  coffee_chat: "Сoffee Сhat"
 
   all_list: "All list"
   back: "Back"

@@ -36,9 +36,9 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      redirect_to @company, notice: 'Company was successfully created.'
+      redirect_to @company, notice: I18n.t('.created')
     else
-      render :new, alert: 'Company was not created.', status: :unprocessable_entity
+      render :new, alert: I18n.t('.not_created'), status: :unprocessable_entity
     end
   end
 
@@ -53,21 +53,21 @@ class CompaniesController < ApplicationController
 
   def update
     if @company.update(company_params)
-      redirect_to @company, notice: 'Company was successfully updated.'
+      redirect_to @company, notice: I18n.t('.updated')
     else
-      render :edit, alert: 'Company was not updated.', status: :unprocessable_entity
+      render :edit, alert: I18n.t('.not_updated'), status: :unprocessable_entity
     end
   end
 
   def destroy
     @company.destroy
-    redirect_to companies_path, notice: 'Company was successfully destroyed.'
+    redirect_to companies_path, notice: I18n.t('.destroyed')
   end
 
   private
 
     def check_admin
-      redirect_to companies_path, alert: 'Access denied!' unless current_user.admin?
+      redirect_to companies_path, alert: I18n.t('.access_denied') unless current_user.admin?
     end
 
     def set_company

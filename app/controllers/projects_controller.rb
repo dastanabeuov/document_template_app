@@ -40,9 +40,9 @@ class ProjectsController < ApplicationController
   def create
     @project = @company.projects.new(project_params)
     if @project.save
-      redirect_to [@company, @project], notice: 'Project was successfully created.'
+      redirect_to [@company, @project], notice: I18n.t('.created')
     else
-      render :new, alert: 'Project was not created.', status: :unprocessable_entity
+      render :new, alert: I18n.t('.not_created'), status: :unprocessable_entity
     end
   end
 
@@ -59,30 +59,30 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to [@company, @project], notice: 'Project was successfully updated.'
+      redirect_to [@company, @project], notice: I18n.t('.updated')
     else
-      render :edit, alert: 'Project was not updated.', status: :unprocessable_entity
+      render :edit, alert: I18n.t('.not_updated'), status: :unprocessable_entity
     end
   end
 
   def destroy
     @project.destroy
-    redirect_to company_projects_path(@company), notice: 'Project was successfully destroyed.'
+    redirect_to company_projects_path(@company), notice: I18n.t('.destroyed')
   end
 
   def sample_document
     @document = Document.create(
-      title: "Новый документ-#{SecureRandom.urlsafe_base64(4)}",
-      content: "<h3>Заполните контент...</h3>".html_safe,
+      title: "#{I18n.t('.sample_title')}-#{SecureRandom.urlsafe_base64(4)}",
+      content: "#{I18n.t('.sample_content')}".html_safe,
       user_id: current_user.id,
       project_id: @project.id,
       company_id: @company.id
     )
 
     if @document.persisted?
-      redirect_to edit_company_project_document_path(@company, @project, @document), notice: 'Document created and ready for editing.'
+      redirect_to edit_company_project_document_path(@company, @project, @document), notice: I18n.t('.created')
     else
-      redirect_to company_project_path(@company, @project), alert: 'Failed to create document.'
+      redirect_to company_project_path(@company, @project), alert: I18n.t('.not_created')
     end
   end
 

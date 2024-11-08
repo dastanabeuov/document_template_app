@@ -2,16 +2,16 @@
   <span class="text-secondary"><a class="link-underline-opacity-0 link-secondary" href="#"></a></span>
   <ul class="nav m-0">
     <li class="nav-item">
-      <a class="nav-link text-secondary me-5" aria-current="page" href="https://kazniisa.kz">© <%= current_year %> AO "КазНИИСА"</a>
+      <a class="nav-link text-secondary me-5" aria-current="page" href="https://kazniisa.kz">© <%= current_year %> <%= I18n.t('.jsc_kazrica') %></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-secondary" aria-current="page" href="#">Политика конфиденциальности</a>
+      <a class="nav-link text-secondary" aria-current="page" href="#"><%= I18n.t('.privacy_policy') %></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-secondary" href="#">Условия и положения</a>
+      <a class="nav-link text-secondary" href="#"><%= I18n.t('.terms_and_conditions') %></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link text-secondary" href="#">Контакты</a>
+      <a class="nav-link text-secondary" href="#"><%= I18n.t('.contacts') %></a>
     </li>
   </ul>
 </footer>

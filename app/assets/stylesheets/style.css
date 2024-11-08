@@ -30,3 +30,8 @@ main {
 .h-650 {
   height: 650px !important;
 }
+.flag-icon {
+  width: 20px;
+  height: 15px;
+  object-fit: cover;
+}

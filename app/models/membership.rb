@@ -6,5 +6,5 @@ class Membership < ApplicationRecord
 
   validates :company_id, presence: true
   validates :user_id,    presence: true, uniqueness: { scope: :company_id,
-    message: "should only have one membership per company" }
+    message: "#{I18n.t('.only_one_membership')}" }
 end

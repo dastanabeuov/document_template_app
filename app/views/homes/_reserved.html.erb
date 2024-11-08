@@ -1,17 +1,17 @@
 <div class="row">
   <div class="col-12 col-xl-8 mb-4 mb-lg-0">
     <div class="card">
-      <h5 class="card-header">Последние транзакции</h5>
+      <h5 class="card-header"><%= I18n.t('.latest_transactions') %></h5>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Order</th>
-                <th scope="col">Product</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Total</th>
-                <th scope="col">Date</th>
+                <th scope="col">ID</th>
+                <th scope="col"><%= I18n.t('.documents') %></th>
+                <th scope="col"><%= I18n.t('.users') %></th>
+                <th scope="col"><%= I18n.t('.members') %></th>
+                <th scope="col"><%= I18n.t('.data') %></th>
               </tr>
             </thead>
             <tbody>
@@ -32,17 +32,19 @@
           </table>
         </div>
         <div class="d-grid">
-          <%= link_to t('all_list'), companies_path, class: 'btn btn-light' %>
+          <%= link_to t('all_list'), companies_path, class: 'btn btn-outline-success' %>
         </div>
       </div>
     </div>
   </div>
   <div class="col-12 col-xl-4">
       <div class="card">
-          <h5 class="card-header">Трафик за последние 6 мес.</h5>
+          <h5 class="card-header"><%= I18n.t('.traffic_last_6_months') %></h5>
           <div class="card-body">
             <div data-controller="chart"
-                 data-chart-labels='<%= @users_by_month.keys.map { |date| date.strftime("%B %Y") } %>'
+                 data-translate-users="<%= I18n.t('.users') %>"
+                 data-translate-active-users="<%= I18n.t('.active_users') %>"
+                 data-chart-labels='<%= @users_by_month.keys.map { |date| l(date, format: '%B %Y', locale: I18n.locale) } %>'
                  data-chart-data='<%= @users_by_month.values %>'>
               <canvas data-chart-target="canvas"></canvas>
             </div>
