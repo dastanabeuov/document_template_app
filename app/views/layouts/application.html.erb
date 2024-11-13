@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title><%= I18n.t('.bim_templates') %></title>
-    <link rel="apple-touch-icon" sizes="76x76" href="<%= asset_path("apple-icon.png") %>">
-    <link rel="icon" type="image/png" href="<%= asset_path("favicon.ico") %>">
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= favicon_link_tag 'favicon_32x32.ico', rel: 'icon', sizes: '32x32' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
