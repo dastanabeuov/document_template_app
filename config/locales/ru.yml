@@ -87,3 +87,20 @@ ru:
 
   all_rights_reserved: "Все права защищены."
   copyright: "Авторские права"
+
+  actions: "Действия"
+  members_count: "Количество участников"
+  activerecord:
+    attributes:
+      template:
+        updated_at: "Дата обновления"
+        title: "Заголовок"
+      document:
+        updated_at: "Дата обновления"
+        title: "Заголовок"
+      project:
+        updated_at: "Дата обновления"
+        title: "Заголовок"
+      company:
+        updated_at: "Дата обновления"
+        name: "Имя"

@@ -102,3 +102,20 @@ kz:
       - :day
       - :month
       - :year
+
+  actions: "Әрекеттер"
+  members_count: "Қатысушылар саны"
+  activerecord:
+    attributes:
+      template:
+        updated_at: "Жаңартылған күн"
+        title: "Тақырып"
+      document:
+        updated_at: "Жаңартылған күн"
+        title: "Тақырып"
+      project:
+        updated_at: "Жаңартылған күн"
+        title: "Тақырып"
+      company:
+        updated_at: "Жаңартылған күн"
+        name: "Аты"
