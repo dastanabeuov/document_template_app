@@ -1,3 +1,10 @@
+<script>
+  document.addEventListener('turbo:load', function () {
+    $('#documents-table').DataTable();
+    $('#templates-table').DataTable();
+  });
+</script>
+
 <div class="row">
   <%= render 'nav' %>
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
@@ -36,16 +43,27 @@
       <!-- Содержимое для проектов -->
       <% @project_documents.group_by(&:project).each do |project, docs| %>
         <div class="tab-pane fade <%= 'show active' if docs.first == @project_documents.first %>" id="pills-project-<%= project.id %>" role="tabpanel" aria-labelledby="pills-project-<%= project.id %>-tab" tabindex="0">
-          <div class="overflow-y-scroll h-650 my-3">
-            <% docs.each_slice(4) do |d4| %>
-              <div class="row mb-3">
-                <%= render collection: d4, partial: 'documents/document', as: :document %>
-              </div>
-            <% end %>
+          <div class="table-responsive">
+            <table class="table table-hover" id="documents-table">
+              <thead>
+                <tr>
+                  <th scope="col"><%= t('.title') %></th>
+                  <th scope="col"><%= t('.updated_at') %></th>
+                  <th scope="col" class="text-end"><%= t('.actions') %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= render collection: docs, partial: 'documents/document', as: :document %>
+              </tbody>
+            </table>
           </div>
+
           <% if can?(:create, Document) %>
             <div class="btn-group mt-3">
-              <%= button_to t('new'), sample_document_company_project_path(@company, @project), method: :post, class: "btn btn-sm btn-outline-primary", title: "Create document" %>
+              <%= button_to t('new'), sample_document_company_project_path(@company, @project),
+                  method: :post,
+                  class: "btn btn-sm btn-outline-primary",
+                  title: "Create document" %>
             </div>
           <% end %>
         </div>
@@ -54,20 +72,30 @@
 
       <!-- Содержимое для шаблонов -->
       <div class="tab-pane fade" id="pills-templates" role="tabpanel" aria-labelledby="pills-templates-tab" tabindex="0">
-        <div class="overflow-y-scroll h-650 my-3">
-          <% @templates.each_slice(4) do |t4| %>
-            <div class="row mb-3">
-              <%= render partial: 'templates/template', collection: t4, as: :template, locals: { company: @company, project: @project } %>
-            </div>
-          <% end %>
+        <div class="table-responsive">
+          <table class="table table-hover" id="templates-table">
+            <thead>
+              <tr>
+                <th scope="col"><%= t('.title') %></th>
+                <th scope="col"><%= t('.updated_at') %></th>
+                <th scope="col" class="text-end"><%= t('.actions') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render partial: 'templates/template', collection: @templates, as: :template, locals: { company: @company, project: @project } %>
+            </tbody>
+          </table>
         </div>
+
         <% if can?(:create, Template) %>
           <div class="btn-group mt-3">
-            <%= button_to t('new'), sample_template_templates_path, method: :post, class: "btn btn-sm btn-primary", title: "Create template" %>
+            <%= button_to t('new'), sample_template_templates_path,
+                method: :post,
+                class: "btn btn-sm btn-outline-primary",
+                title: "Create template" %>
           </div>
         <% end %>
       </div>
       <!-- Содержимое для шаблонов -->
-    </div>
   </main>
 </div>

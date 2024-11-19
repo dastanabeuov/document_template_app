@@ -89,3 +89,20 @@ en:
 
   all_rights_reserved: "All rights reserved."
   copyright: "Copyright"
+
+  actions: "Actions"
+  members_count: "Members count"
+  activerecord:
+    attributes:
+      template:
+        updated_at: "Date of update"
+        title: "Title"
+      document:
+        updated_at: "Date of update"
+        title: "Title"
+      project:
+        updated_at: "Date of update"
+        title: "Title"
+      company:
+        updated_at: "Date of update"
+        name: "Name"

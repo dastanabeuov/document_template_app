@@ -1,0 +1,15 @@
+<% row_class = if admin
+                  ''
+                elsif company.memberships.owner.exists?(user_id: current_user.id)
+                  'table-danger'
+                else
+                  'table-primary'
+                end %>
+
+<tr class="<%= row_class %>" onclick="window.location='<%= company_path(company) %>'" style="cursor: pointer;">
+  <td><%= company.name %></td>
+  <td><small><%= company.updated_at %></small></td>
+  <td>
+    <span class="badge bg-primary rounded-pill"><%= company.memberships.count %></span>
+  </td>
+</tr>

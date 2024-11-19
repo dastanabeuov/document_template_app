@@ -1,15 +1,30 @@
+<script>
+  document.addEventListener('turbo:load', function () {
+    $('#projects-table').DataTable();
+  });
+</script>
+
 <div class="row">
   <%= render 'companies/nav' %>
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
     <%= render 'layouts/breadcrumbs' %>
     <h1><%= t('all_list') %></h1>
-    <div class="overflow-y-scroll h-650 my-3">
-      <% @projects&.each_slice(4) do |p4| %>
-        <div class="row mb-4">
-          <%= render collection: p4, partial: 'projects/project', as: :project %>
-        </div>
-      <% end %>
+
+    <div class="table-responsive">
+      <table class="table table-hover" id="projects-table">
+        <thead>
+          <tr>
+            <th scope="col"><%= Project.human_attribute_name(:title) %></th>
+            <th scope="col"><%= Project.human_attribute_name(:updated_at) %></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render collection: @projects, partial: 'projects/project', as: :project %>
+        </tbody>
+      </table>
     </div>
+
     <% if can?(:create, Project) %>
       <div class="btn-group mt-3">
         <%= link_to t('new'), new_company_project_path(@company), class: "btn btn-primary" %>
