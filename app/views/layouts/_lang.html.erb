@@ -10,7 +10,7 @@
   <ul class="dropdown-menu shadow" aria-labelledby="languageDropdown">
     <% [:kz, :ru, :en].each do |locale| %>
       <li>
-        <%= link_to root_path(locale: locale), class: "dropdown-item d-flex align-items-center gap-2" do %>
+        <%= link_to "?locale=#{locale}", class: "dropdown-item d-flex align-items-center gap-2" do %>
           <%= image_tag "flags/#{locale}.png", alt: "#{locale.upcase} Flag", class: "flag-icon" %>
           <span><%= t("languages.#{locale}") %></span>
         <% end %>
