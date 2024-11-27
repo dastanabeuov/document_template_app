@@ -1,4 +1,8 @@
 en:
+  languages:
+    kz: Kazakh
+    ru: Russian
+    en: English
   created: 'Successfully created.'
   not_created: 'Not created.'
   updated: 'Successfully updated.'

@@ -1,4 +1,8 @@
 kz:
+  languages:
+    kz: Қазақша
+    ru: Орысша
+    en: Ағылшынша
   created: 'Сәтті құрылды.'
   not_created: 'Құрылмады.'
   updated: 'Сәтті жаңартылды.'
