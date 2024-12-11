@@ -5,7 +5,13 @@ class HomesController < ApplicationController
                           .group_by_month(:last_sign_in_at, last: 6)
                           .count
 
-    @latest_trunsactions_documents = Document.last(10)
+    @latest_trunsactions_documents = Document.where(
+      user_id: current_user.id
+    ).or(
+      Document.where(company_id: current_user.company_ids)
+    ).order(created_at: :desc)
+    .limit(7)
+
     @templates = Template.last(4)
 
     @breadcrumbs = [

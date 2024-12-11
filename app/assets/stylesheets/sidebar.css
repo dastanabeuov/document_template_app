@@ -27,12 +27,14 @@
         z-index: 999;
     }
 }
-
+hr {
+  margin: 0px;
+  border-top: none;
+}
 .sidebar .nav-link {
-    color: #333;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
-
-.sidebar .nav-link.active {
-    color: #6ea8fe !important;
+.sidebar .nav-item {
+  margin-top: -10px;
 }
-
