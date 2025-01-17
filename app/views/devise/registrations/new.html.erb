@@ -3,7 +3,7 @@
     <div class="border rounded p-5">
       <h2><%= I18n.t('devise.registrations.new.sign_up') %></h2>
 
-      <ul class="nav nav-tabs" id="registrationTabs" role="tablist">
+      <ul class="nav nav-fill nav-tabs" id="registrationTabs" role="tablist">
         <li class="nav-item" role="presentation">
           <a class="nav-link active" id="user-tab" data-bs-toggle="tab" href="#user-form" role="tab" aria-controls="user-form" aria-selected="true"><%= I18n.t('devise.registrations.new.sign_up_as_user') %></a>
         </li>
@@ -16,7 +16,7 @@
         <div class="tab-pane fade show active" id="user-form" role="tabpanel" aria-labelledby="user-tab">
           <div class="card card-body">
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'user-form' }) do |f| %>
-              <%= devise_error_messages! %>
+              <%= render "devise/shared/error_messages", resource: resource %>
 
               <div class="mb-3">
                 <%= f.label :email, class: 'form-label' %>
@@ -43,7 +43,7 @@
         <div class="tab-pane fade" id="company-form" role="tabpanel" aria-labelledby="company-tab">
           <div class="card card-body">
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'company-form' }) do |f| %>
-              <%= devise_error_messages! %>
+              <%= render "devise/shared/error_messages", resource: resource %>
 
               <div class="mb-3">
                 <%= f.label :email, class: 'form-label' %>

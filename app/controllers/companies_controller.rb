@@ -10,8 +10,8 @@ class CompaniesController < ApplicationController
       { name: "#{I18n.t('.companies')}", current: true }
     ]
 
-    @user_companies = current_user&.companies
-    @companies = Company.all
+    @user_companies = current_user&.companies.includes(:memberships)
+    @companies = Company.all.includes(:memberships)
   end
 
   def show

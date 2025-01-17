@@ -6,12 +6,14 @@ Bundler.require(*Rails.groups)
 
 module DocumentTemplateApp
   class Application < Rails::Application
+    config.active_record.schema_format = :sql
+
     config.app_generators.scaffold_controller :responders_controller
 
     config.load_defaults 7.1
     config.time_zone = 'Almaty'
     config.i18n.fallbacks = true
-    config.i18n.default_locale = :kz
+    config.i18n.default_locale = :en
     config.i18n.available_locales = %i[ru kz en]
 
     config.autoload_lib(ignore: %w(assets tasks))
