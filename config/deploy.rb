@@ -3,7 +3,7 @@
 lock '~> 3.19.1'
 
 set :application, 'document_template_app'
-set :repo_url, 'git@github.com:dastanabeuov/document_template_app.git'
+set :repo_url, 'https://github.com/dastanabeuov/document_template_app.git'
 set :rvm_type, :user
 set :deploy_to, '/home/deploy/document_template_app'
 set :deploy_user, 'deploy'
