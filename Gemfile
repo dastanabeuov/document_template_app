@@ -121,3 +121,4 @@ gem "sanitize"
 gem "pghero"
 gem "pg_query"
 gem "prosopite"
+gem 'nokogiri', '~> 1.9', '>= 1.9.1'
