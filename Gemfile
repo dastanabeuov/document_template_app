@@ -113,7 +113,7 @@ gem "cancancan", "~> 3.6"
 gem "strong_migrations", "1.0.0"
 gem "groupdate", "6.4.0"
 gem "ruby-vips"
-gem 'mini_racer', '~> 0.9.0'
+gem 'mini_racer', '~> 0.6.3'
 gem "dotenv-rails"
 gem "ruby_audit"
 gem "bundler-audit"
