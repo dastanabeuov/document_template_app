@@ -28,11 +28,11 @@ RSpec.describe HomesController, type: :controller do
       end
 
       it 'assigns @latest_transactions_documents' do
-        create_list(:document, 10)
+        create_list(:document, 7)
 
         get :index
 
-        expect(assigns(:latest_trunsactions_documents).count).to eq(10)
+        expect(assigns(:latest_trunsactions_documents).count).to eq(7)
       end
 
       it 'assigns @templates' do

@@ -6,6 +6,8 @@ Bundler.require(*Rails.groups)
 
 module DocumentTemplateApp
   class Application < Rails::Application
+    config.active_record.schema_format = :sql
+
     config.app_generators.scaffold_controller :responders_controller
 
     config.load_defaults 7.1

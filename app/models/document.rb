@@ -8,6 +8,7 @@ class Document < ApplicationRecord
   accepts_nested_attributes_for :document_images, allow_destroy: true
 
   validates :title, presence: true, uniqueness: true
+  validates :content, presence: true
 
   scope :latest, ->(limit = 10) { order(created_at: :desc).limit(limit) }
 

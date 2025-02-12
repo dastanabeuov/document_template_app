@@ -36,3 +36,9 @@ main {
 .dt-length label {
   margin-left: 5px;
 }
+
+/*.table-responsive {
+  border: 1px solid #4a94de;
+  border-top: none;
+  padding: 20px;
+}*/

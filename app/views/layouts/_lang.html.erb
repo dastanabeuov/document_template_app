@@ -1,29 +1,20 @@
 <div class="dropdown me-1">
-  <button class="btn btn-sm btn-warning dropdown-toggle"
+  <button class="btn btn-sm btn-light border border-secondary-subtle dropdown-toggle"
           type="button"
           id="languageDropdown"
           data-bs-toggle="dropdown"
           aria-expanded="false">
     <i class="bi bi-translate"></i>
+    <%= t("languages.#{I18n.locale}") %>
   </button>
   <ul class="dropdown-menu shadow" aria-labelledby="languageDropdown">
-    <li>
-      <a class="dropdown-item d-flex align-items-center gap-2" href="?locale=kz">
-        <%= image_tag "flags/qazaqstan.png", alt: "Kazakh Flag", class: "flag-icon" %>
-        <span>Қазақша</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item d-flex align-items-center gap-2" href="?locale=ru">
-        <%= image_tag "flags/russa.png", alt: "Russian Flag", class: "flag-icon" %>
-        <span>Русский</span>
-      </a>
-    </li>
-    <li>
-      <a class="dropdown-item d-flex align-items-center gap-2" href="?locale=en">
-        <%= image_tag "flags/england.png", alt: "English Flag", class: "flag-icon" %>
-        <span>English</span>
-      </a>
-    </li>
+    <% [:kz, :ru, :en].each do |locale| %>
+      <li>
+        <%= link_to "?locale=#{locale}", class: "dropdown-item d-flex align-items-center gap-2" do %>
+          <%= image_tag "flags/#{locale}.png", alt: "#{locale.upcase} Flag", class: "flag-icon" %>
+          <span><%= t("languages.#{locale}") %></span>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </div>
