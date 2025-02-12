@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-gem 'bigdecimal', '3.1.9'
+
 ruby "3.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
@@ -121,3 +121,4 @@ gem "sanitize"
 gem "pghero"
 gem "pg_query"
 gem "prosopite"
+gem 'bigdecimal', '3.1.5'
