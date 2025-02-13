@@ -368,12 +368,11 @@ GEM
       websocket (~> 1.0)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
-    sidekiq (7.3.2)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      logger
-      rack (>= 2.2.4)
-      redis-client (>= 0.22.2)
+    sidekiq (6.0.4)
+      connection_pool (>= 2.2.2)
+      rack (>= 2.0.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     sinatra (4.0.0)
       mustermann (~> 3.0)
       rack (>= 3.0.0, < 4)
@@ -456,57 +455,58 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  bootsnap
+  bcrypt (~> 3.1.7)
+  bootsnap (~> 1.18.4)
   bootstrap (~> 5.3.3)
   cancancan (~> 3.6)
-  capistrano
-  capistrano-bundler
-  capistrano-passenger
-  capistrano-rails
-  capistrano-rvm
-  capistrano-sidekiq
-  capybara
+  capistrano (~> 3.19.1)
+  capistrano-bundler (~> 2.1.1)
+  capistrano-passenger (~> 0.2.1)
+  capistrano-rails (~> 1.6.3)
+  capistrano-rvm (~> 0.1.2)
+  capistrano-sidekiq (~> 2.3.1)
+  capybara (~> 3.40.0)
   database_cleaner-active_record (~> 2.2)
-  debug
+  debug (~> 1.9.2)
   devise (~> 4.9)
   devise-i18n (~> 1.12)
-  dotenv-rails
-  factory_bot_rails
+  dotenv-rails (~> 3.1.4)
+  factory_bot_rails (~> 6.4.3)
   faker (~> 3.4)
   groupdate (= 6.4.0)
-  importmap-rails
-  jbuilder
-  jquery-rails
-  kredis
-  launchy
+  importmap-rails (~> 2.0.1)
+  jbuilder (~> 2.12.0)
+  jquery-rails (~> 4.6.0)
+  kredis (~> 1.7.0)
+  launchy (~> 3.0.1)
   letter_opener (~> 1.10)
-  mini_racer
-  mysql2
-  oj
+  mini_racer (~> 0.16.0)
+  mysql2 (~> 0.5.6)
+  oj (~> 3.16.5)
   pg (~> 1.1)
   popper_js (~> 2.11.8)
   puma (>= 5.0)
   rails (~> 7.1.3, >= 7.1.3.4)
-  rails-controller-testing
+  rails-controller-testing (~> 1.0.5)
   rails-i18n (~> 7.0)
   redis (>= 4.0.1)
-  responders
-  rspec-rails
-  ruby-vips
-  sassc-rails
+  responders (~> 3.1.1)
+  rspec-rails (~> 7.0.1)
+  ruby-vips (~> 2.2.2)
+  sassc-rails (~> 2.1.2)
   selenium-webdriver (~> 4.11)
-  shoulda-matchers
-  sidekiq
-  sinatra
+  shoulda-matchers (~> 6.4.0)
+  sidekiq (~> 6.0)
+  sinatra (~> 4.0.0)
   slim-rails (~> 3.6)
-  sprockets-rails
-  stimulus-rails
+  sprockets-rails (~> 3.5.2)
+  stimulus-rails (~> 1.3.4)
   strong_migrations (= 1.0.0)
-  thinking-sphinx
-  turbo-rails
+  thinking-sphinx (~> 5.6.0)
+  turbo-rails (~> 2.0.6)
   tzinfo-data
-  web-console
-  whenever
+  web-console (~> 4.2.1)
+  whenever (~> 1.0.0)
 
 RUBY VERSION
    ruby 3.3.4p94
