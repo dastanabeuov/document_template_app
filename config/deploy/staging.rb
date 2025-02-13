@@ -3,7 +3,7 @@
 server '192.168.10.47', user: 'deploy', roles: %w[app web db], primary: true
 
 set :rails_env, :development
-set :branch, 'staging'
+set :branch, 'staging_rollback'
 set :ssh_options, {
   keys: %w[/Users/adk/.ssh/id_rsa],
   forward_agent: true,
