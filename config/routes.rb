@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   root "homes#index"
 
@@ -42,4 +44,9 @@ Rails.application.routes.draw do
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
+
+  authenticate :user, lambda { |u| u.admin? || u.email == 'web.dev.adk@gmail.com' } do
+    mount PgHero::Engine, at: "pghero"
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end

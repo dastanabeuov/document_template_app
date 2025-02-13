@@ -12,7 +12,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem "puma", ">= 6.5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
@@ -50,6 +50,16 @@ group :development, :test do
 end
 
 group :development do
+  gem "brakeman", require: false
+  gem "actual_db_schema"
+  gem "database_consistency", require: false
+  gem "ruby-lsp", "~> 0.3.0", require: false
+  gem "vernier", "~> 1.5"
+  gem "bundle_update_interactive", "~> 0.11.0"
+  gem "libyear-bundler", "~> 0.8.0"
+  gem "rubocop", require: false
+  gem "solargraph"
+
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
@@ -91,6 +101,7 @@ gem "mysql2"
 gem "thinking-sphinx"
 gem "whenever", require: false
 gem "sidekiq"
+#gem "gitlab-sidekiq-fetcher", require: "sidekiq-reliable-fetch"
 gem "sinatra", require: false
 gem "oj"
 gem "responders"
@@ -104,3 +115,9 @@ gem "groupdate", "6.4.0"
 gem "ruby-vips"
 gem "mini_racer"
 gem "dotenv-rails"
+gem "ruby_audit"
+gem "bundler-audit"
+gem "sanitize"
+gem "pghero"
+gem "pg_query"
+gem "prosopite"

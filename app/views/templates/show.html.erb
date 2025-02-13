@@ -4,7 +4,7 @@
     <%= render 'layouts/breadcrumbs' %>
     <div class="p-3">
       <h1><%= @template.title %></h1>
-      <div class="sun-editor-editable border rounded overflow-y-scroll h-650 p-5"><%= raw @template.content %></div>
+      <div class="sun-editor-editable border rounded overflow-y-scroll h-650 p-5"><%= Sanitize.fragment(@template.content) %></div>
     </div>
     <div class="btn-group pt-3">
       <% if can?(:destroy, @template) && can?(:update, @template) %>
