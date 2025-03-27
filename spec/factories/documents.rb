@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :document do
-    sequence(:title) { |n| "Sample Title #{n}" }
-    content { "" }
-    association :user
-    association :template
+    title { generate(:string) }
+    content { generate(:string) }
+    
+    association :user, factory: :user
+    association :template, factory: :template
   end
 end

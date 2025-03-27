@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :template do
-    sequence(:title) { |n| "UniqueTitle#{n} - #{Faker::Lorem.sentence(word_count: 3)}" }
-    content { "" }
-    association :user
+    title { generate(:string) }
+    content { generate(:string) }
+    
+    association :user, factory: :user
   end
 end

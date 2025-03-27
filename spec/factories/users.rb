@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    sequence(:email) { |n| "user#{n}@test.com" }
+    email { generate(:email) }
     password { "password" }
     password_confirmation { "password" }
     role { :admin }
@@ -11,8 +11,8 @@ FactoryBot.define do
     end
 
     trait :with_company do
-      after(:create) do |user|
-        create(:membership, user: user, company: create(:company))
+      after(:build) do |user|
+        build(:membership, user: user, company: build(:company))
       end
     end
   end

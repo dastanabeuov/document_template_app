@@ -6,9 +6,7 @@ RSpec.describe ProjectsController, type: :controller do
   let(:membership) { create(:membership, user: user, company: company) }
   let(:project) { create(:project, company: company) }
 
-  before do
-    login(user)
-  end
+  before { sign_in user }
 
   describe 'GET #index' do
     it 'returns a success response' do

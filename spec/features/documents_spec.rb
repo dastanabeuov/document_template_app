@@ -21,9 +21,10 @@ RSpec.feature "Documents", type: :feature do
       visit edit_company_project_document_path(company, project, document)
 
       fill_in 'Title', with: 'Updated Title'
-      click_button 'Update Document'
+      
+      click_button 'Save'
 
-      expect(page).to have_content('Document was successfully updated.')
+      expect(page).to have_content('Successfully updated.')
       expect(page).to have_content('Updated Title')
     end
 
@@ -34,7 +35,7 @@ RSpec.feature "Documents", type: :feature do
         click_button 'Destroy'
       end
 
-      expect(page).to have_content('Document was successfully destroyed.')
+      expect(page).to have_content('Successfully destroyed.')
       expect(page).not_to have_content(document.title)
     end
 

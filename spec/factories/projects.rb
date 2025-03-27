@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :project do
-    title { "MyString" }
-    description { "MyText" }
-    company { nil }
+    title { generate(:string) }
+    description { generate(:string) }
+    
+    association :company, factory: :company
   end
 end

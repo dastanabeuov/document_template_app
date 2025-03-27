@@ -4,9 +4,7 @@ RSpec.describe TemplatesController, type: :controller do
   let(:user) { create(:user) }
   let(:template) { create(:template, user: user) }
 
-  before do
-    login(user)
-  end
+  before { sign_in user }
 
   describe "GET #index" do
     it "returns http success" do

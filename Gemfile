@@ -47,6 +47,13 @@ gem "bootsnap", "~> 1.18.4", require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", "~> 1.9.2", platforms: %i[ mri windows ]
+  gem 'simplecov', require: false
+  gem "rspec-rails", "~> 7.0.1"
+  gem "factory_bot_rails", "~> 6.4.3"
+  gem "faker", "~> 3.4"
+  gem "database_cleaner-active_record", "~> 2.2"
+  gem "shoulda-matchers", "~> 6.4.0"
+  gem "rails-controller-testing", "~> 1.0.5"
 end
 
 group :development do
@@ -72,13 +79,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", "~> 3.40.0"
   gem "selenium-webdriver", "~> 4.11"  # Ensure you're using the latest version
+  gem 'webdrivers', '~> 5.2.0'
   gem "launchy", "~> 3.0.1"
-  gem "shoulda-matchers", "~> 6.4.0"
-  gem "faker", "~> 3.4"
-  gem "factory_bot_rails", "~> 6.4.3"
-  gem "rspec-rails", "~> 7.0.1"
-  gem "rails-controller-testing", "~> 1.0.5"
-  gem "database_cleaner-active_record", "~> 2.2"
   # Remove the 'webdrivers' gem if you are using Selenium 4.11+
 end
 

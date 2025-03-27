@@ -5,9 +5,7 @@ RSpec.describe MembershipsController, type: :controller do
   let(:user) { create(:user, :guest_user) }
   let(:admin) { create(:user) } # by default role is admin
 
-  before do
-    login(admin)
-  end
+  before { sign_in admin }
 
   describe 'POST #create' do
     context 'with valid params' do
