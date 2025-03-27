@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe HomesController, type: :controller do
-  let(:user) { create(:user) }
+  let(:user) { create(:user) } #default user created role admin
 
-  before do
-    sign_in user
-  end
+  before { sign_in user }
 
   describe 'GET #index' do
     context 'render template index' do
@@ -28,11 +26,11 @@ RSpec.describe HomesController, type: :controller do
       end
 
       it 'assigns @latest_transactions_documents' do
-        create_list(:document, 10)
+        create_list(:document, 7, user: user)
 
         get :index
 
-        expect(assigns(:latest_trunsactions_documents).count).to eq(10)
+        expect(assigns(:latest_trunsactions_documents).count).to eq(7)
       end
 
       it 'assigns @templates' do

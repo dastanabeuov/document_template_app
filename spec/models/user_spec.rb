@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { create(:user) }
-  let(:company) { create(:company) }
-
   context 'associations' do
     it { should have_many(:templates).dependent(:destroy) }
     it { is_expected.to have_many(:memberships).dependent(:destroy) }
@@ -11,18 +8,18 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associating companies through memberships' do
-    before do
-      @membership1 = create(:membership, user: user, company: company)
-      @membership2 = create(:membership, user: user, company: create(:company))
-    end
+    let(:user) { create(:user) }
+    let(:company1) { create(:company) }
+    let(:company2) { create(:company) }
+    let!(:membership1) { create(:membership, user: user, company: company1) }
+    let!(:membership2) { create(:membership, user: user, company: company2) }
 
     it 'allows user to have multiple companies' do
       expect(user.companies.count).to eq(2)
     end
 
     it 'allows user to have companies through memberships' do
-      expect(user.companies).to include(@membership1.company)
-      expect(user.companies).to include(@membership2.company)
+      expect(user.companies).to include(company1, company2)
     end
 
     it 'removes associated memberships when user is deleted' do

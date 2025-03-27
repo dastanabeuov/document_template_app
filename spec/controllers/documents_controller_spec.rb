@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DocumentsController, type: :controller do
-  let(:user) { create(:user) }
+  let(:user) { create(:user) } #default user created role admin
   let(:company) { create(:company) }
   let(:project) { create(:project, company: company) }
   let(:template) { create(:template) }
@@ -9,7 +9,7 @@ RSpec.describe DocumentsController, type: :controller do
   let(:document) { create(:document, user: user, company: company, project: project) }
 
   before do
-    login(user)
+    sign_in(user)
   end
 
   describe "GET #index" do
@@ -173,7 +173,7 @@ RSpec.describe DocumentsController, type: :controller do
       }.to change(Document, :count).by(1)
 
       expect(response).to redirect_to(company_project_document_path(company, project, Document.last))
-      expect(flash[:notice]).to eq 'Document was successfully created from template.'
+      expect(flash[:notice]).to eq 'Successfully created.'
     end
   end
 end

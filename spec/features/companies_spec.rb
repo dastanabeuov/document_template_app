@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Companies", type: :feature do
-  let(:admin) { create(:user, :admin) }
+  let(:admin) { create(:user) } #from test default user role admin
   let(:guest_user) { create(:user, :guest_user) }
   let(:company) { create(:company) }
 
@@ -29,30 +29,27 @@ RSpec.feature "Companies", type: :feature do
     scenario "POST /create with valid parameters" do
       visit new_company_path
       fill_in 'Name', with: 'New Company'
-
-      expect {
-        click_button 'Create Company'
-      }.to change { Company.count }.by(1)
-
-      expect(page).to have_content('Company was successfully created.')
+      click_button 'Save'
+      
+      expect(page).to have_content('Successfully created.')
+      expect(Company.exists?(name: 'New Company')).to be_truthy
     end
 
     scenario "POST /create with invalid parameters" do
       visit new_company_path
-
-      click_button 'Create Company'
-
+      click_button 'Save'
+      
       expect { Company.count }.not_to change { Company.count }
       expect(page).to have_content("Name can't be blank")
     end
 
     scenario "user updates a company" do
       visit edit_company_path(company)
-
+      
       fill_in 'Name', with: 'Updated Company Name'
-      click_button 'Update Company'
-
-      expect(page).to have_content('Company was successfully updated.')
+      click_button 'Save'
+      
+      expect(page).to have_content('Successfully updated.')
       expect(page).to have_content('Updated Company Name')
     end
 
@@ -62,6 +59,7 @@ RSpec.feature "Companies", type: :feature do
       accept_alert do
         click_button 'Destroy'
       end
+      
 
       expect(page).to have_content('Company was successfully destroyed.')
       expect(page).not_to have_content(company.name)
