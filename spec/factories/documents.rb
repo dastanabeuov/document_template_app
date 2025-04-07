@@ -5,5 +5,13 @@ FactoryBot.define do
     
     association :user, factory: :user
     association :template, factory: :template
+
+    trait :pure do
+      user nil
+    end
+
+    trait :pure do
+      template nil
+    end
   end
 end
