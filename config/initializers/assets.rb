@@ -13,10 +13,11 @@ Rails.application.config.assets.precompile += %w[
   bootstrap.min.js
   popper.js
   datatables.css
-  suneditor.css
-  suneditor-contents.css
-  katex.min.css
-  codemirror.min.css
-  color-modes.css
-  chartist.min.css
 ]
+
+# suneditor.css
+# suneditor-contents.css
+# katex.min.css
+# codemirror.min.css
+# color-modes.css
+# chartist.min.css
