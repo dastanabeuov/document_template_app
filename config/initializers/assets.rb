@@ -19,5 +19,4 @@ Rails.application.config.assets.precompile += %w[
   codemirror.min.css
   color-modes.css
   chartist.min.css
-  bootstrap-icons.min
 ]
