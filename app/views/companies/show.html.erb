@@ -1,9 +1,3 @@
-<script>
-  document.addEventListener('turbo:load', function () {
-    $('#memberships-table').DataTable();
-  });
-</script>
-
 <div class="row">
   <%= render 'nav' %>
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 my-4">
@@ -55,8 +49,8 @@
           <div class="col-12">
             <div class="p-3 rounded border">
               <h3><%= I18n.t('.members') %></h3>
-              <div class="table-responsive">
-                <table class="table table-hover" id="memberships-table">
+              <div class="table-responsive" data-controller="datatables">
+                <table class="table table-hover" data-datatables-target="table">
                   <thead>
                     <tr>
                       <th scope="col"><%= I18n.t('.email') %></th>

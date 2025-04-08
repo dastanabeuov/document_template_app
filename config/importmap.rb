@@ -8,7 +8,13 @@ pin_all_from "app/javascript/resources", under: "resources"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
 
-pin "color-modes", to: "color-modes.js", preload: true
+pin "datatables", to: "datatables/datatables.js", preload: true
+pin "jquery", to: "jquery/jquery-3.7.1.js", preload: true
+# pin "jquery", to: "https://code.jquery.com/jquery-3.7.1.js"
+# pin "datatables", to: "https://cdn.datatables.net/2.1.8/js/dataTables.js"
+
+pin "color-modes", to: "color-modes/color-modes.js", preload: true
+
 pin "chart.js", to: "https://ga.jspm.io/npm:chart.js@4.4.4/dist/chart.js"
 pin "@kurkle/color", to: "https://ga.jspm.io/npm:@kurkle/color@0.3.2/dist/color.esm.js"
 

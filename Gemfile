@@ -87,7 +87,7 @@ end
 ## Additional gems
 gem 'bootstrap', '~> 5.3.3'
 gem 'popper_js', '~> 2.11.8'
-gem 'jquery-rails', '~> 4.6.0'
+#gem 'jquery-rails', '~> 4.6.0'
 gem "sassc-rails", "~> 2.1.2"
 gem "mysql2", "~> 0.5.6"
 gem "thinking-sphinx", "~> 5.6.0"

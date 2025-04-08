@@ -8,8 +8,16 @@
     <%= favicon_link_tag 'favicon_32x32.ico', rel: 'icon', sizes: '32x32' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "datatables", media: "all" %>
+    <%= stylesheet_link_tag "suneditor", media: "all" %>
+    <%= stylesheet_link_tag "suneditor-contents", media: "all" %>
+    <%= stylesheet_link_tag "katex.min", media: "all" %>
+    <%= stylesheet_link_tag "codemirror.min", media: "all" %>
+    <%= stylesheet_link_tag "color-modes", media: "all" %>
+    <%= stylesheet_link_tag "chartist.min", media: "all" %>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
     <%= javascript_importmap_tags %>
   </head>
   <body class="data-bs-theme">
@@ -29,7 +37,5 @@
       </div>
     <% end %>
     <%# <script async defer src="https://buttons.github.io/buttons.js"></script> %>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
   </body>
 </html>

@@ -10,8 +10,8 @@
     <%= render 'layouts/breadcrumbs' %>
     <h1><%= t('all_list') %></h1>
 
-    <div class="table-responsive">
-      <table class="table table-hover" id="projects-table">
+    <div class="table-responsive" data-controller="datatables">
+      <table class="table table-hover" data-datatables-target="table">
         <thead>
           <tr>
             <th scope="col"><%= Project.human_attribute_name(:title) %></th>
