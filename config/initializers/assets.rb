@@ -15,9 +15,9 @@ Rails.application.config.assets.precompile += %w[
   datatables.css
 ]
 
+# color-modes.css
+# chartist.min.css
 # suneditor.css
 # suneditor-contents.css
 # katex.min.css
 # codemirror.min.css
-# color-modes.css
-# chartist.min.css
