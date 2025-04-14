@@ -1,16 +1,10 @@
-<script>
-  document.addEventListener('turbo:load', function () {
-    $('#projects-table').DataTable();
-  });
-</script>
-
 <div class="row">
   <%= render 'companies/nav' %>
   <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
     <%= render 'layouts/breadcrumbs' %>
     <h1><%= t('all_list') %></h1>
 
-    <div class="table-responsive" data-controller="datatables">
+    <div class="table-responsive" data-controller="datatables" data-datatables-language-value="<%= I18n.locale %>">
       <table class="table table-hover" data-datatables-target="table">
         <thead>
           <tr>

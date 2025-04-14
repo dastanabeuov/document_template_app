@@ -49,7 +49,7 @@
           <div class="col-12">
             <div class="p-3 rounded border">
               <h3><%= I18n.t('.members') %></h3>
-              <div class="table-responsive" data-controller="datatables">
+              <div class="table-responsive" data-controller="datatables" data-datatables-language-value="<%= I18n.locale %>">
                 <table class="table table-hover" data-datatables-target="table">
                   <thead>
                     <tr>
@@ -83,30 +83,32 @@
           <div class="col-12">
             <div class="p-3 rounded border">
               <h3><%= I18n.t('.members') %></h3>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col"><%= I18n.t('.email') %></th>
-                    <th scope="col"><%= I18n.t('.actions') %></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @company.memberships.includes(:user).each do |membership| %>
-                    <tr class="<%= 'table-primary' if membership.owner? %>">
-                      <td><%= membership.user.email %></td>
-                      <td class="text-end">
-                        <%= button_to company_membership_path(@company, membership),
-                            method: :delete,
-                            data: { turbo_confirm: t('are_you_sure') },
-                            class: "btn btn-outline-danger #{'hidden' unless can?(:destroy, membership)}",
-                            title: t('destroy') do %>
-                          <i class="bi bi-trash3-fill"></i>
-                        <% end %>
-                      </td>
+              <div class="table-responsive" data-controller="datatables" data-datatables-language-value="<%= I18n.locale %>">
+                <table class="table table-hover" data-datatables-target="table">
+                  <thead>
+                    <tr>
+                      <th scope="col"><%= I18n.t('.email') %></th>
+                      <th scope="col"><%= I18n.t('.actions') %></th>
                     </tr>
-                  <% end %>
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    <% @company.memberships.includes(:user).each do |membership| %>
+                      <tr class="<%= 'table-primary' if membership.owner? %>">
+                        <td><%= membership.user.email %></td>
+                        <td class="text-end">
+                          <%= button_to company_membership_path(@company, membership),
+                              method: :delete,
+                              data: { turbo_confirm: t('are_you_sure') },
+                              class: "btn btn-outline-danger #{'hidden' unless can?(:destroy, membership)}",
+                              title: t('destroy') do %>
+                            <i class="bi bi-trash3-fill"></i>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
