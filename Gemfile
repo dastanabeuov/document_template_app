@@ -36,7 +36,7 @@ gem "kredis", "~> 1.7.0"
 gem "bcrypt", "~> 3.1.18"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: %i[ mswin jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", "~> 1.18.4", require: false

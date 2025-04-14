@@ -61,7 +61,7 @@
                     <% @company.memberships.includes(:user).each do |membership| %>
                       <tr class="<%= 'table-primary' if membership.owner? %>" style="cursor: pointer;">
                         <td><%= membership.user.email %></td>
-                        <td>
+                        <td class="text-end">
                           <%= button_to company_membership_path(@company, membership),
                               method: :delete,
                               data: { turbo_confirm: t('are_you_sure') },
@@ -94,7 +94,7 @@
                   <% @company.memberships.includes(:user).each do |membership| %>
                     <tr class="<%= 'table-primary' if membership.owner? %>">
                       <td><%= membership.user.email %></td>
-                      <td>
+                      <td class="text-end">
                         <%= button_to company_membership_path(@company, membership),
                             method: :delete,
                             data: { turbo_confirm: t('are_you_sure') },
