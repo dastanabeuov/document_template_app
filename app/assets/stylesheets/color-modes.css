@@ -50,7 +50,6 @@
   z-index: -1;
 }
 
-
 /* Для светлой темы #e9ecef*/
 [data-bs-theme="light"] .navbar {
   background-color: #D4D8DB; /* светлый цвет */
@@ -68,7 +67,6 @@
 [data-bs-theme="dark"] .navbar-brand {
   color: #ffffff; /* светлый текст для темной темы */
 }
-
 
 /* Для светлой темы #e9ecef*/
 [data-bs-theme="light"] #sidebar {

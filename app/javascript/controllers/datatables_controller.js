@@ -1,6 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 import "jquery"
 import "datatables"
+// Импортируем языковые файлы
+import ruLanguage from "datatables-i18n-ru"
+import enLanguage from "datatables-i18n-en"
+import kzLanguage from "datatables-i18n-kz"
 
 // Контроллер DataTables
 export default class extends Controller {
@@ -9,7 +13,15 @@ export default class extends Controller {
 
   // Опции для DataTables
   static values = {
-    options: { type: Object, default: {} }
+    options: { type: Object, default: {} },
+    language: { type: String, default: "ru" } // Параметр для языка
+  }
+
+  // Словарь доступных языков
+  languages = {
+    ru: ruLanguage,
+    en: enLanguage,
+    kz: kzLanguage
   }
 
   connect() {
@@ -24,16 +36,33 @@ export default class extends Controller {
       return
     }
 
-    // Инициализируем DataTables на целевом элементе с опциями (если они есть)
-    try {
-      this.dataTable = $(this.tableTarget).DataTable(this.optionsValue)
-      console.log("DataTable успешно инициализирована")
-    } catch (error) {
-      console.error("Ошибка при инициализации DataTable:", error)
-    }
-
+    // Инициализируем таблицу
+    this.initializeDataTable()
+    
     // Слушаем событие turbo:before-cache для очистки таблицы
     document.addEventListener("turbo:before-cache", () => this.disconnect())
+  }
+
+  // Метод для инициализации таблицы с выбором языка
+  initializeDataTable() {
+    try {
+      const language = this.languageValue.toLowerCase()
+      const languageData = this.languages[language] || {}
+      
+      // Объединяем пользовательские опции с языковыми настройками
+      const options = {
+        ...this.optionsValue,
+        language: languageData
+      }
+
+      // Инициализируем DataTables с опциями
+      this.dataTable = $(this.tableTarget).DataTable(options)
+      console.log(`DataTable успешно инициализирована с языком: ${language}`)
+    } catch (error) {
+      console.error("Ошибка при инициализации DataTable:", error)
+      // Пробуем инициализировать без языковых настроек в случае ошибки
+      this.dataTable = $(this.tableTarget).DataTable(this.optionsValue)
+    }
   }
 
   disconnect() {

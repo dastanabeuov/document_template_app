@@ -10,6 +10,12 @@ pin "@popperjs/core", to: "popper.js", preload: true
 
 pin "datatables", to: "datatables/datatables.js", preload: true
 pin "jquery", to: "jquery/jquery-3.7.1.js", preload: true
+
+# Языковые файлы для DataTables
+pin "datatables-i18n-ru", to: "datatables/i18n/russian.js", preload: true
+pin "datatables-i18n-en", to: "datatables/i18n/english.js", preload: true
+pin "datatables-i18n-kz", to: "datatables/i18n/kazakh.js", preload: true
+
 # pin "jquery", to: "https://code.jquery.com/jquery-3.7.1.js"
 # pin "datatables", to: "https://cdn.datatables.net/2.1.8/js/dataTables.js"
 
