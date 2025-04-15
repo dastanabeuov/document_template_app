@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: %{"BIM Templates" <noreply@bimtemplates.kazniisa.kz>}
   layout "mailer"
 end
