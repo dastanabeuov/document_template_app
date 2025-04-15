@@ -7,3 +7,6 @@ import "bootstrap";
 import "color-modes";
 import "chart.js";
 import "@kurkle/color";
+
+import "suneditor";
+import "suneditor/src/plugins";
