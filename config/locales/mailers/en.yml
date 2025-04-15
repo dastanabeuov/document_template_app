@@ -1,0 +1,10 @@
+en:
+  notification_mailer:
+    welcome_email:
+      subject: "Welcome to our site, %{name}!"
+      greeting: "Hello, %{name}!"
+      intro: "Thank you for registering with us."
+      instructions: "To get started, please click the link below:"
+      link_text: "Confirm your account"
+      outro: "We hope you enjoy using our service."
+      signature: "Best regards, The Team"

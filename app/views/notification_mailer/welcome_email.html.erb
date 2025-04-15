@@ -1,0 +1,8 @@
+<h1><%= I18n.t('notification_mailer.welcome_email.greeting', name: @user.email) %></h1>
+<p><%= I18n.t('notification_mailer.welcome_email.intro') %></p>
+<p><%= I18n.t('notification_mailer.welcome_email.instructions') %></p>
+<p>
+  <a href="<%= @confirmation_url %>"><%= I18n.t('notification_mailer.welcome_email.link_text') %></a>
+</p>
+<p><%= I18n.t('notification_mailer.welcome_email.outro') %></p>
+<p><%= I18n.t('notification_mailer.welcome_email.signature') %></p>
