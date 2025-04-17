@@ -4,10 +4,10 @@ import * as plugins from "suneditor/src/plugins";
 
 import "katex";
 
-import CodeMirror from "codemirror";
-import "codemirror/mode/htmlmixed/htmlmixed";
-import "codemirror/mode/xml/xml";
-import "codemirror/mode/css/css";
+// import CodeMirror from "codemirror";
+// import "codemirror/mode/htmlmixed/htmlmixed";
+// import "codemirror/mode/xml/xml";
+// import "codemirror/mode/css/css";
 
 // Import the i18n language files
 import enLang from '../i18n/en';
@@ -63,8 +63,8 @@ export default class extends Controller {
       plugins: plugins,
       lang: i18n[currentLanguage],
       katex: katex,
-      codeMirror: CodeMirror,
-      imageGalleryUrl: urlImagesGallery,
+      // codeMirror: CodeMirror,
+      // imageGalleryUrl: urlImagesGallery,
       mode: "htmlmixed",
       lineNumbers: true,
       theme: "default",
@@ -80,8 +80,8 @@ export default class extends Controller {
           "align", "horizontalRule", "list", "lineHeight",
           "table", "link", "image", "video", "audio",
           "math",
-          "codeView",
-          "imageGallery",
+          // "codeView",
+          // "imageGallery",
           "fullScreen", "showBlocks",
           "preview", "print", "save",
            "template", "dir", "dir_ltr", "dir_rtl"
